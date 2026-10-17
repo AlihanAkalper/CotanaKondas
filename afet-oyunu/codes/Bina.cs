@@ -49,11 +49,11 @@ public partial class Bina : Area2D
                 if(katlar[i].Malzeme == 1)
                 {
                     GD.Print("YENİ KAT ÇIKILIYOR!");
-                    katlar[i].Malzeme = 2; //GEÇİCİ OLARAK KOYDUM, MALZEME NO'su olacak
+                    katlar[i].Malzeme = 4; //GEÇİCİ OLARAK KOYDUM, MALZEME NO'su olacak
                     if (i+1 == MaxKat)
                     {
                         katlar[i].SonKat = true;
-                        katlar[i].Malzeme = 2;
+                        katlar[i].Malzeme = 4;
                         GD.Print("ÇATI KATI ÇIKILDI");
                         // katlar[i].       EN ÜST KATI ÇATI YAPACAK    
                     }
@@ -74,7 +74,7 @@ public partial class Bina : Area2D
         if (katlar[MaxKat-1].Malzeme  < 2)
         {
         NewKatTime += delta;
-        if(NewKatTime > 4.0)
+        if(NewKatTime > 1.5)
         {
             NewKatTime = 0.0;
             KatEkle();
