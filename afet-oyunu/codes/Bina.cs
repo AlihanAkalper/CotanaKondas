@@ -32,12 +32,13 @@ public partial class Bina : Area2D
         for (int i = 1; i < MaxKat; i++)
         {
             var EmptyKat = (Kat)Kat_Template.Instantiate();
-            EmptyKat.Malzeme = 0;
-            //EmptyKat.Malzeme = 0;
             EmptyKat.Position += new Vector2(0,-1*KatHeight*i);
+            EmptyKat.SonKat = false;
+            EmptyKat.Malzeme = 0;
             AddChild(EmptyKat);
             katlar[i] = (EmptyKat);
         }
+        katlar[MaxKat-1].SonKat = true;
         GD.Print(katlar);
     }
 
@@ -47,9 +48,13 @@ public partial class Bina : Area2D
             {
                 if(katlar[i].Malzeme == 1)
                 {
+                    GD.Print("YENİ KAT ÇIKILIYOR!");
                     katlar[i].Malzeme = 2; //GEÇİCİ OLARAK KOYDUM, MALZEME NO'su olacak
                     if (i+1 == MaxKat)
                     {
+                        katlar[i].SonKat = true;
+                        katlar[i].Malzeme = 2;
+                        GD.Print("ÇATI KATI ÇIKILDI");
                         // katlar[i].       EN ÜST KATI ÇATI YAPACAK    
                     }
                     else
@@ -72,7 +77,6 @@ public partial class Bina : Area2D
         if(NewKatTime > 4.0)
         {
             NewKatTime = 0.0;
-            GD.Print("YENİ KAT!");
             KatEkle();
         }   
         }

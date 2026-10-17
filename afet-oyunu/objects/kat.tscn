@@ -1,14 +1,12 @@
 [gd_scene format=3 uid="uid://b11vljavmsgg8"]
 
-[ext_resource type="Texture2D" uid="uid://b0w2oh73cqn1u" path="res://assets/woodWall.png" id="1_anwck"]
 [ext_resource type="Script" uid="uid://ck86gc3u1h64q" path="res://codes/Kat.cs" id="1_lgjv1"]
 [ext_resource type="CompressedTexture2DArray" uid="uid://bon67ei0ro3n1" path="res://assets/TextureArray/woodWallArr.png" id="2_sck4t"]
 [ext_resource type="CompressedTexture2DArray" uid="uid://dsxpt6o3eejch" path="res://assets/TextureArray/steelWallArr.png" id="4_tbgye"]
 [ext_resource type="CompressedTexture2DArray" uid="uid://d04qmuf1it8a2" path="res://assets/TextureArray/brickwallArr.png" id="5_5spxf"]
 
 [node name="Kat" type="Sprite2D" unique_id=170612053 node_paths=PackedStringArray("ArkaDuv", "SolDuv", "SagDuv", "Çatı")]
-texture = ExtResource("1_anwck")
-region_enabled = true
+scale = Vector2(1.5, 0.9)
 region_rect = Rect2(516, 94, 117, 9)
 script = ExtResource("1_lgjv1")
 ArkaDuv = NodePath("ArkaDuvar")
@@ -20,26 +18,18 @@ Metal = ExtResource("4_tbgye")
 Tugla = ExtResource("5_5spxf")
 
 [node name="ArkaDuvar" type="Sprite2D" parent="." unique_id=474522903]
-position = Vector2(3, -52)
-texture = ExtResource("1_anwck")
-region_enabled = true
+position = Vector2(20, -20)
 region_rect = Rect2(25, 15, 31, 102)
 
 [node name="SolDuvar" type="Sprite2D" parent="." unique_id=369147684]
-position = Vector2(-71, -54)
-texture = ExtResource("1_anwck")
-region_enabled = true
+position = Vector2(-35, -18)
 region_rect = Rect2(279, 13, 35, 106)
 
 [node name="SagDuvar" type="Sprite2D" parent="." unique_id=57978093]
-position = Vector2(74, -52)
-texture = ExtResource("1_anwck")
-region_enabled = true
+position = Vector2(74, -18)
 region_rect = Rect2(409, 15, 31, 102)
 
 [node name="Çatı" type="Sprite2D" parent="." unique_id=848647806]
-position = Vector2(12, -112)
-scale = Vector2(7.314815, 1)
-texture = ExtResource("1_anwck")
-region_enabled = true
+position = Vector2(14, -85)
+scale = Vector2(5.6, 1)
 region_rect = Rect2(1199, 55, 27, 27)

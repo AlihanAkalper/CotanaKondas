@@ -52,16 +52,16 @@ public partial class Kat : Sprite2D
 				break;
 			case 1: //İskele
 				this.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(4)); //İSKELE OLACAK
-				ArkaDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(5));
-				SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(5));
-				SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(5));
+				ArkaDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
 				Çatı.Texture = null;
 				break;
 			case 2: //Odun
 				this.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(4));
-				ArkaDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(5));
-				SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(5));
-				SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(5));
+				ArkaDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
 				if (SonKat)
 				{
 					Çatı.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(9));
