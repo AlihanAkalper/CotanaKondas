@@ -32,9 +32,9 @@ public partial class Kat : Sprite2D
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+	// public override void _Process(double delta)
+	// {
+	// }
 
 	private void UpdateLook(int YeniMalz)
 	{
