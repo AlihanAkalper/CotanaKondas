@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://bnm4mv22mcrdw"]
+
+[ext_resource type="Texture2D" uid="uid://bsxbayyisu44e" path="res://assets/map.png" id="1_bhmm6"]
+[ext_resource type="Script" uid="uid://bi22nbg5a6ngp" path="res://codes/RegionPoint.cs" id="2_wvl83"]
+[ext_resource type="Script" uid="uid://pkhjltfk2g48" path="res://codes/HUD.cs" id="4_wvl83"]
+[ext_resource type="Script" uid="uid://bmpnyftqylqw" path="res://codes/StatPanel.cs" id="5_7ljjv"]
+
+[node name="Türkiye haritası" type="Node2D" unique_id=232434904]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1051094339]
+position = Vector2(576.49994, 324.5)
+scale = Vector2(9.0703125, 7.797619)
+texture = ExtResource("1_bhmm6")
+
+[node name="RegionPoints" type="Node2D" parent="." unique_id=661173284]
+
+[node name="Ege buton" type="TextureButton" parent="RegionPoints" unique_id=1676508737 node_paths=PackedStringArray("_statPanel")]
+offset_left = 124.0
+offset_top = 242.0
+offset_right = 286.0
+offset_bottom = 326.0
+script = ExtResource("2_wvl83")
+RegionType = 1
+_statPanel = NodePath("../../MainHud/StatPanel")
+
+[node name="Kıbrıs buton" type="TextureButton" parent="RegionPoints" unique_id=920499736 node_paths=PackedStringArray("_statPanel")]
+offset_left = 431.0
+offset_top = 496.0
+offset_right = 691.0
+offset_bottom = 626.0
+script = ExtResource("2_wvl83")
+RegionType = 7
+_statPanel = NodePath("../../MainHud/StatPanel")
+
+[node name="Akdeniz buton" type="TextureButton" parent="RegionPoints" unique_id=1623335176 node_paths=PackedStringArray("_statPanel")]
+offset_left = 395.0
+offset_top = 331.0
+offset_right = 718.0
+offset_bottom = 371.0
+script = ExtResource("2_wvl83")
+RegionType = 6
+_statPanel = NodePath("../../MainHud/StatPanel")
+
+[node name="Marmara buton" type="TextureButton" parent="RegionPoints" unique_id=1665747754 node_paths=PackedStringArray("_statPanel")]
+offset_left = 131.0
+offset_top = 97.0
+offset_right = 286.0
+offset_bottom = 188.0
+script = ExtResource("2_wvl83")
+_statPanel = NodePath("../../MainHud/StatPanel")
+
+[node name="İç Anadolu buton" type="TextureButton" parent="RegionPoints" unique_id=1022551757 node_paths=PackedStringArray("_statPanel")]
+offset_left = 420.0
+offset_top = 205.0
+offset_right = 720.0
+offset_bottom = 288.0
+script = ExtResource("2_wvl83")
+RegionType = 2
+_statPanel = NodePath("../../MainHud/StatPanel")
+
+[node name="Karadeniz buton" type="TextureButton" parent="RegionPoints" unique_id=869118386 node_paths=PackedStringArray("_statPanel")]
+offset_left = 458.0
+offset_top = 94.0
+offset_right = 781.0
+offset_bottom = 156.0
+script = ExtResource("2_wvl83")
+RegionType = 3
+_statPanel = NodePath("../../MainHud/StatPanel")
+
+[node name="Güneydoğu buton" type="TextureButton" parent="RegionPoints" unique_id=1635697318 node_paths=PackedStringArray("_statPanel")]
+offset_left = 841.0
+offset_top = 311.0
+offset_right = 968.0
+offset_bottom = 362.0
+script = ExtResource("2_wvl83")
+RegionType = 5
+_statPanel = NodePath("../../MainHud/StatPanel")
+
+[node name="Doğu Anadolu buton" type="TextureButton" parent="RegionPoints" unique_id=1149113707 node_paths=PackedStringArray("_statPanel")]
+offset_left = 918.0
+offset_top = 157.0
+offset_right = 1041.0
+offset_bottom = 263.0
+script = ExtResource("2_wvl83")
+RegionType = 4
+_statPanel = NodePath("../../MainHud/StatPanel")
+
+[node name="MainHud" type="CanvasLayer" parent="." unique_id=693278071 node_paths=PackedStringArray("_moneyLabel", "_dateLabel")]
+script = ExtResource("4_wvl83")
+_moneyLabel = NodePath("MoneyLabel")
+_dateLabel = NodePath("DateLabel")
+
+[node name="StatPanel" type="PanelContainer" parent="MainHud" unique_id=1330962018 node_paths=PackedStringArray("_lblArsaAd", "_lblArsaÜcreti", "_lblPahalıMateryal", "_lblUcuzMateryal", "_lblMinKira", "_lblİnşaEdildi")]
+offset_left = 719.0
+offset_top = 402.0
+offset_right = 1147.0
+offset_bottom = 646.0
+script = ExtResource("5_7ljjv")
+_lblArsaAd = NodePath("VBoxContainer/RegionNameLabel")
+"_lblArsaÜcreti" = NodePath("VBoxContainer/PlotPriceLabel")
+"_lblPahalıMateryal" = NodePath("VBoxContainer/ExpensiveMatLabel")
+_lblUcuzMateryal = NodePath("VBoxContainer/CheapMatLabel")
+_lblMinKira = NodePath("VBoxContainer/RentIncomeLabel")
+"_lblİnşaEdildi" = NodePath("VBoxContainer/StatusLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainHud/StatPanel" unique_id=844202841]
+layout_mode = 2
+
+[node name="RegionNameLabel" type="Label" parent="MainHud/StatPanel/VBoxContainer" unique_id=1009116482]
+layout_mode = 2
+
+[node name="PlotPriceLabel" type="Label" parent="MainHud/StatPanel/VBoxContainer" unique_id=1209867658]
+layout_mode = 2
+
+[node name="ExpensiveMatLabel" type="Label" parent="MainHud/StatPanel/VBoxContainer" unique_id=779645310]
+layout_mode = 2
+
+[node name="CheapMatLabel" type="Label" parent="MainHud/StatPanel/VBoxContainer" unique_id=1121650779]
+layout_mode = 2
+
+[node name="RentIncomeLabel" type="Label" parent="MainHud/StatPanel/VBoxContainer" unique_id=1768911033]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="MainHud/StatPanel/VBoxContainer" unique_id=831618574]
+layout_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="MainHud" unique_id=2138528950]
+offset_right = 180.0
+offset_bottom = 51.0
+
+[node name="DateLabel" type="Label" parent="MainHud" unique_id=1256239754]
+offset_left = 454.0
+offset_top = 4.0
+offset_right = 726.0
+offset_bottom = 56.0

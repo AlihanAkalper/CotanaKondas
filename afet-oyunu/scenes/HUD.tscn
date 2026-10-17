@@ -1,6 +1,14 @@
 [gd_scene format=3 uid="uid://b3ent0gq0siy4"]
 
 [ext_resource type="Script" uid="uid://pkhjltfk2g48" path="res://codes/HUD.cs" id="1_qpvh6"]
+[ext_resource type="Script" uid="uid://1bkf3vedwl1i" path="res://codes/TextureButton.cs" id="2_fls4u"]
 
 [node name="HUD" type="CanvasLayer" unique_id=503998733]
 script = ExtResource("1_qpvh6")
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=1716135817]
+offset_left = 117.0
+offset_top = 76.0
+offset_right = 193.0
+offset_bottom = 117.0
+script = ExtResource("2_fls4u")
