@@ -8,6 +8,7 @@
 [node name="Bina" type="Area2D" unique_id=1273967015 node_paths=PackedStringArray("katlar")]
 position = Vector2(583, 556)
 script = ExtResource("1_0e48y")
+DEV_Malzeme = 3
 Kat_Template = ExtResource("2_v281k")
 MaxKat = 5
 KatHeight = 120

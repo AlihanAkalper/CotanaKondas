@@ -5,6 +5,8 @@ using System.Runtime.InteropServices.JavaScript;
 
 public partial class Bina : Area2D
 {
+    private int DEV_Malzeme = 1;
+
 	[Export] public Ev_numaraları type;
 
     [Export] private PackedScene Kat_Template;
@@ -46,14 +48,18 @@ public partial class Bina : Area2D
     {
         for (int i = 0; i < MaxKat; i++)
             {
+                if(DEV_Malzeme > 4)
+                {
+                    DEV_Malzeme = 1;
+                }
                 if(katlar[i].Malzeme == 1)
                 {
                     GD.Print("YENİ KAT ÇIKILIYOR!");
-                    katlar[i].Malzeme = 4; //GEÇİCİ OLARAK KOYDUM, MALZEME NO'su olacak
+                    katlar[i].Malzeme = DEV_Malzeme; //GEÇİCİ OLARAK KOYDUM, MALZEME NO'su olacak
                     if (i+1 == MaxKat)
                     {
                         katlar[i].SonKat = true;
-                        katlar[i].Malzeme = 4;
+                        katlar[i].Malzeme = DEV_Malzeme;
                         GD.Print("ÇATI KATI ÇIKILDI");
                         // katlar[i].       EN ÜST KATI ÇATI YAPACAK    
                     }
@@ -64,6 +70,7 @@ public partial class Bina : Area2D
                     GD.Print(katlar);
                     break;
                 }
+                DEV_Malzeme++;
             }
     }
 
