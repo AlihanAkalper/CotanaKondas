@@ -32,6 +32,8 @@ public class HouseSaveData // laod save yapıldığında neler kaydedilecekse
     public Materyal material { get; set; } = Materyal.Alınmadı;
     public int Price { get; set; }
 
+    public float Health { get; set; } = 100f;
+
     public int InvestedWood { get; set; } = 0;
     public int InvestedBricks { get; set; } = 0;
     public int InvestedSteel { get; set; } = 0;
@@ -42,6 +44,8 @@ public class GameSaveData
 {
     public int CurrentDay { get; set; } = 1;
     public int Money { get; set; } = 200000;
+
+    public float CumulativeDisasterChance { get; set; } = 15f;
 
     public List<HouseSaveData> Houses { get; set; } = new();
 

@@ -7,6 +7,8 @@ public partial class GameManager : Node
 {
     public static GameManager Instance { get; private set; }
 
+    public AfetTürü ActiveDisaster { get; set; } = AfetTürü.Yok;
+
     public GameSaveData SaveData { get; private set; } = new();
     private string _savePath;
 

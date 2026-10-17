@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://buhlj0agxpiym"]
+
+[ext_resource type="Script" uid="uid://qq6dwtgirf7e" path="res://codes/BuildingMap.cs" id="1_jgs2t"]
+[ext_resource type="Texture2D" uid="uid://bsxbayyisu44e" path="res://assets/map.png" id="2_iwd6b"]
+
+[node name="Şehir" type="Node2D" unique_id=576134575]
+script = ExtResource("1_jgs2t")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=292076233]
+position = Vector2(576, 323.25)
+scale = Vector2(8.984376, 7.7083335)
+texture = ExtResource("2_iwd6b")
+metadata/_edit_lock_ = true
+
+[node name="Kamera" type="Camera2D" parent="Sprite2D" unique_id=606487271]
