@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://b11vljavmsgg8"]
 
+[ext_resource type="Texture2D" uid="uid://jf6ku0v5uu2y" path="res://icon.svg" id="1_anwck"]
 [ext_resource type="Script" uid="uid://ck86gc3u1h64q" path="res://codes/Kat.cs" id="1_lgjv1"]
+[ext_resource type="CompressedTexture2DArray" uid="uid://bon67ei0ro3n1" path="res://assets/TextureArray/woodWallArr.png" id="2_sck4t"]
 
 [node name="Kat" type="Sprite2D" unique_id=170612053 node_paths=PackedStringArray("ArkaDuv", "SolDuv", "SagDuv")]
+texture = ExtResource("1_anwck")
 region_rect = Rect2(808, 59, 31, 30)
 script = ExtResource("1_lgjv1")
 ArkaDuv = NodePath("ArkaDuvar")
 SolDuv = NodePath("SolDuvar")
 SagDuv = NodePath("SagDuvar")
+Odun = ExtResource("2_sck4t")
 
 [node name="ArkaDuvar" type="Sprite2D" parent="." unique_id=474522903]
 region_enabled = true

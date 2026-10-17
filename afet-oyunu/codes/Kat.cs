@@ -11,7 +11,7 @@ public partial class Kat : Sprite2D
 	[Export]private Sprite2D Çatı;
 
 	[ExportGroup("Texturelar")]
-	[Export]private Texture2DArray Odun;
+	[Export]private CompressedTextureLayered Odun;
 	[Export]private Texture2DArray Metal;
 	[Export]private Texture2DArray Tugla;
 
@@ -29,7 +29,7 @@ public partial class Kat : Sprite2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		
+		this.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(2));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,7 +43,6 @@ public partial class Kat : Sprite2D
 		switch (_malzeme)
 		{
 			case 0:
-				
 			case 1:
 			
 			case 2:
