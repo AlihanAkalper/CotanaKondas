@@ -4,46 +4,71 @@ using System;
 public partial class BuildingMap : Node2D
 {
     [Export] private DisasterAnimationManager _disasterAnimManager;
-    [Export] private Sprite2D _plotOrHouseSprite;
+    [Export] private TextureButton _plotButton; // Boş arsa tık alanı (veya TextureButton)
     [Export] private Texture2D _emptyPlotTexture;
     [Export] private Texture2D _woodHouseTexture;
     [Export] private Texture2D _brickHouseTexture;
     [Export] private Texture2D _steelHouseTexture;
-    [Export] private Button _buyPlotButton;
-    [Export] private BuildMenu _buildMenu;
+
+    [Export] private PlotConfirmDialog _confirmDialog; // Yeni onay paneli
+    [Export] private BuildMenu _buildMenu;             // Malzeme menüsü
+    [Export] private TextureButton _backButton;
+
+    private Ev_numaraları _currentRegion;
 
     public override void _Ready()
     {
-        var region = GameManager.Instance.SelectedRegion;
+        _currentRegion = GameManager.Instance.SelectedRegion;
 
-        if (_buyPlotButton != null && _buildMenu != null)
+        if (_backButton != null)
         {
-            _buyPlotButton.Pressed += () => _buildMenu.Open(region);
+            _backButton.Pressed += () => OnBackToMapButtonPressed();
+        }
+
+        if (_plotButton != null)
+        {
+            _plotButton.Pressed += OnPlotClicked;
         }
 
         RefreshScene();
 
-        // Aktif afet kontrolü (Enum adını projene göre kontrol et: AfetTuru.None veya AfetTürü.Yok)
+        // Afet kontrolü
         if (GameManager.Instance.ActiveDisaster != AfetTürü.Yok)
         {
-            GD.Print($"DİKKAT: Bu bölgede {GameManager.Instance.ActiveDisaster} afeti yaşanıyor!");
             _disasterAnimManager?.PlayDisasterAnimation(GameManager.Instance.ActiveDisaster);
             GameManager.Instance.ActiveDisaster = AfetTürü.Yok;
         }
     }
 
+    private void OnPlotClicked()
+    {
+        var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == _currentRegion);
+
+        // Eğer ev henüz yapılmamışsa onay penceresini aç
+        if (house != null && !house.IsBuilt)
+        {
+            _confirmDialog?.Open(_currentRegion);
+        }
+        else
+        {
+            GD.Print("Bu arsa zaten inşa edilmiş!");
+        }
+    }
+
+    public void OpenBuildMenu()
+    {
+        _buildMenu?.Open(_currentRegion);
+    }
+
     public void RefreshScene()
     {
-        var region = GameManager.Instance.SelectedRegion;
-        var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == region);
-
-        if (house == null || _plotOrHouseSprite == null) return;
+        var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == _currentRegion);
+        if (house == null || _plotButton == null) return;
 
         if (house.IsBuilt)
         {
-            if (_buyPlotButton != null) _buyPlotButton.Visible = false;
-
-            _plotOrHouseSprite.Texture = house.material switch
+            // Ev inşa edildiyse ilgili malzeme görselini bas
+            _plotButton.TextureNormal = house.material switch
             {
                 Materyal.Odun => _woodHouseTexture,
                 Materyal.Tuğla => _brickHouseTexture,
@@ -53,13 +78,13 @@ public partial class BuildingMap : Node2D
         }
         else
         {
-            if (_buyPlotButton != null) _buyPlotButton.Visible = true;
-            _plotOrHouseSprite.Texture = _emptyPlotTexture;
+            // Boş arsa görseli
+            _plotButton.TextureNormal = _emptyPlotTexture;
         }
     }
 
     public void OnBackToMapButtonPressed()
     {
-        GetTree().ChangeSceneToFile("res://Scenes/TurkeyMap.tscn");
+        GetTree().ChangeSceneToFile("res://scenes/türkiye_haritası.tscn");
     }
 }

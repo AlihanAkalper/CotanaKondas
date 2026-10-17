@@ -72,9 +72,12 @@ public partial class BuildMenu : Control
             GetTree().CreateTimer(0.8f).Timeout += () =>
             {
                 Visible = false;
-                if (Owner is BuildingMap map)
+
+                // Türkiye haritasındaki butonların ikonlarını yenile
+                var points = GetTree().GetNodesInGroup("RegionButtons");
+                foreach (var node in points)
                 {
-                    map.RefreshScene();
+                    if (node is RegionPoint rp) rp.UpdatePointTexture();
                 }
             };
         }

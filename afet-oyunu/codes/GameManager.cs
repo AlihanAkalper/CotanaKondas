@@ -42,7 +42,7 @@ public partial class GameManager : Node
             SaveGame();
 
             // 2. Harita / Bölge sahnesine geçiş yap
-            GetTree().ChangeSceneToFile("res://Scenes/BuildingMap.tscn");
+            GetTree().ChangeSceneToFile("res://scenes/şehir.tscn");
         }
         else
         {
