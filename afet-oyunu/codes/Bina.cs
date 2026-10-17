@@ -11,7 +11,7 @@ public partial class Bina : Area2D
     
     [Export] public int MaxKat;
     [Export] public int KatHeight;
-    [Export] private Sprite2D[] katlar;
+    [Export] private Kat[] katlar;
 
     [ExportGroup("Durum Görselleri")]
     [Export] private Texture2D _forSaleTexture;   // Satılık tabela/boş arazi görseli
@@ -22,18 +22,18 @@ public partial class Bina : Area2D
 
     public override void _Ready()
     {
-        var Zemin = (Sprite2D)Kat_Template.Instantiate();
+        var Zemin = (Kat)Kat_Template.Instantiate();
         //MaxKat = 5;
         //KatHeight = 15;     //Şimdilik koydum, ayarlanacak
         AddChild(Zemin);
-        katlar = new Sprite2D[MaxKat];
+        katlar = new Kat[MaxKat];
         katlar[0] = Zemin;
         for (int i = 1; i < MaxKat; i++)
         {
-            Sprite2D EmptyKat = (Kat)Kat_Template.Instantiate();
-            EmptyKat.Texture = null;
+            var EmptyKat = (Kat)Kat_Template.Instantiate();
+            EmptyKat.Malzeme = 0;
             //EmptyKat.Malzeme = 0;
-            EmptyKat.Position += new Vector2(0,KatHeight);
+            EmptyKat.Position += new Vector2(0,KatHeight*i);
             AddChild(EmptyKat);
             katlar[i] = (EmptyKat);
         }
@@ -44,16 +44,16 @@ public partial class Bina : Area2D
     {
         for (int i = 0; i < MaxKat; i++)
             {
-                if(katlar[i].Texture == _forSaleTexture)
+                if(katlar[i].Malzeme == 0)
                 {
-                    katlar[i].Texture = _builtHouseTexture_tuğla; //GEÇİCİ OLARAK KOYDUM, MALZEME ATLASI OLACAK
+                    katlar[i].Malzeme = 1; //GEÇİCİ OLARAK KOYDUM, MALZEME ATLASI OLACAK
                     if (i+1 == MaxKat)
                     {
                         // katlar[i].       EN ÜST KATI ÇATI YAPACAK    
                     }
                     else
                     {
-                        katlar[i+1].Texture = _forSaleTexture;
+                        katlar[i+1].Malzeme = 0;
                     }
                     GD.Print(katlar);
                 }
@@ -61,15 +61,15 @@ public partial class Bina : Area2D
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	private float NewKatTime = 0f;
+	private double NewKatTime = 0.0;
     public override void _Process(double delta)
     {
-        if (katlar[MaxKat-1].Texture != _forSaleTexture)
+        if (katlar[MaxKat-1].Malzeme != 0)
         {
-        NewKatTime += ((float)delta);
-        if(NewKatTime > 4)
+        NewKatTime += delta;
+        if(NewKatTime > 4000.0)
         {
-            NewKatTime = 0;
+            NewKatTime = 0.0;
             GD.Print("YENİ KAT!");
             KatEkle();
         }   

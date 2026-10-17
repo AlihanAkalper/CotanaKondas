@@ -14,14 +14,14 @@ public partial class Kat : Sprite2D
 	[Export]private AtlasTexture Metal;
 	[Export]private AtlasTexture Tugla;
 
-
+	private int _malzeme;
     public int Malzeme
     {
-		get{return Malzeme;}
+		get{return _malzeme;}
 
 		set
 		{
-			Malzeme = value;
+			_malzeme = value;
 			UpdateLook(value);
 		}
 	}
@@ -38,7 +38,7 @@ public partial class Kat : Sprite2D
 
 	private void UpdateLook(int YeniMalz)
 	{
-		
+		GD.Print("CHANGE MY MALZEME TO " + YeniMalz);
 	}
 
 }
