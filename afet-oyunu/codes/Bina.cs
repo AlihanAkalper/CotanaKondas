@@ -9,6 +9,7 @@ public partial class Bina : Area2D
 
     [Export] private PackedScene Kat_Template;
     
+    public int MaxKat;
     private Sprite2D[] katlar;
 
     [ExportGroup("Durum Görselleri")]
@@ -36,13 +37,36 @@ public partial class Bina : Area2D
     }
     public override void _Ready()
     {
-        katlar = new Sprite2D[5];
-        GD.Print("uwu");
+        katlar = new Sprite2D[MaxKat];
         var Zemin = (Sprite2D)Kat_Template.Instantiate();
         AddChild(Zemin);
         katlar[0] = (Zemin);
         Zemin.Texture = _forSaleTexture;
         GD.Print(katlar);
+    }
+
+    public void KatEkle()
+    {
+        if(katlar[0].Texture == _forSaleTexture)
+        {
+            katlar[0].Texture = _forSaleTexture; //GEÇİCİ OLARAK KOYDUM, MALZEME ATLASI OLACAK
+        }
+        else
+        {
+            for (int i = 0; i < MaxKat; i++)
+            {
+                if(katlar[i] == null)
+                {
+                    var YeniKat = (Sprite2D)Kat_Template.Instantiate();
+                    AddChild(YeniKat);
+                    YeniKat.Position += new Vector2(0,6);
+                    YeniKat.Texture = _forSaleTexture; //GEÇİCİ OLARAK KOYDUM, MALZEME ATLASI OLACAK
+                    katlar[i] = YeniKat;
+                    GD.Print(katlar);
+                }
+            }
+        }
+        
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
