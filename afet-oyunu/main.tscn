@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://uspwk66q5w2w"]
 
+[ext_resource type="PackedScene" uid="uid://b3ent0gq0siy4" path="res://scenes/HUD.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://c23e4cs1tlvu7" path="res://scenes/ana_ekran.tscn" id="1_ig7tw"]
 
-[node name="MAIN" type="ResourcePreloader" unique_id=24769079]
+[node name="MAIN_NODE" type="ResourcePreloader" unique_id=24769079]
+
+[node name="HUD" parent="." unique_id=503998733 instance=ExtResource("1_0xm2m")]
 
 [node name="Ana Ekran" parent="." unique_id=918265103 instance=ExtResource("1_ig7tw")]
