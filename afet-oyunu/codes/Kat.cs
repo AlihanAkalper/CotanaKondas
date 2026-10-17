@@ -1,8 +1,11 @@
 using Godot;
 using System;
+using System.ComponentModel;
 
 public partial class Kat : Sprite2D
 {
+	[Export] public Boolean SonKat;
+
 	[ExportGroup("Duvarlar")]
 	[Export]private Sprite2D ArkaDuv;
 	[Export]private Sprite2D SolDuv;
@@ -10,19 +13,18 @@ public partial class Kat : Sprite2D
 	[Export]private Sprite2D Çatı;
 
 	[ExportGroup("Texturelar")]
-	[Export]private AtlasTexture Odun;
-	[Export]private AtlasTexture Metal;
-	[Export]private AtlasTexture Tugla;
+	[Export]private CompressedTextureLayered Odun;
+	[Export]private CompressedTextureLayered Metal;
+	[Export]private CompressedTextureLayered Tugla;
 
-	private int _malzeme;
+	[Export] private int _malzeme;
     public int Malzeme
     {
 		get{return _malzeme;}
-
 		set
 		{
 			_malzeme = value;
-			UpdateLook(value);
+			UpdateLook();
 		}
 	}
 
@@ -32,13 +34,63 @@ public partial class Kat : Sprite2D
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	// public override void _Process(double delta)
-	// {
-	// }
-
-	private void UpdateLook(int YeniMalz)
+	public override void _Process(double delta)
 	{
-		GD.Print("CHANGE MY MALZEME TO " + YeniMalz);
+	}
+
+	private void UpdateLook()
+	{
+		GD.Print("CHANGE MY MALZEME TO " + _malzeme);
+		switch (_malzeme)
+		{
+			case 0: //Boşluk
+				this.Texture = null;
+				ArkaDuv.Texture = null;
+				SolDuv.Texture = null;
+				SagDuv.Texture = null;
+				Çatı.Texture = null;
+				break;
+			case 1: //İskele
+				this.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(4)); //İSKELE OLACAK
+				ArkaDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				Çatı.Texture = null;
+				break;
+			case 2: //Odun
+				this.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(4));
+				ArkaDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				if (SonKat)
+				{
+					Çatı.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(9));
+				}
+				break;
+			case 3: //Çelik
+				this.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(3));
+				ArkaDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(6));
+				SolDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(0));
+				SagDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(0));
+				if (SonKat)
+				{
+					Çatı.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(5));
+				}
+				break;
+			case 4: //Tuğla
+				this.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(3));
+				ArkaDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(6));
+				SolDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(0));
+				SagDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(0));
+				if (SonKat)
+				{
+					Çatı.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(5));
+				}
+				break;
+			default:
+				GD.PrintErr("Unknown malzeme");
+				break;
+		}
 	}
 
 }

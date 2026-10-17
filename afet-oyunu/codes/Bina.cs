@@ -15,7 +15,7 @@ public partial class Bina : Area2D
 
     [ExportGroup("Durum Görselleri")]
     [Export] private Texture2D _forSaleTexture;   // Satılık tabela/boş arazi görseli
-    [Export] private Texture2DArray _builtHouseTexture_odun; // odun
+    [Export] private Texture2D _builtHouseTexture_odun; // odun
     [Export] private Texture2D _builtHouseTexture_tuğla; // tuğla
     [Export] private Texture2D _builtHouseTexture_celik; // çelik
     [Export] private Sprite2D _sprite;
@@ -26,17 +26,19 @@ public partial class Bina : Area2D
         //MaxKat = 5;
         //KatHeight = 15;     //Şimdilik koydum, ayarlanacak
         AddChild(Zemin);
+        Zemin.Malzeme = 1;
         katlar = new Kat[MaxKat];
         katlar[0] = Zemin;
         for (int i = 1; i < MaxKat; i++)
         {
             var EmptyKat = (Kat)Kat_Template.Instantiate();
+            EmptyKat.Position += new Vector2(0,-1*KatHeight*i);
+            EmptyKat.SonKat = false;
             EmptyKat.Malzeme = 0;
-            //EmptyKat.Malzeme = 0;
-            EmptyKat.Position += new Vector2(0,KatHeight*i);
             AddChild(EmptyKat);
             katlar[i] = (EmptyKat);
         }
+        katlar[MaxKat-1].SonKat = true;
         GD.Print(katlar);
     }
 
@@ -44,18 +46,23 @@ public partial class Bina : Area2D
     {
         for (int i = 0; i < MaxKat; i++)
             {
-                if(katlar[i].Malzeme == 0)
+                if(katlar[i].Malzeme == 1)
                 {
-                    katlar[i].Malzeme = 1; //GEÇİCİ OLARAK KOYDUM, MALZEME ATLASI OLACAK
+                    GD.Print("YENİ KAT ÇIKILIYOR!");
+                    katlar[i].Malzeme = 2; //GEÇİCİ OLARAK KOYDUM, MALZEME NO'su olacak
                     if (i+1 == MaxKat)
                     {
+                        katlar[i].SonKat = true;
+                        katlar[i].Malzeme = 2;
+                        GD.Print("ÇATI KATI ÇIKILDI");
                         // katlar[i].       EN ÜST KATI ÇATI YAPACAK    
                     }
                     else
                     {
-                        katlar[i+1].Malzeme = 0;
+                        katlar[i+1].Malzeme = 1;
                     }
                     GD.Print(katlar);
+                    break;
                 }
             }
     }
@@ -64,13 +71,12 @@ public partial class Bina : Area2D
 	private double NewKatTime = 0.0;
     public override void _Process(double delta)
     {
-        if (katlar[MaxKat-1].Malzeme != 0)
+        if (katlar[MaxKat-1].Malzeme  < 2)
         {
         NewKatTime += delta;
-        if(NewKatTime > 4000.0)
+        if(NewKatTime > 4.0)
         {
             NewKatTime = 0.0;
-            GD.Print("YENİ KAT!");
             KatEkle();
         }   
         }

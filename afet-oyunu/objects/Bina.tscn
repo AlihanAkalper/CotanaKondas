@@ -6,11 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://b0w2oh73cqn1u" path="res://assets/woodWall.png" id="4_anltg"]
 
 [node name="Bina" type="Area2D" unique_id=1273967015 node_paths=PackedStringArray("katlar")]
-position = Vector2(342, 299)
+position = Vector2(583, 556)
 script = ExtResource("1_0e48y")
 Kat_Template = ExtResource("2_v281k")
 MaxKat = 5
-KatHeight = 16
+KatHeight = 100
 katlar = []
 _forSaleTexture = ExtResource("3_bnuxh")
 _builtHouseTexture_odun = ExtResource("4_anltg")
