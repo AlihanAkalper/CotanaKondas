@@ -17,6 +17,7 @@ public partial class Kat : Sprite2D
 	[Export]private Sprite2D Çatı;
 
 	[ExportGroup("Texturelar")]
+	[Export]private Texture2D iskele;
 	[Export]private CompressedTextureLayered Odun;
 	[Export]private CompressedTextureLayered Metal;
 	[Export]private CompressedTextureLayered Tugla;
@@ -61,10 +62,10 @@ public partial class Kat : Sprite2D
 				Çatı.Texture = null;
 				break;
 			case 1: //İskele
-				this.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(4)); //İSKELE OLACAK
+				this.Texture = iskele;
 				ArkaDuv.Texture = null;
-				SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
-				SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				SolDuv.Texture = null;
+				SagDuv.Texture = null;
 				Çatı.Texture = null;
 				break;
 			case 2: //Odun

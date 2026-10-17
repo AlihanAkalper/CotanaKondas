@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ck86gc3u1h64q" path="res://codes/Kat.cs" id="1_lgjv1"]
 [ext_resource type="CompressedTexture2DArray" uid="uid://bon67ei0ro3n1" path="res://assets/TextureArray/woodWallArr.png" id="2_sck4t"]
+[ext_resource type="Texture2D" uid="uid://baqjauljeglfd" path="res://assets/iskele.png" id="2_tbgye"]
 [ext_resource type="CompressedTexture2DArray" uid="uid://dsxpt6o3eejch" path="res://assets/TextureArray/steelWallArr.png" id="4_tbgye"]
 [ext_resource type="CompressedTexture2DArray" uid="uid://d04qmuf1it8a2" path="res://assets/TextureArray/brickwallArr.png" id="5_5spxf"]
 
@@ -14,6 +15,7 @@ ArkaDuv = NodePath("ArkaDuvar")
 SolDuv = NodePath("SolDuvar")
 SagDuv = NodePath("SagDuvar")
 "Çatı" = NodePath("Çatı")
+iskele = ExtResource("2_tbgye")
 Odun = ExtResource("2_sck4t")
 Metal = ExtResource("4_tbgye")
 Tugla = ExtResource("5_5spxf")
