@@ -18,6 +18,7 @@ config/icon="uid://jpxmnl73o60i"
 [autoload]
 
 GameManager="*uid://dxhrd8cnttihu"
+DisasterManager="*uid://cc7a6obqcmm5i"
 
 [display]
 

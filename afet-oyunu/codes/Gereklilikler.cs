@@ -2,6 +2,16 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+
+public static class MaterialPrices
+{
+    public static readonly Dictionary<Materyal, int> UnitPrices = new()
+    {
+        { Materyal.Odun,  100 },  // 1 adet Odun = 100 TL
+        { Materyal.Tuğla, 250 },  // 1 adet Tuğla = 250 TL
+        { Materyal.Çelik, 600 }   // 1 adet Çelik = 600 TL
+    };
+}
 public enum Ev_numaraları
 {
     Marmara = 0,
@@ -31,12 +41,10 @@ public class HouseSaveData // laod save yapıldığında neler kaydedilecekse
     public bool IsBuilt { get; set; } = false;
     public Materyal material { get; set; } = Materyal.Alınmadı;
     public int Price { get; set; }
+    public int MaterialAmount { get; set; } = 0;
 
     public float Health { get; set; } = 100f;
 
-    public int InvestedWood { get; set; } = 0;
-    public int InvestedBricks { get; set; } = 0;
-    public int InvestedSteel { get; set; } = 0;
 }
 
 [Serializable]

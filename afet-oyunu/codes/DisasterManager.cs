@@ -10,6 +10,8 @@ public class DisasterEvent
     public AfetTürü DisasterType { get; set; }
     public float DamageTaken { get; set; }
     public float RemainingHealth { get; set; }
+   
+   
 }
 
 public partial class DisasterManager : Node

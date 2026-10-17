@@ -5,6 +5,52 @@ using System.Text.Json;
 
 public partial class GameManager : Node
 {
+
+
+    public void AdvanceToNextDay()
+    {
+        SaveData.CurrentDay++;
+        int totalDailyIncome = 0;
+
+        foreach (var house in SaveData.Houses)
+        {
+            if (house.IsBuilt && house.Health > 0)
+            {
+                if (RegionDatabase.Regions.ContainsKey(house.Type))
+                {
+                    int rent = RegionDatabase.Regions[house.Type].MinRentIncome;
+                    totalDailyIncome += rent;
+                }
+            }
+        }
+
+        SaveData.Money += totalDailyIncome;
+        GD.Print($"Gün {SaveData.CurrentDay} başladı! Toplanan Kira: {totalDailyIncome:N0} TL | Yeni Bakiye: {SaveData.Money:N0} TL");
+
+        var occurredDisasters = DisasterManager.Instance.ProcessDailyDisasters();
+
+        if (occurredDisasters.Count > 0)
+        {
+            // İlk afeti al ve o bölgeye git
+            var disaster = occurredDisasters[0];
+
+            SelectedRegion = disaster.Region;
+            ActiveDisaster = disaster.DisasterType;
+
+            GD.Print($"[DİKKAT] {disaster.Region} bölgesinde {disaster.DisasterType} çıktı! Oraya yönlendiriliyorsunuz...");
+
+            SaveGame();
+
+            // 2. Harita / Bölge sahnesine geçiş yap
+            GetTree().ChangeSceneToFile("res://Scenes/BuildingMap.tscn");
+        }
+        else
+        {
+            // Afet yoksa sadece HUD'ı güncelle ve oyunu kaydet
+            HUD.Instance?.UpdateHUD();
+            SaveGame();
+        }
+    }
     public static GameManager Instance { get; private set; }
 
     public AfetTürü ActiveDisaster { get; set; } = AfetTürü.Yok;
@@ -28,19 +74,33 @@ public partial class GameManager : Node
         }
 
         // 1. Para kontrolü
-        if (SaveData.Money < house.Price)
+
+        // Malzemenin birim fiyatı ve toplam inşa maliyeti
+        int unitPrice = MaterialPrices.UnitPrices[material];
+        int materialCost = unitPrice * amount;
+        int totalCost = house.Price + materialCost;
+
+        // Bakiye kontrolü
+        if (SaveData.Money < totalCost)
         {
-            GD.Print("Yetersiz para!");
+            GD.PrintErr($"Yetersiz bakiye! Gereken: {totalCost:N0} TL, Mevcut: {SaveData.Money:N0} TL");
             return false;
         }
 
-        // 4. Evin bilgilerini doldur
+        // Parayı doğrudan kasadan düş
+        SaveData.Money -= totalCost;
+
+        // Evi kaydet
         house.IsBuilt = true;
         house.material = material;
+        house.MaterialAmount = amount;
+        house.Health = 100f;
 
-        GD.Print($"{type} inşa edildi! Kullanılan: {material}");
+        GD.Print($"{type} başarıyla inşa edildi!");
+        GD.Print($"Harcanan: {house.Price:N0} TL (Arsa) + {materialCost:N0} TL ({amount}x {material}) = Toplam {totalCost:N0} TL");
 
         SaveGame();
+        HUD.Instance?.UpdateHUD();
         return true;
     }
 
