@@ -10,7 +10,8 @@ public partial class Bina : Area2D
     [Export] private PackedScene Kat_Template;
     
     public int MaxKat;
-    private Sprite2D[] katlar;
+    public int KatHeight;
+    [Export] private Sprite2D[] katlar;
 
     [ExportGroup("Durum Görselleri")]
     [Export] private Texture2D _forSaleTexture;   // Satılık tabela/boş arazi görseli
@@ -37,40 +38,47 @@ public partial class Bina : Area2D
     }
     public override void _Ready()
     {
-        katlar = new Sprite2D[MaxKat];
         var Zemin = (Sprite2D)Kat_Template.Instantiate();
+        Zemin.Texture = _forSaleTexture;
         AddChild(Zemin);
         katlar[0] = (Zemin);
-        Zemin.Texture = _forSaleTexture;
+        for (int i = 1; i < MaxKat; i++)
+        {
+            var EmptyKat = (Sprite2D)Kat_Template.Instantiate();
+            EmptyKat.Texture = null;
+            EmptyKat.Position += new Vector2(0,KatHeight);
+            AddChild(EmptyKat);
+            katlar[i] = (EmptyKat);
+        }
         GD.Print(katlar);
     }
 
     public void KatEkle()
     {
-        if(katlar[0].Texture == _forSaleTexture)
-        {
-            katlar[0].Texture = _forSaleTexture; //GEÇİCİ OLARAK KOYDUM, MALZEME ATLASI OLACAK
-        }
-        else
-        {
-            for (int i = 0; i < MaxKat; i++)
+        for (int i = 0; i < MaxKat; i++)
             {
-                if(katlar[i] == null)
+                if(katlar[i].Texture == _forSaleTexture)
                 {
-                    var YeniKat = (Sprite2D)Kat_Template.Instantiate();
-                    AddChild(YeniKat);
-                    YeniKat.Position += new Vector2(0,6);
-                    YeniKat.Texture = _forSaleTexture; //GEÇİCİ OLARAK KOYDUM, MALZEME ATLASI OLACAK
-                    katlar[i] = YeniKat;
+                    katlar[i].Texture = _builtHouseTexture_odun; //GEÇİCİ OLARAK KOYDUM, MALZEME ATLASI OLACAK
+                    if (i+1 == MaxKat)
+                    {
+                        // katlar[i].       EN ÜST KATI ÇATI YAPACAK    
+                    }
+                    else
+                    {
+                        katlar[i+1].Texture = _forSaleTexture;
+                    }
                     GD.Print(katlar);
                 }
             }
-        }
-        
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{
-	}
+    {
+        if(delta % 15 == 1)
+        {
+            KatEkle();
+        }
+    }
 }
