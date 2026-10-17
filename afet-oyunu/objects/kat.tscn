@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b11vljavmsgg8"]
+
+[ext_resource type="Texture2D" uid="uid://bii5ohtf57gju" path="res://assets/sale.png" id="1_lgjv1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+
+[node name="Kat" type="Sprite2D" unique_id=170612053]
+scale = Vector2(4, 4)
+texture = ExtResource("1_lgjv1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=358282937]
+scale = Vector2(0.99999976, 0.99999994)
+shape = SubResource("RectangleShape2D_h2yge")

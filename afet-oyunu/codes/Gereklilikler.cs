@@ -25,7 +25,7 @@ public enum Materyal
 }
 
 [Serializable]
-public class HouseSaveData
+public class HouseSaveData // laod save yapıldığında neler kaydedilecekse
 {
     public Ev_numaraları Type { get; set; }
     public bool IsBuilt { get; set; } = false;
@@ -48,7 +48,7 @@ public class GameSaveData
     public GameSaveData()
     {
 
-        int[] housePrices = new int[8] { 150000, 300000, 600000, 1000000, 1800000, 3000000, 5000000, 8500000 };
+        int[] housePrices = new int[8] { 150000, 300000, 600000, 1000000, 1800000, 3000000, 5000000, 8500000 };//deişebilir
 
         for (int i = 0; i < 8; i++)
         {
