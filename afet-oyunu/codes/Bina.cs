@@ -28,7 +28,6 @@ public partial class Bina : Area2D
         AddChild(Zemin);
         katlar = new Sprite2D[MaxKat];
         katlar[0] = Zemin;
-        GD.PrintErr("1Hit");
         for (int i = 1; i < MaxKat; i++)
         {
             Sprite2D EmptyKat = (Kat)Kat_Template.Instantiate();
@@ -37,7 +36,6 @@ public partial class Bina : Area2D
             EmptyKat.Position += new Vector2(0,KatHeight);
             AddChild(EmptyKat);
             katlar[i] = (EmptyKat);
-            GD.PrintErr("1Hit");
         }
         GD.Print(katlar);
     }
@@ -66,10 +64,8 @@ public partial class Bina : Area2D
 	private float NewKatTime = 0f;
     public override void _Process(double delta)
     {
-        GD.PrintErr("ProcHit");
         if (katlar[MaxKat-1].Texture != _forSaleTexture)
         {
-            GD.PrintErr("ProcHit");
         NewKatTime += ((float)delta);
         if(NewKatTime > 4)
         {
@@ -78,6 +74,5 @@ public partial class Bina : Area2D
             KatEkle();
         }   
         }
-        GD.PrintErr("ProcEndHit");
     }
 }
