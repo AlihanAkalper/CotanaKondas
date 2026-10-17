@@ -6,8 +6,8 @@
 [ext_resource type="CompressedTexture2DArray" uid="uid://dyfla3if6pyum" path="res://assets/TextureArray/steelWall2.png" id="4_ak55u"]
 [ext_resource type="CompressedTexture2DArray" uid="uid://ci1v8m28o1skv" path="res://assets/TextureArray/brickwall2.png" id="5_m3r6m"]
 [ext_resource type="Texture2D" uid="uid://dnc16iknt0lb1" path="res://assets/npc.png" id="6_5spxf"]
-[ext_resource type="Texture2D" uid="uid://jpxmnl73o60i" path="res://assets/logo.png" id="7_ohifh"]
 [ext_resource type="Script" uid="uid://b8ixabwwc5eej" path="res://objects/Kiraci.cs" id="7_okegr"]
+[ext_resource type="Texture2D" uid="uid://cxtihrojgrmvr" path="res://assets/soruIsareti.png" id="8_okegr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ohifh"]
 atlas = ExtResource("6_5spxf")
@@ -57,14 +57,35 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_yqqx7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bn7wg"]
+atlas = ExtResource("8_okegr")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqk7p"]
+atlas = ExtResource("8_okegr")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ci55w"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_ohifh")
+"texture": SubResource("AtlasTexture_bn7wg")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"SagaYurume",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqk7p")
+}],
+"loop": 1,
+"name": &"SolaYurume",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Yok",
 "speed": 5.0
 }]
 
@@ -155,13 +176,15 @@ scale = Vector2(0.5, 0.7)
 sprite_frames = SubResource("SpriteFrames_vngvs")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.20623145
+frame_progress = 0.30796957
 script = ExtResource("7_okegr")
 
 [node name="Baloncuk" type="AnimatedSprite2D" parent="Kiraci" unique_id=1427294327]
 position = Vector2(-7.4264493, -30.044182)
 scale = Vector2(0.05, 0.05)
-sprite_frames = SubResource("SpriteFrames_yqqx7")
+sprite_frames = SubResource("SpriteFrames_ci55w")
+animation = &"SagaYurume"
+autoplay = "Yok"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Kiraci/Baloncuk" unique_id=606208892]
 libraries/ = SubResource("AnimationLibrary_m3r6m")
