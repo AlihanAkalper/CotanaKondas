@@ -6,7 +6,7 @@
 [ext_resource type="CompressedTexture2DArray" uid="uid://d04qmuf1it8a2" path="res://assets/TextureArray/brickwallArr.png" id="5_5spxf"]
 
 [node name="Kat" type="Sprite2D" unique_id=170612053 node_paths=PackedStringArray("ArkaDuv", "SolDuv", "SagDuv", "Çatı")]
-scale = Vector2(1.5, 0.9)
+scale = Vector2(2.5, 1.732)
 region_rect = Rect2(516, 94, 117, 9)
 script = ExtResource("1_lgjv1")
 ArkaDuv = NodePath("ArkaDuvar")
@@ -18,18 +18,21 @@ Metal = ExtResource("4_tbgye")
 Tugla = ExtResource("5_5spxf")
 
 [node name="ArkaDuvar" type="Sprite2D" parent="." unique_id=474522903]
-position = Vector2(20, -20)
+position = Vector2(13, -0.5)
+scale = Vector2(4, 1.7)
 region_rect = Rect2(25, 15, 31, 102)
 
 [node name="SolDuvar" type="Sprite2D" parent="." unique_id=369147684]
-position = Vector2(-35, -18)
+position = Vector2(-42, 9)
+scale = Vector2(0.4, 0.4)
 region_rect = Rect2(279, 13, 35, 106)
 
 [node name="SagDuvar" type="Sprite2D" parent="." unique_id=57978093]
-position = Vector2(74, -18)
+position = Vector2(59, 9)
+scale = Vector2(0.4, 0.4)
 region_rect = Rect2(409, 15, 31, 102)
 
 [node name="Çatı" type="Sprite2D" parent="." unique_id=848647806]
-position = Vector2(14, -85)
-scale = Vector2(5.6, 1)
+position = Vector2(-3, -16)
+scale = Vector2(4.6, 0.4)
 region_rect = Rect2(1199, 55, 27, 27)

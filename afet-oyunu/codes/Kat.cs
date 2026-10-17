@@ -6,6 +6,10 @@ public partial class Kat : Sprite2D
 {
 	[Export] public Boolean SonKat;
 
+	private Node Kiraci;
+
+	private int Saglamlık;
+
 	[ExportGroup("Duvarlar")]
 	[Export]private Sprite2D ArkaDuv;
 	[Export]private Sprite2D SolDuv;
@@ -31,6 +35,12 @@ public partial class Kat : Sprite2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		if(GetParent().ToString() == "<Window#26860324303>")
+		{
+			GD.PrintErr("In DEV mode, material set to 2");
+			SonKat = true;
+			Malzeme = 2;
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,19 +62,19 @@ public partial class Kat : Sprite2D
 				break;
 			case 1: //İskele
 				this.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(4)); //İSKELE OLACAK
-				ArkaDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				ArkaDuv.Texture = null;
 				SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
 				SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
 				Çatı.Texture = null;
 				break;
 			case 2: //Odun
 				this.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(4));
-				ArkaDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				ArkaDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(9));
 				SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
 				SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
 				if (SonKat)
 				{
-					Çatı.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(9));
+					Çatı.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(8));
 				}
 				break;
 			case 3: //Çelik
