@@ -9,43 +9,31 @@ public partial class Bina : Area2D
 
     [Export] private PackedScene Kat_Template;
     
-    public int MaxKat;
-    public int KatHeight;
-    [Export] private Sprite2D[] katlar;
+    [Export] public int MaxKat;
+    [Export] public int KatHeight;
+    [Export] private Kat[] katlar;
 
     [ExportGroup("Durum Görselleri")]
     [Export] private Texture2D _forSaleTexture;   // Satılık tabela/boş arazi görseli
-    [Export] private Texture2D _builtHouseTexture_odun; // odun
+    [Export] private Texture2DArray _builtHouseTexture_odun; // odun
     [Export] private Texture2D _builtHouseTexture_tuğla; // tuğla
     [Export] private Texture2D _builtHouseTexture_celik; // çelik
     [Export] private Sprite2D _sprite;
 
-	public void UpdateView(HouseSaveData data)
-	{
-        if(_sprite == null) return;
-        if(!data.IsBuilt)
-        {
-            _sprite.Texture = _forSaleTexture;
-            return;
-        }
-        _sprite.Texture = data.material switch
-        {
-            Materyal.Odun => _builtHouseTexture_odun,
-            Materyal.Tuğla => _builtHouseTexture_tuğla,
-            Materyal.Çelik => _builtHouseTexture_celik,
-            _ => _forSaleTexture
-        };
-    }
     public override void _Ready()
     {
-        var Zemin = (Sprite2D)Kat_Template.Instantiate();
-        Zemin.Texture = _forSaleTexture;
+        var Zemin = (Kat)Kat_Template.Instantiate();
+        //MaxKat = 5;
+        //KatHeight = 15;     //Şimdilik koydum, ayarlanacak
+        Zemin.Malzeme = 0;
         AddChild(Zemin);
-        katlar[0] = (Zemin);
+        katlar = new Kat[MaxKat];
+        katlar[0] = Zemin;
         for (int i = 1; i < MaxKat; i++)
         {
-            var EmptyKat = (Sprite2D)Kat_Template.Instantiate();
+            var EmptyKat = (Kat)Kat_Template.Instantiate();
             EmptyKat.Texture = null;
+            EmptyKat.Malzeme = 0;
             EmptyKat.Position += new Vector2(0,KatHeight);
             AddChild(EmptyKat);
             katlar[i] = (EmptyKat);
@@ -57,9 +45,9 @@ public partial class Bina : Area2D
     {
         for (int i = 0; i < MaxKat; i++)
             {
-                if(katlar[i].Texture == _forSaleTexture)
+                if(katlar[i].Malzeme == 0)
                 {
-                    katlar[i].Texture = _builtHouseTexture_odun; //GEÇİCİ OLARAK KOYDUM, MALZEME ATLASI OLACAK
+                    katlar[i].Malzeme = 1; //GEÇİCİ OLARAK KOYDUM, MALZEME ATLASI OLACAK
                     if (i+1 == MaxKat)
                     {
                         // katlar[i].       EN ÜST KATI ÇATI YAPACAK    
@@ -74,10 +62,14 @@ public partial class Bina : Area2D
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	private double time = 0;
+    public override void _Process(double delta)
     {
-        if(delta % 15 == 1)
+        time += delta;
+        if(time > 4.0)
         {
+            time = 0;
+            GD.Print("YENİ KAT!");
             KatEkle();
         }
     }
