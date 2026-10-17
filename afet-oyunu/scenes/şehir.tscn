@@ -4,9 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://b2hvlx7ok18p8" path="res://assets/akdeniz.png" id="2_iwd6b"]
 [ext_resource type="Texture2D" uid="uid://o7jc4km6ujir" path="res://assets/gameui.png" id="3_0omdw"]
 [ext_resource type="Script" uid="uid://brihs7gnur1pr" path="res://scenes/BackButton.cs" id="4_hj688"]
+[ext_resource type="Script" uid="uid://bbr2idbxx5wv" path="res://codes/DisasterAnimationManager.cs" id="5_oe26e"]
+[ext_resource type="Script" uid="uid://pkhjltfk2g48" path="res://codes/HUD.cs" id="6_385tt"]
 
-[node name="Şehir" type="Node2D" unique_id=576134575]
+[node name="Şehir" type="Node2D" unique_id=576134575 node_paths=PackedStringArray("_disasterAnimManager")]
 script = ExtResource("1_jgs2t")
+_disasterAnimManager = NodePath("DisasterEffect")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=292076233]
 position = Vector2(575, 325.50003)
@@ -21,3 +24,25 @@ texture_normal = ExtResource("3_0omdw")
 ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("4_hj688")
+
+[node name="DisasterEffect" type="Node" parent="." unique_id=1821234811 node_paths=PackedStringArray("_camera")]
+script = ExtResource("5_oe26e")
+_camera = NodePath("../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=757772713]
+position = Vector2(576, 333)
+
+[node name="Cityhud" type="CanvasLayer" parent="." unique_id=1432209959 node_paths=PackedStringArray("_moneyLabel", "_dateLabel")]
+script = ExtResource("6_385tt")
+_moneyLabel = NodePath("Money Label")
+_dateLabel = NodePath("Day Label")
+
+[node name="Money Label" type="Label" parent="Cityhud" unique_id=913878039]
+offset_right = 180.0
+offset_bottom = 51.0
+
+[node name="Day Label" type="Label" parent="Cityhud" unique_id=1971786900]
+offset_left = 518.0
+offset_top = 1.0
+offset_right = 790.0
+offset_bottom = 53.0

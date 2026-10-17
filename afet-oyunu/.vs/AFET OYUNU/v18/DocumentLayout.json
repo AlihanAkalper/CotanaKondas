@@ -3,60 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\scenes\\NextDayButton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:scenes\\NextDayButton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|c:\\users\\admin\\onedrive\\belgeler\\github\\cotanakondas\\afet-oyunu\\codes\\regionpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|solutionrelative:codes\\regionpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|c:\\users\\admin\\onedrive\\belgeler\\github\\cotanakondas\\afet-oyunu\\codes\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|solutionrelative:codes\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\BuildingMap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:codes\\BuildingMap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|c:\\users\\admin\\onedrive\\belgeler\\github\\cotanakondas\\afet-oyunu\\codes\\buildingmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|solutionrelative:codes\\buildingmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\EarthquakeEffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:codes\\EarthquakeEffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|c:\\users\\admin\\onedrive\\belgeler\\github\\cotanakondas\\afet-oyunu\\codes\\disastermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|solutionrelative:codes\\disastermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\FloodEffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:codes\\FloodEffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|c:\\users\\admin\\onedrive\\belgeler\\github\\cotanakondas\\afet-oyunu\\codes\\disasteranimationmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|solutionrelative:codes\\disasteranimationmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\DisasterAnimationManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:codes\\DisasterAnimationManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|c:\\users\\admin\\onedrive\\belgeler\\github\\cotanakondas\\afet-oyunu\\codes\\buildmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|solutionrelative:codes\\buildmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\FireEffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:codes\\FireEffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\DisasterManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:codes\\DisasterManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\StatPanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:codes\\StatPanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|c:\\users\\admin\\onedrive\\belgeler\\github\\cotanakondas\\afet-oyunu\\codes\\gereklilikler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|solutionrelative:codes\\gereklilikler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|c:\\users\\admin\\onedrive\\belgeler\\github\\cotanakondas\\afet-oyunu\\codes\\disasterdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|solutionrelative:codes\\disasterdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|c:\\users\\admin\\onedrive\\belgeler\\github\\cotanakondas\\afet-oyunu\\codes\\regiondata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|solutionrelative:codes\\regiondata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|c:\\users\\admin\\onedrive\\belgeler\\github\\cotanakondas\\afet-oyunu\\codes\\regionpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|solutionrelative:codes\\regionpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\HUD.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:codes\\HUD.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|c:\\users\\admin\\onedrive\\belgeler\\github\\cotanakondas\\afet-oyunu\\codes\\plotconfirmdialog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F7C41F8-4350-4D0F-889A-D2D8EB20E52F}|Afet Oyunu.csproj|solutionrelative:codes\\plotconfirmdialog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,85 +38,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "NextDayButton.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\scenes\\NextDayButton.cs",
-              "RelativeDocumentMoniker": "scenes\\NextDayButton.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\scenes\\NextDayButton.cs",
-              "RelativeToolTip": "scenes\\NextDayButton.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T14:26:44.196Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "FireEffect.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\FireEffect.cs",
-              "RelativeDocumentMoniker": "codes\\FireEffect.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\FireEffect.cs",
-              "RelativeToolTip": "codes\\FireEffect.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T13:43:37.364Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "DisasterAnimationManager.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\DisasterAnimationManager.cs",
               "RelativeDocumentMoniker": "codes\\DisasterAnimationManager.cs",
               "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\DisasterAnimationManager.cs",
               "RelativeToolTip": "codes\\DisasterAnimationManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACYAAAAAAAAAAAAmwBwAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T13:52:16.152Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "FloodEffect.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\FloodEffect.cs",
-              "RelativeDocumentMoniker": "codes\\FloodEffect.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\FloodEffect.cs",
-              "RelativeToolTip": "codes\\FloodEffect.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T13:44:47.748Z",
+              "WhenOpened": "2026-10-17T19:19:45.174Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "EarthquakeEffect.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\EarthquakeEffect.cs",
-              "RelativeDocumentMoniker": "codes\\EarthquakeEffect.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\EarthquakeEffect.cs",
-              "RelativeToolTip": "codes\\EarthquakeEffect.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAswCoAAAABAAAAAAAAAA==",
+              "Title": "DisasterManager.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\DisasterManager.cs",
+              "RelativeDocumentMoniker": "codes\\DisasterManager.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\DisasterManager.cs",
+              "RelativeToolTip": "codes\\DisasterManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T13:36:45.425Z",
+              "WhenOpened": "2026-10-17T19:14:42.164Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BuildingMap.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\BuildingMap.cs",
-              "RelativeDocumentMoniker": "codes\\BuildingMap.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\BuildingMap.cs",
-              "RelativeToolTip": "codes\\BuildingMap.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABDAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "BuildMenu.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\BuildMenu.cs",
+              "RelativeDocumentMoniker": "codes\\BuildMenu.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\BuildMenu.cs",
+              "RelativeToolTip": "codes\\BuildMenu.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAiwG8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T13:02:03.793Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-17T18:49:51.246Z"
             },
             {
               "$type": "Document",
@@ -154,100 +86,47 @@
               "RelativeDocumentMoniker": "codes\\GameManager.cs",
               "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\GameManager.cs",
               "RelativeToolTip": "codes\\GameManager.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAswDEAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAGoAAAAAAAAAAAA/wAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T08:20:49.682Z",
+              "WhenOpened": "2026-10-17T18:31:12.25Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "DisasterManager.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\DisasterManager.cs",
-              "RelativeDocumentMoniker": "codes\\DisasterManager.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\DisasterManager.cs",
-              "RelativeToolTip": "codes\\DisasterManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGAAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T12:16:00.094Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "DisasterData.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\DisasterData.cs",
-              "RelativeDocumentMoniker": "codes\\DisasterData.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\DisasterData.cs",
-              "RelativeToolTip": "codes\\DisasterData.cs",
-              "ViewState": "AgIAAIAAAAAAAAAAAAAAAJgAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T11:44:51.909Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Gereklilikler.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\Gereklilikler.cs",
-              "RelativeDocumentMoniker": "codes\\Gereklilikler.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\Gereklilikler.cs",
-              "RelativeToolTip": "codes\\Gereklilikler.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAwwBkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T11:52:33.03Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "StatPanel.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\StatPanel.cs",
-              "RelativeDocumentMoniker": "codes\\StatPanel.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\StatPanel.cs",
-              "RelativeToolTip": "codes\\StatPanel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T08:31:59.74Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 0,
               "Title": "RegionPoint.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\RegionPoint.cs",
               "RelativeDocumentMoniker": "codes\\RegionPoint.cs",
               "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\RegionPoint.cs",
               "RelativeToolTip": "codes\\RegionPoint.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBcAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T11:10:42.84Z",
+              "WhenOpened": "2026-10-17T17:27:57.509Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "RegionData.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\RegionData.cs",
-              "RelativeDocumentMoniker": "codes\\RegionData.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\RegionData.cs",
-              "RelativeToolTip": "codes\\RegionData.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "PlotConfirmDialog.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\PlotConfirmDialog.cs",
+              "RelativeDocumentMoniker": "codes\\PlotConfirmDialog.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\PlotConfirmDialog.cs",
+              "RelativeToolTip": "codes\\PlotConfirmDialog.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAmwDkAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T08:33:45.252Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-17T17:21:21.042Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "HUD.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\HUD.cs",
-              "RelativeDocumentMoniker": "codes\\HUD.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\HUD.cs",
-              "RelativeToolTip": "codes\\HUD.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAABNAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "BuildingMap.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\BuildingMap.cs",
+              "RelativeDocumentMoniker": "codes\\BuildingMap.cs",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Belgeler\\GitHub\\CotanaKondas\\afet-oyunu\\codes\\BuildingMap.cs",
+              "RelativeToolTip": "codes\\BuildingMap.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAswDAAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-17T08:24:50.813Z",
+              "WhenOpened": "2026-10-17T17:01:03.183Z",
               "EditorCaption": ""
             }
           ]

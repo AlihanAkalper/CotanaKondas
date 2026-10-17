@@ -12,8 +12,6 @@
 [ext_resource type="Script" uid="uid://denc77tkxos68" path="res://codes/PlotConfirmDialog.cs" id="10_0tmf1"]
 
 [node name="Türkiye haritası" type="Node2D" unique_id=232434904]
-metadata/_edit_vertical_guides_ = [599.0]
-metadata/_edit_horizontal_guides_ = [330.0]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1051094339]
 position = Vector2(576.49994, 324.5)
@@ -185,13 +183,20 @@ ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("8_qehax")
 
-[node name="BuildMenu" type="Control" parent="MainHud" unique_id=754634902]
+[node name="BuildMenu" type="Control" parent="MainHud" unique_id=754634902 node_paths=PackedStringArray("_titleLabel", "_materialDropdown", "_amountInput", "_materialCostLabel", "_statusMessageLabel", "_confirmButton", "_cancelButton")]
 visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_6tlxa")
+_titleLabel = NodePath("PanelContainer/VBoxContainer/TitleLabel")
+_materialDropdown = NodePath("PanelContainer/VBoxContainer/MaterialDropdown")
+_amountInput = NodePath("PanelContainer/VBoxContainer/AmountInput")
+_materialCostLabel = NodePath("PanelContainer/VBoxContainer/MaterialCostLabel")
+_statusMessageLabel = NodePath("PanelContainer/VBoxContainer/StatusMessageLabel")
+_confirmButton = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Confirm Button")
+_cancelButton = NodePath("PanelContainer/VBoxContainer/HBoxContainer/CancelButton")
 
 [node name="PanelContainer" type="PanelContainer" parent="MainHud/BuildMenu" unique_id=196346424]
 layout_mode = 0
@@ -202,9 +207,6 @@ offset_bottom = 40.0
 layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="MainHud/BuildMenu/PanelContainer/VBoxContainer" unique_id=456918138]
-layout_mode = 2
-
-[node name="PlotCostLabel" type="Label" parent="MainHud/BuildMenu/PanelContainer/VBoxContainer" unique_id=1302034005]
 layout_mode = 2
 
 [node name="MaterialDropdown" type="OptionButton" parent="MainHud/BuildMenu/PanelContainer/VBoxContainer" unique_id=2126392335]

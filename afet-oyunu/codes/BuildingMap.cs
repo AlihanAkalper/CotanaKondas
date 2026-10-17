@@ -35,7 +35,17 @@ public partial class BuildingMap : Node2D
         // Afet kontrolü
         if (GameManager.Instance.ActiveDisaster != AfetTürü.Yok)
         {
-            _disasterAnimManager?.PlayDisasterAnimation(GameManager.Instance.ActiveDisaster);
+            AfetTürü currentDisaster = GameManager.Instance.ActiveDisaster;
+
+            GD.Print($"Şehir Sahnesi: {currentDisaster} tespit edildi. 0.3 saniye sonra animasyon başlayacak.");
+
+            // Sahnenin oturması için 0.3 saniye bekleyip animasyonu başlat
+            GetTree().CreateTimer(0.3f).Timeout += () =>
+            {
+                _disasterAnimManager?.PlayDisasterAnimation(currentDisaster);
+            };
+
+            // Afeti tüket (tekrar tekrar oynamasın)
             GameManager.Instance.ActiveDisaster = AfetTürü.Yok;
         }
     }

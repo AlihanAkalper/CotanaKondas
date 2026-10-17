@@ -48,7 +48,7 @@ public partial class RegionPoint : TextureButton
         if (houseData != null && houseData.IsBuilt)
         {
             // ARSA ZATEN ALINMIŞ: Şehir/Ev haritasına git
-            GetTree().ChangeSceneToFile("res://scenes/BuildingMap.tscn");
+            GetTree().ChangeSceneToFile("res://scenes/şehir.tscn");
         }
         else
         {
