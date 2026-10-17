@@ -3,7 +3,16 @@ using System;
 
 public partial class Kat : Sprite2D
 {
-	
+	[ExportGroup("Duvarlar")]
+	[Export]private Sprite2D ArkaDuv;
+	[Export]private Sprite2D SolDuv;
+	[Export]private Sprite2D SagDuv;
+	[Export]private Sprite2D Çatı;
+
+	[ExportGroup("Texturelar")]
+	[Export]private AtlasTexture Odun;
+	[Export]private AtlasTexture Metal;
+	[Export]private AtlasTexture Tugla;
 
 
     public int Malzeme

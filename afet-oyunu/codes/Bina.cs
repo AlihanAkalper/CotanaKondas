@@ -62,15 +62,18 @@ public partial class Bina : Area2D
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	private double time = 0;
+	private int NewKatTime = 0;
     public override void _Process(double delta)
     {
-        time += delta;
-        if(time > 4.0)
+        if (katlar[-1].Malzeme != 0)
         {
-            time = 0;
+        NewKatTime += ((int)delta);
+        if(NewKatTime > 4)
+        {
+            NewKatTime = 0;
             GD.Print("YENİ KAT!");
             KatEkle();
+        }   
         }
     }
 }

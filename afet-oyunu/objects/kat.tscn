@@ -1,10 +1,22 @@
 [gd_scene format=3 uid="uid://b11vljavmsgg8"]
 
 [ext_resource type="Script" uid="uid://ck86gc3u1h64q" path="res://codes/Kat.cs" id="1_lgjv1"]
+[ext_resource type="Texture2D" uid="uid://dkypmuhrue8le" path="res://assets/Atlaslar/Wood.tres" id="1_sck4t"]
 
-[node name="Kat" type="Sprite2D" unique_id=170612053]
-scale = Vector2(4, 4)
+[node name="Kat" type="Sprite2D" unique_id=170612053 node_paths=PackedStringArray("ArkaDuv", "SolDuv", "SagDuv")]
+texture = ExtResource("1_sck4t")
 region_rect = Rect2(808, 59, 31, 30)
 script = ExtResource("1_lgjv1")
+ArkaDuv = NodePath("ArkaDuvar")
+SolDuv = NodePath("SolDuvar")
+SagDuv = NodePath("SagDuvar")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=474522903]
+[node name="ArkaDuvar" type="Sprite2D" parent="." unique_id=474522903]
+texture = ExtResource("1_sck4t")
+region_enabled = true
+
+[node name="SolDuvar" type="Sprite2D" parent="." unique_id=369147684]
+
+[node name="SagDuvar" type="Sprite2D" parent="." unique_id=57978093]
+
+[node name="Çatı" type="Sprite2D" parent="." unique_id=848647806]
