@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://b11vljavmsgg8"]
 
 [ext_resource type="Script" uid="uid://ck86gc3u1h64q" path="res://codes/Kat.cs" id="1_lgjv1"]
-[ext_resource type="CompressedTexture2DArray" uid="uid://bon67ei0ro3n1" path="res://assets/TextureArray/woodWallArr.png" id="2_sck4t"]
 [ext_resource type="Texture2D" uid="uid://baqjauljeglfd" path="res://assets/iskele.png" id="2_tbgye"]
-[ext_resource type="CompressedTexture2DArray" uid="uid://dsxpt6o3eejch" path="res://assets/TextureArray/steelWallArr.png" id="4_tbgye"]
-[ext_resource type="CompressedTexture2DArray" uid="uid://d04qmuf1it8a2" path="res://assets/TextureArray/brickwallArr.png" id="5_5spxf"]
+[ext_resource type="CompressedTexture2DArray" uid="uid://c28pq4twtgi3i" path="res://assets/TextureArray/woodWall2.png" id="3_okegr"]
+[ext_resource type="CompressedTexture2DArray" uid="uid://dyfla3if6pyum" path="res://assets/TextureArray/steelWall2.png" id="4_ak55u"]
+[ext_resource type="CompressedTexture2DArray" uid="uid://ci1v8m28o1skv" path="res://assets/TextureArray/brickwall2.png" id="5_m3r6m"]
 [ext_resource type="Texture2D" uid="uid://dnc16iknt0lb1" path="res://assets/npc.png" id="6_5spxf"]
 [ext_resource type="Texture2D" uid="uid://jpxmnl73o60i" path="res://assets/logo.png" id="7_ohifh"]
 [ext_resource type="Script" uid="uid://b8ixabwwc5eej" path="res://objects/Kiraci.cs" id="7_okegr"]
@@ -124,9 +124,9 @@ SolDuv = NodePath("SolDuvar")
 SagDuv = NodePath("SagDuvar")
 "Çatı" = NodePath("Çatı")
 iskele = ExtResource("2_tbgye")
-Odun = ExtResource("2_sck4t")
-Metal = ExtResource("4_tbgye")
-Tugla = ExtResource("5_5spxf")
+Odun = ExtResource("3_okegr")
+Metal = ExtResource("4_ak55u")
+Tugla = ExtResource("5_m3r6m")
 
 [node name="ArkaDuvar" type="Sprite2D" parent="." unique_id=474522903]
 z_index = -1
@@ -155,7 +155,7 @@ scale = Vector2(0.5, 0.7)
 sprite_frames = SubResource("SpriteFrames_vngvs")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.19273797
+frame_progress = 0.20623145
 script = ExtResource("7_okegr")
 
 [node name="Baloncuk" type="AnimatedSprite2D" parent="Kiraci" unique_id=1427294327]

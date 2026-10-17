@@ -89,7 +89,7 @@ public partial class Kat : Sprite2D
 					SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(3));
 				}
 				this.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(4));
-				ArkaDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(9));
+				ArkaDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(7));
 				if (SonKat)
 				{
 					Çatı.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(8));
