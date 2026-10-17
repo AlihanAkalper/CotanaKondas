@@ -72,4 +72,5 @@ public partial class GameManager : Node
             return false;
         }
     }
+    public Ev_numaraları SelectedRegion { get; set; } = Ev_numaraları.Marmara;
 }

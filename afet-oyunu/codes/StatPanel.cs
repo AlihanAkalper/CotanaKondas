@@ -1,13 +1,14 @@
 using Godot;
 using System;
 
-public partial class StatPanel : Node
+public partial class StatPanel : Control
 {
 	[Export] private Label _lblArsaAd;
     [Export] private Label _lblArsaÜcreti;
     [Export] private Label _lblPahalıMateryal;
     [Export] private Label _lblUcuzMateryal;
     [Export] private Label _lblMinKira;
+    [Export] private Label _lblİnşaEdildi;
 
     public override void _Ready()
 	{
@@ -26,9 +27,9 @@ public partial class StatPanel : Node
         _lblMinKira.Text = $"Min. Kira Getirisi: {info.MinRentIncome:N0} TL/Gün";
 
         if (houseData != null && houseData.IsBuilt)
-            _lblBuildStatus.Text = $"Durum: İnşa Edildi ({houseData.material})";
+            _lblİnşaEdildi.Text = $"Durum: İnşa Edildi ({houseData.material})";
         else
-            _lblBuildStatus.Text = "Durum: Satılık Boş Arsa";
+            _lblİnşaEdildi.Text = "Durum: Satılık Boş Arsa";
 
         Visible = true;
     }
@@ -37,9 +38,7 @@ public partial class StatPanel : Node
     {
         Visible = false;
     }
-
-
-	public override void _Process(double delta)
-	{
-	}
+    public override void _Process(double delta)
+    {
+    }
 }
