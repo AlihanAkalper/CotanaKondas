@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c23e4cs1tlvu7"]
 
-[ext_resource type="Script" uid="uid://bunwudvaql021" path="res://SaveFile(Bozuk).cs" id="1_2hveo"]
+[ext_resource type="Script" uid="uid://bunwudvaql021" path="res://codes/SaveFile(Bozuk).cs" id="1_2hveo"]
 
 [node name="Ana Ekran" type="Node2D" unique_id=918265103]
 
