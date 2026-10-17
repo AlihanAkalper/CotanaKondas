@@ -69,10 +69,27 @@ public partial class Kat : Sprite2D
 				Çatı.Texture = null;
 				break;
 			case 2: //Odun
+				if (Saglamlık > 100)
+				{
+					SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(2));
+					SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(2));
+				}else if (Saglamlık > 50)
+				{
+					SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+					SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
+				}
+				else if(Saglamlık > 25)
+				{
+					SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(1));
+					SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(1));
+				}
+				else
+				{
+					SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(3));
+					SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(3));
+				}
 				this.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(4));
 				ArkaDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(9));
-				SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
-				SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
 				if (SonKat)
 				{
 					Çatı.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(8));
@@ -81,8 +98,21 @@ public partial class Kat : Sprite2D
 			case 3: //Çelik
 				this.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(3));
 				ArkaDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(6));
-				SolDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(0));
-				SagDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(0));
+				if (Saglamlık > 200)
+				{
+					SolDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(0));
+					SagDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(0));
+				}
+				else if(Saglamlık > 100)
+				{
+					SolDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(1));
+					SagDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(1));
+				}
+				else
+				{
+					SolDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(2));
+					SagDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(2));
+				}
 				if (SonKat)
 				{
 					Çatı.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(5));
@@ -91,8 +121,21 @@ public partial class Kat : Sprite2D
 			case 4: //Tuğla
 				this.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(3));
 				ArkaDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(6));
-				SolDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(0));
-				SagDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(0));
+				if (Saglamlık > 200)
+				{
+					SolDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(0));
+					SagDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(0));
+				}
+				else if(Saglamlık > 100)
+				{
+					SolDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(1));
+					SagDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(1));
+				}
+				else
+				{
+					SolDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(2));
+					SagDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(2));
+				}
 				if (SonKat)
 				{
 					Çatı.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(5));
