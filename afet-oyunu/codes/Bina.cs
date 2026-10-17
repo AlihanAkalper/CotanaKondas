@@ -70,8 +70,8 @@ public partial class Bina : Area2D
                     GD.Print(katlar);
                     break;
                 }
-                DEV_Malzeme++;
             }
+            DEV_Malzeme++;  
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
