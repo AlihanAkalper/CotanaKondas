@@ -24,20 +24,19 @@ public partial class Bina : Area2D
 
     public override void _Ready()
     {
-        var Zemin = (Kat)Kat_Template.Instantiate();
-        AddChild(Zemin);
-        Zemin.Malzeme = 1;
         katlar = new Kat[MaxKat];
-        katlar[0] = Zemin;
-        for (int i = 1; i < MaxKat; i++)
+        for (int i = 0; i < MaxKat; i++)
         {
             var EmptyKat = (Kat)Kat_Template.Instantiate();
             EmptyKat.Position += new Vector2(0,-1*KatHeight*i);
             EmptyKat.SonKat = false;
             EmptyKat.Malzeme = 0;
+            EmptyKat.Saglamlık = 0;
+            EmptyKat.Kiraci = null;
             AddChild(EmptyKat);
             katlar[i] = (EmptyKat);
         }
+        katlar[0].Malzeme = 1;
         katlar[MaxKat-1].SonKat = true;
         GD.Print(katlar);
     }
