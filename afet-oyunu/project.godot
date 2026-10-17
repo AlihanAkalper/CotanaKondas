@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Afet Oyunu"
 run/main_scene="uid://uspwk66q5w2w"
-config/features=PackedStringArray("4.7", "GL Compatibility")
+config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="uid://jpxmnl73o60i"
 
 [autoload]
