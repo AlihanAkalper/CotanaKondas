@@ -1,10 +1,15 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Runtime.InteropServices.JavaScript;
 
 public partial class Bina : Area2D
 {
 	[Export] public Ev_numaraları type;
+
+    [Export] private PackedScene Kat_Template;
+    
+    private Sprite2D[] katlar;
 
     [ExportGroup("Durum Görselleri")]
     [Export] private Texture2D _forSaleTexture;   // Satılık tabela/boş arazi görseli
@@ -12,9 +17,6 @@ public partial class Bina : Area2D
     [Export] private Texture2D _builtHouseTexture_tuğla; // tuğla
     [Export] private Texture2D _builtHouseTexture_celik; // çelik
     [Export] private Sprite2D _sprite;
-
-    [Export] private Node Kat_Template;
-    [Export] private Node[] katlar;
 
 	public void UpdateView(HouseSaveData data)
 	{
@@ -33,9 +35,15 @@ public partial class Bina : Area2D
         };
     }
     public override void _Ready()
-	{
-
-	}
+    {
+        katlar = new Sprite2D[5];
+        GD.Print("uwu");
+        var Zemin = (Sprite2D)Kat_Template.Instantiate();
+        AddChild(Zemin);
+        katlar[0] = (Zemin);
+        Zemin.Texture = _forSaleTexture;
+        GD.Print(katlar);
+    }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
