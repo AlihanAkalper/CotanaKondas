@@ -25,8 +25,6 @@ public partial class Bina : Area2D
     public override void _Ready()
     {
         var Zemin = (Kat)Kat_Template.Instantiate();
-        //MaxKat = 5;
-        //KatHeight = 15;     //Şimdilik koydum, ayarlanacak
         AddChild(Zemin);
         Zemin.Malzeme = 1;
         katlar = new Kat[MaxKat];

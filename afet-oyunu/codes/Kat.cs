@@ -6,9 +6,9 @@ public partial class Kat : Sprite2D
 {
 	[Export] public Boolean SonKat;
 
-	private Node Kiraci;
+	public Node Kiraci;
 
-	private int Saglamlık;
+	public int Saglamlık;
 
 	[ExportGroup("Duvarlar")]
 	[Export]private Sprite2D ArkaDuv;
@@ -85,7 +85,7 @@ public partial class Kat : Sprite2D
 				SagDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(0));
 				if (SonKat)
 				{
-					Çatı.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(5));
+					Çatı.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(5));
 				}
 				break;
 			case 4: //Tuğla
@@ -95,7 +95,7 @@ public partial class Kat : Sprite2D
 				SagDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(0));
 				if (SonKat)
 				{
-					Çatı.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(5));
+					Çatı.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(5));
 				}
 				break;
 			default:
@@ -105,22 +105,3 @@ public partial class Kat : Sprite2D
 	}
 
 }
-
-//ÇETO'nun Bina için kodu
-
-// public void UpdateView(HouseSaveData data)
-// 	{
-//         if(_sprite == null) return;
-//         if(!data.IsBuilt)
-//         {
-//             _sprite.Texture = _forSaleTexture;
-//             return;
-//         }
-//         _sprite.Texture = data.material switch
-//         {
-//             Materyal.Odun => _builtHouseTexture_odun.,
-//             Materyal.Tuğla => _builtHouseTexture_tuğla,
-//             Materyal.Çelik => _builtHouseTexture_celik,
-//             _ => _forSaleTexture
-//         };
-//     }
