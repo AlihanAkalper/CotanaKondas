@@ -5,6 +5,43 @@
 [ext_resource type="Texture2D" uid="uid://baqjauljeglfd" path="res://assets/iskele.png" id="2_tbgye"]
 [ext_resource type="CompressedTexture2DArray" uid="uid://dsxpt6o3eejch" path="res://assets/TextureArray/steelWallArr.png" id="4_tbgye"]
 [ext_resource type="CompressedTexture2DArray" uid="uid://d04qmuf1it8a2" path="res://assets/TextureArray/brickwallArr.png" id="5_5spxf"]
+[ext_resource type="Texture2D" uid="uid://dnc16iknt0lb1" path="res://assets/npc.png" id="6_5spxf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohifh"]
+atlas = ExtResource("6_5spxf")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okegr"]
+atlas = ExtResource("6_5spxf")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ak55u"]
+atlas = ExtResource("6_5spxf")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3r6m"]
+atlas = ExtResource("6_5spxf")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vngvs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohifh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okegr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ak55u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3r6m")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Kat" type="Sprite2D" unique_id=170612053 node_paths=PackedStringArray("ArkaDuv", "SolDuv", "SagDuv", "Çatı")]
 z_index = 1
@@ -40,3 +77,9 @@ region_rect = Rect2(409, 15, 31, 102)
 position = Vector2(-3, -16)
 scale = Vector2(4.6, 0.4)
 region_rect = Rect2(1199, 55, 27, 27)
+
+[node name="Kiraci" type="AnimatedSprite2D" parent="." unique_id=90659385]
+position = Vector2(0, 11.958763)
+scale = Vector2(0.5, 0.7)
+sprite_frames = SubResource("SpriteFrames_vngvs")
+autoplay = "default"
