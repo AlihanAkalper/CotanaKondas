@@ -15,7 +15,7 @@ public partial class Bina : Area2D
 
     [ExportGroup("Durum Görselleri")]
     [Export] private Texture2D _forSaleTexture;   // Satılık tabela/boş arazi görseli
-    [Export] private Texture2DArray _builtHouseTexture_odun; // odun
+    [Export] private Texture2D _builtHouseTexture_odun; // odun
     [Export] private Texture2D _builtHouseTexture_tuğla; // tuğla
     [Export] private Texture2D _builtHouseTexture_celik; // çelik
     [Export] private Sprite2D _sprite;

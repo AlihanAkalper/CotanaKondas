@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.ComponentModel;
 
 public partial class Kat : Sprite2D
 {
@@ -10,35 +11,51 @@ public partial class Kat : Sprite2D
 	[Export]private Sprite2D Çatı;
 
 	[ExportGroup("Texturelar")]
-	[Export]private AtlasTexture Odun;
-	[Export]private AtlasTexture Metal;
-	[Export]private AtlasTexture Tugla;
+	[Export]private Texture2DArray Odun;
+	[Export]private Texture2DArray Metal;
+	[Export]private Texture2DArray Tugla;
 
 	private int _malzeme;
     public int Malzeme
     {
 		get{return _malzeme;}
-
 		set
 		{
 			_malzeme = value;
-			UpdateLook(value);
+			UpdateLook();
 		}
 	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	// public override void _Process(double delta)
-	// {
-	// }
-
-	private void UpdateLook(int YeniMalz)
+	public override void _Process(double delta)
 	{
-		GD.Print("CHANGE MY MALZEME TO " + YeniMalz);
+	}
+
+	private void UpdateLook()
+	{
+		GD.Print("CHANGE MY MALZEME TO " + _malzeme);
+		switch (_malzeme)
+		{
+			case 0:
+				
+			case 1:
+			
+			case 2:
+			
+			case 3:
+			
+			case 4:
+
+			default:
+				GD.PrintErr("Unknown malzeme");
+				break;
+		}
 	}
 
 }
