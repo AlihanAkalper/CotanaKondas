@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://uspwk66q5w2w"]
 
-[ext_resource type="PackedScene" uid="uid://b3ent0gq0siy4" path="res://scenes/HUD.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bnm4mv22mcrdw" path="res://scenes/türkiye_haritası.tscn" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://c23e4cs1tlvu7" path="res://scenes/ana_ekran.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://7b6eqocxihfe" path="res://objects/Bina.tscn" id="3_h2yge"]
 
 [node name="MAIN_NODE" type="ResourcePreloader" unique_id=24769079]
 
-[node name="HUD" parent="." unique_id=503998733 instance=ExtResource("1_0xm2m")]
+[node name="Türkiye haritası" parent="." unique_id=232434904 instance=ExtResource("1_h2yge")]
 
 [node name="Ana Ekran" parent="." unique_id=918265103 instance=ExtResource("1_ig7tw")]
 
