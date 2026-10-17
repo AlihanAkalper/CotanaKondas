@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://bsxbayyisu44e" path="res://assets/map.png" id="1_bhmm6"]
 [ext_resource type="Script" uid="uid://bi22nbg5a6ngp" path="res://codes/RegionPoint.cs" id="2_wvl83"]
+[ext_resource type="Texture2D" uid="uid://bii5ohtf57gju" path="res://assets/sale.png" id="3_76wrw"]
+[ext_resource type="Texture2D" uid="uid://boknxe8gtlyus" path="res://assets/houseicon.png" id="4_heq2v"]
 [ext_resource type="Script" uid="uid://pkhjltfk2g48" path="res://codes/HUD.cs" id="4_wvl83"]
 [ext_resource type="Script" uid="uid://bmpnyftqylqw" path="res://codes/StatPanel.cs" id="5_7ljjv"]
 
@@ -15,75 +17,107 @@ texture = ExtResource("1_bhmm6")
 [node name="RegionPoints" type="Node2D" parent="." unique_id=661173284]
 
 [node name="Ege buton" type="TextureButton" parent="RegionPoints" unique_id=1676508737 node_paths=PackedStringArray("_statPanel")]
-offset_left = 124.0
-offset_top = 242.0
+offset_left = 167.0
+offset_top = 235.0
 offset_right = 286.0
-offset_bottom = 326.0
+offset_bottom = 335.0
+ignore_texture_size = true
+stretch_mode = 5
 script = ExtResource("2_wvl83")
 RegionType = 1
 _statPanel = NodePath("../../MainHud/StatPanel")
+_forSaleTexture = ExtResource("3_76wrw")
+_purchasedTexture = ExtResource("4_heq2v")
 
 [node name="Kıbrıs buton" type="TextureButton" parent="RegionPoints" unique_id=920499736 node_paths=PackedStringArray("_statPanel")]
-offset_left = 431.0
-offset_top = 496.0
-offset_right = 691.0
-offset_bottom = 626.0
+offset_left = 496.0
+offset_top = 519.0
+offset_right = 613.0
+offset_bottom = 581.0
+ignore_texture_size = true
+stretch_mode = 5
 script = ExtResource("2_wvl83")
 RegionType = 7
 _statPanel = NodePath("../../MainHud/StatPanel")
+_forSaleTexture = ExtResource("3_76wrw")
+_purchasedTexture = ExtResource("4_heq2v")
 
 [node name="Akdeniz buton" type="TextureButton" parent="RegionPoints" unique_id=1623335176 node_paths=PackedStringArray("_statPanel")]
 offset_left = 395.0
 offset_top = 331.0
 offset_right = 718.0
 offset_bottom = 371.0
+ignore_texture_size = true
+stretch_mode = 5
 script = ExtResource("2_wvl83")
 RegionType = 6
 _statPanel = NodePath("../../MainHud/StatPanel")
+_forSaleTexture = ExtResource("3_76wrw")
+_purchasedTexture = ExtResource("4_heq2v")
 
 [node name="Marmara buton" type="TextureButton" parent="RegionPoints" unique_id=1665747754 node_paths=PackedStringArray("_statPanel")]
 offset_left = 131.0
 offset_top = 97.0
 offset_right = 286.0
 offset_bottom = 188.0
+ignore_texture_size = true
+stretch_mode = 5
 script = ExtResource("2_wvl83")
 _statPanel = NodePath("../../MainHud/StatPanel")
+_forSaleTexture = ExtResource("3_76wrw")
+_purchasedTexture = ExtResource("4_heq2v")
 
 [node name="İç Anadolu buton" type="TextureButton" parent="RegionPoints" unique_id=1022551757 node_paths=PackedStringArray("_statPanel")]
 offset_left = 420.0
 offset_top = 205.0
 offset_right = 720.0
 offset_bottom = 288.0
+ignore_texture_size = true
+stretch_mode = 5
 script = ExtResource("2_wvl83")
 RegionType = 2
 _statPanel = NodePath("../../MainHud/StatPanel")
+_forSaleTexture = ExtResource("3_76wrw")
+_purchasedTexture = ExtResource("4_heq2v")
 
 [node name="Karadeniz buton" type="TextureButton" parent="RegionPoints" unique_id=869118386 node_paths=PackedStringArray("_statPanel")]
 offset_left = 458.0
 offset_top = 94.0
 offset_right = 781.0
 offset_bottom = 156.0
+ignore_texture_size = true
+stretch_mode = 5
 script = ExtResource("2_wvl83")
 RegionType = 3
 _statPanel = NodePath("../../MainHud/StatPanel")
+_forSaleTexture = ExtResource("3_76wrw")
+_purchasedTexture = ExtResource("4_heq2v")
 
 [node name="Güneydoğu buton" type="TextureButton" parent="RegionPoints" unique_id=1635697318 node_paths=PackedStringArray("_statPanel")]
 offset_left = 841.0
 offset_top = 311.0
 offset_right = 968.0
 offset_bottom = 362.0
+ignore_texture_size = true
+stretch_mode = 5
 script = ExtResource("2_wvl83")
 RegionType = 5
 _statPanel = NodePath("../../MainHud/StatPanel")
+_forSaleTexture = ExtResource("3_76wrw")
+_purchasedTexture = ExtResource("4_heq2v")
 
 [node name="Doğu Anadolu buton" type="TextureButton" parent="RegionPoints" unique_id=1149113707 node_paths=PackedStringArray("_statPanel")]
 offset_left = 918.0
 offset_top = 157.0
 offset_right = 1041.0
 offset_bottom = 263.0
+ignore_texture_size = true
+stretch_mode = 5
 script = ExtResource("2_wvl83")
 RegionType = 4
 _statPanel = NodePath("../../MainHud/StatPanel")
+_forSaleTexture = ExtResource("3_76wrw")
+_purchasedTexture = ExtResource("4_heq2v")
 
 [node name="MainHud" type="CanvasLayer" parent="." unique_id=693278071 node_paths=PackedStringArray("_moneyLabel", "_dateLabel")]
 script = ExtResource("4_wvl83")
