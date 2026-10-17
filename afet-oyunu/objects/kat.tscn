@@ -7,6 +7,7 @@
 [ext_resource type="CompressedTexture2DArray" uid="uid://d04qmuf1it8a2" path="res://assets/TextureArray/brickwallArr.png" id="5_5spxf"]
 [ext_resource type="Texture2D" uid="uid://dnc16iknt0lb1" path="res://assets/npc.png" id="6_5spxf"]
 [ext_resource type="Texture2D" uid="uid://jpxmnl73o60i" path="res://assets/logo.png" id="7_ohifh"]
+[ext_resource type="Script" uid="uid://b8ixabwwc5eej" path="res://objects/Kiraci.cs" id="7_okegr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ohifh"]
 atlas = ExtResource("6_5spxf")
@@ -154,7 +155,8 @@ scale = Vector2(0.5, 0.7)
 sprite_frames = SubResource("SpriteFrames_vngvs")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.8615389
+frame_progress = 0.19273797
+script = ExtResource("7_okegr")
 
 [node name="Baloncuk" type="AnimatedSprite2D" parent="Kiraci" unique_id=1427294327]
 position = Vector2(-7.4264493, -30.044182)
