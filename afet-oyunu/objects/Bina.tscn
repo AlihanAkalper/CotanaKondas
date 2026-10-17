@@ -1,20 +1,10 @@
 [gd_scene format=3 uid="uid://7b6eqocxihfe"]
 
 [ext_resource type="Script" uid="uid://b3vvf2fmsw7fk" path="res://codes/Bina.cs" id="1_0e48y"]
-[ext_resource type="Texture2D" uid="uid://jf6ku0v5uu2y" path="res://icon.svg" id="2_epypp"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8vrlf"]
-size = Vector2(243, 303)
+[ext_resource type="PackedScene" uid="uid://b11vljavmsgg8" path="res://objects/kat.tscn" id="2_v281k"]
 
 [node name="Bina" type="Area2D" unique_id=1273967015]
-position = Vector2(159, 90)
 script = ExtResource("1_0e48y")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1275287004]
-position = Vector2(393.25, 216.5)
-scale = Vector2(1.9023439, 2.3671875)
-texture = ExtResource("2_epypp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=962842211]
-position = Vector2(392.5, 216.5)
-shape = SubResource("RectangleShape2D_8vrlf")
+[node name="Kat" parent="." unique_id=170612053 instance=ExtResource("2_v281k")]
+position = Vector2(0, -54.499996)

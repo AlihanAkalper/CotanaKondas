@@ -13,6 +13,9 @@ public partial class Bina : Area2D
     [Export] private Texture2D _builtHouseTexture_celik; // çelik
     [Export] private Sprite2D _sprite;
 
+    [Export] private Node Kat_Template;
+    [Export] private Node[] katlar;
+
 	public void UpdateView(HouseSaveData data)
 	{
         if(_sprite == null) return;
