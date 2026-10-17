@@ -1,13 +1,12 @@
 using Godot;
+using System;
 
 public partial class BuildMenu : Control
 {
     [Export] private Label _titleLabel;
-    [Export] private Label _plotCostLabel;
-    [Export] private Label _materialCostLabel;
-    [Export] private Label _totalCostLabel;
     [Export] private OptionButton _materialDropdown;
     [Export] private SpinBox _amountInput;
+    [Export] private Label _materialCostLabel;
     [Export] private Label _statusMessageLabel;
     [Export] private Button _confirmButton;
     [Export] private Button _cancelButton;
@@ -16,6 +15,10 @@ public partial class BuildMenu : Control
 
     public override void _Ready()
     {
+        // Inspector bağlantıları henüz yapılmadıysa hata vermesini engelle
+        if (_materialDropdown == null || _confirmButton == null || _cancelButton == null)
+            return;
+
         _materialDropdown.Clear();
         _materialDropdown.AddItem("Odun (100 TL)", (int)Materyal.Odun);
         _materialDropdown.AddItem("Tuğla (250 TL)", (int)Materyal.Tuğla);
@@ -32,14 +35,20 @@ public partial class BuildMenu : Control
     {
         _currentRegion = region;
         var info = RegionDatabase.Regions[region];
+        var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == region);
 
-        _titleLabel.Text = $"{info.Name} Arsa & İnşaat";
-        _plotCostLabel.Text = $"Arsa Bedeli: {info.BasePlotPrice:N0} TL";
-        _statusMessageLabel.Text = "";
+        if (_titleLabel != null)
+            _titleLabel.Text = $"{info.Name} - İnşaat Paneli";
 
-        _amountInput.MinValue = 10;
-        _amountInput.MaxValue = 500;
-        _amountInput.Value = 50;
+        if (_statusMessageLabel != null)
+            _statusMessageLabel.Text = "";
+
+        if (_amountInput != null)
+        {
+            _amountInput.MinValue = 1;
+            _amountInput.MaxValue = 500;
+            _amountInput.Value = 10;
+        }
 
         UpdateCostDisplay();
         Visible = true;
@@ -47,16 +56,18 @@ public partial class BuildMenu : Control
 
     private void UpdateCostDisplay()
     {
-        var info = RegionDatabase.Regions[_currentRegion];
+        if (_materialDropdown == null || _amountInput == null || _materialCostLabel == null)
+            return;
+
         Materyal selectedMat = (Materyal)_materialDropdown.GetSelectedId();
         int amount = (int)_amountInput.Value;
 
-        int unitPrice = MaterialPrices.UnitPrices[selectedMat];
-        int materialTotal = unitPrice * amount;
-        int grandTotal = info.BasePlotPrice + materialTotal;
+        if (!MaterialPrices.UnitPrices.ContainsKey(selectedMat)) return;
 
-        _materialCostLabel.Text = $"Malzeme Maliyeti: {materialTotal:N0} TL ({amount} adet)";
-        _totalCostLabel.Text = $"Toplam Ödenecek: {grandTotal:N0} TL";
+        int unitPrice = MaterialPrices.UnitPrices[selectedMat];
+        int totalCost = unitPrice * amount;
+
+        _materialCostLabel.Text = $"Ödenecek Tutar: {totalCost:N0} TL ({amount} adet)";
     }
 
     private void OnConfirmPressed()
@@ -64,26 +75,38 @@ public partial class BuildMenu : Control
         Materyal selectedMat = (Materyal)_materialDropdown.GetSelectedId();
         int amount = (int)_amountInput.Value;
 
-        bool success = GameManager.Instance.BuyAndBuildHouse(_currentRegion, selectedMat, amount);
+        int unitPrice = MaterialPrices.UnitPrices[selectedMat];
+        int totalCost = unitPrice * amount;
 
-        if (success)
+        // Bakiye kontrolü
+        if (GameManager.Instance.SaveData.Money < totalCost)
         {
-            _statusMessageLabel.Text = "Satın alma ve inşaat tamamlandı!";
-            GetTree().CreateTimer(0.8f).Timeout += () =>
-            {
-                Visible = false;
+            if (_statusMessageLabel != null)
+                _statusMessageLabel.Text = "Yetersiz bakiye!";
+            return;
+        }
 
-                // Türkiye haritasındaki butonların ikonlarını yenile
-                var points = GetTree().GetNodesInGroup("RegionButtons");
-                foreach (var node in points)
-                {
-                    if (node is RegionPoint rp) rp.UpdatePointTexture();
-                }
-            };
-        }
-        else
+        var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == _currentRegion);
+        if (house == null) return;
+
+        // Parayı düş ve eve malzemeyi ata
+        GameManager.Instance.SaveData.Money -= totalCost;
+        house.material = selectedMat;
+        house.MaterialAmount += amount;
+        house.Health = 100f; // Ev tamamlandı/yenilendi
+
+        GameManager.Instance.SaveGame();
+        HUD.Instance?.UpdateHUD();
+
+        if (_statusMessageLabel != null)
+            _statusMessageLabel.Text = "İnşaat tamamlandı!";
+
+        // Şehir sahnesini yenile (boş arsa yerine evin görseli gelsin)
+        GetTree().CreateTimer(0.8f).Timeout += () =>
         {
-            _statusMessageLabel.Text = "Yetersiz bakiye!";
-        }
+            Visible = false;
+            var cityScene = GetTree().CurrentScene as BuildingMap;
+            cityScene?.RefreshScene();
+        };
     }
 }
