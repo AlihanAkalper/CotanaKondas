@@ -60,13 +60,6 @@ public partial class DisasterResultPanel : CanvasLayer
             GameManager.Instance.SaveData.IsFinished ? "Sonuçları göster" : "Tamam — Haritaya dön" };
         next.Pressed += () => { next.Disabled = true; GameManager.Instance.AcknowledgeDisaster(); };
         column.AddChild(next);
-        var menu = new Button { Text = "Kaydet ve ana menüye dön" };
-        menu.Pressed += () =>
-        {
-            GameManager.Instance.SaveGame();
-            GetTree().ChangeSceneToFile("res://scenes/GirişEkranı.tscn");
-        };
-        column.AddChild(menu);
     }
 
     public void ShowResults()
