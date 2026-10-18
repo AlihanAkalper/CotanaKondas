@@ -12,15 +12,16 @@ public static class DisasterDatabase
 {
     public static readonly Dictionary<(AfetTürü, Materyal), float> MaterialMultipliers = new()
     {
-        {(AfetTürü.Yangın, Materyal.Odun), 2f},
-        {(AfetTürü.Yangın, Materyal.Tuğla), 1f},
-        {(AfetTürü.Yangın, Materyal.Çelik), 2f},
-        {(AfetTürü.Sel, Materyal.Odun), 2f},
-        {(AfetTürü.Sel, Materyal.Tuğla), 2f},
-        {(AfetTürü.Sel, Materyal.Çelik), 2f},
-        {(AfetTürü.Deprem, Materyal.Odun), 2f},
-        {(AfetTürü.Deprem, Materyal.Tuğla), 2f},
-        {(AfetTürü.Deprem, Materyal.Çelik), 2f}
+        // Oyun içi tercihler: ucuz odun, yangına dayanıklı tuğla, deprem/selde güçlü çelik.
+        {(AfetTürü.Yangın, Materyal.Odun), 1.70f},
+        {(AfetTürü.Yangın, Materyal.Tuğla), .65f},
+        {(AfetTürü.Yangın, Materyal.Çelik), 1.05f},
+        {(AfetTürü.Sel, Materyal.Odun), 1.45f},
+        {(AfetTürü.Sel, Materyal.Tuğla), 1.10f},
+        {(AfetTürü.Sel, Materyal.Çelik), .75f},
+        {(AfetTürü.Deprem, Materyal.Odun), 1.10f},
+        {(AfetTürü.Deprem, Materyal.Tuğla), 1.35f},
+        {(AfetTürü.Deprem, Materyal.Çelik), .80f}
     };
 }
 

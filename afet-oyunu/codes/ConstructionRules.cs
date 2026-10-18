@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-// Geçici denge değerleri: fiyat, gelir, dayanıklılık ve hasar burada düzenlenir.
+// Bölgesel tedarik, yükseltme ve bakım dengesi.
 public static class ConstructionRules
 {
     public const int MaxFloors = 3;
     public const int MaxMaterialLevel = 5;
     public const float FloorHealth = 100f;
-    public const float DurabilityPerLevel = .20f, IncomePerLevel = .15f;
-    public const float UpgradePriceGrowth = 1.5f, RepairCostFraction = .4f;
+    public const float DurabilityPerLevel = .15f, IncomePerLevel = .15f;
+    public const float UpgradePriceGrowth = 1.45f, RepairCostFraction = .50f;
     public static readonly Dictionary<Materyal, int> BasePrices = new()
-    { { Materyal.Odun, 5000 }, { Materyal.Tuğla, 8000 }, { Materyal.Çelik, 12000 } };
+    { { Materyal.Odun, 10000 }, { Materyal.Tuğla, 16000 }, { Materyal.Çelik, 24000 } };
     // Sıra: odun, tuğla, çelik. Her bölge/malzeme bağımsız ayarlanabilir.
     public static readonly Dictionary<Ev_numaraları, float[]> RegionPrices = new()
     {
@@ -39,7 +39,7 @@ public static class ConstructionRules
         // Tamamen yıkılan kat, aynı kattaki yeni inşaatın tam bedeliyle yeniden yapılır.
         if (floor >= 0 && h.Floors[floor].Health <= 0) return FloorPrice(h, floor);
         float missing = FloorHealth - h.Floors[floor].Health;
-        return (int)Math.Ceiling(MaterialPrice(h.Type, h.material) * RepairCostFraction * missing / FloorHealth);
+        return (int)Math.Ceiling(FloorPrice(h, floor) * RepairCostFraction * missing / FloorHealth);
     }
     public static int DailyIncome(HouseSaveData h) => !h.IsBuilt ? 0 :
         (int)Math.Floor(RegionDatabase.Regions[h.Type].MinRentIncome * h.Floors.Count(f => f.Health > 0 && f.HasTenant) * IncomeBonus(h));

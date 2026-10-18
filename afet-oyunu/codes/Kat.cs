@@ -40,10 +40,14 @@ public partial class Kat : Sprite2D
 
     private readonly Dictionary<(CompressedTextureLayered Source, int Index), Texture2D> _layerTextures = new();
 
-    public void SetState(int material, float health, bool topFloor)
+    private Materyal _scaffoldMaterial;
+    private Sprite2D _scaffoldBase;
+
+    public void SetState(int material, float health, bool topFloor, Materyal scaffoldMaterial = Materyal.Alınmadı)
     {
         Saglamlık = (int)Math.Ceiling(health);
         SonKat = topFloor;
+        _scaffoldMaterial = scaffoldMaterial;
 
         Malzeme = material;
     }
@@ -86,17 +90,38 @@ public partial class Kat : Sprite2D
     {
         UpdateKiraciVisibility();
         Texture = null;
+        if (_scaffoldBase != null) _scaffoldBase.Hide();
         ArkaDuv.Texture = SolDuv.Texture = SagDuv.Texture = Çatı.Texture = null;
         if (_malzeme == 0) return;
         // Bina yalnızca sıradaki inşa edilebilir kat için iskele ister.
         if (_malzeme == 1)
         {
-            var scaffoldImage = iskele.GetImage();
+            using var scaffoldImage = iskele.GetImage();
             Texture = new AtlasTexture { Atlas = iskele, Region = scaffoldImage.GetUsedRect() };
             Centered = true;
             RegionEnabled = false;
-            // Ara katlarda çatı yok; iskele ayaklarını katın taban hizasına oturt.
-            const float baseOffset = 4.5f;
+            // Tabanı mevcut katın üstüne koy; iskeleyi tabanın tam yüksekliği kadar kaldır.
+            float baseOffset = 4.5f;
+            var baseSource = _scaffoldMaterial switch
+            {
+                Materyal.Odun => Odun,
+                Materyal.Çelik => Metal,
+                Materyal.Tuğla => Tugla,
+                _ => null
+            };
+            if (baseSource != null)
+            {
+                var baseTexture = Layer(baseSource, _scaffoldMaterial == Materyal.Odun ? 4 : 3);
+                baseOffset += baseTexture.GetHeight();
+                if (_scaffoldBase == null)
+                {
+                    _scaffoldBase = new Sprite2D { Name = "IskeleTabani" };
+                    AddChild(_scaffoldBase);
+                }
+                Fit(_scaffoldBase, baseTexture,
+                    new Vector2(-baseTexture.GetWidth() / 2f, -baseOffset), baseTexture.GetSize());
+                _scaffoldBase.Show();
+            }
             Offset = new Vector2(0, -Texture.GetHeight() / 2f - baseOffset);
             return;
         }

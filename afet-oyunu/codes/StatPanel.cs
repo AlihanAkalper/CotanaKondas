@@ -25,7 +25,9 @@ public partial class StatPanel : Control
         var materials = ConstructionRules.BasePrices.Keys.OrderBy(m => ConstructionRules.MaterialPrice(region, m)).ToArray();
         _lblPahalıMateryal.Text = $"Pahalı Malzeme: {materials[^1]}";
         _lblUcuzMateryal.Text = $"Ucuz Malzeme: {materials[0]}";
-        _lblMinKira.Text = $"Min. Kira Getirisi: {info.MinRentIncome:N0} TL/Gün";
+        int dailyIncome = houseData == null ? 0 : ConstructionRules.DailyIncome(houseData);
+        _lblMinKira.Text = $"Günlük Kira Getirisi: {dailyIncome:N0} TL\n" +
+            $"Kat Başına Temel Kira: {info.MinRentIncome:N0} TL/Gün";
 
         if (houseData != null && houseData.IsBuilt)
             _lblİnşaEdildi.Text = $"Durum: {houseData.material} • {houseData.Floors.Count}/{ConstructionRules.MaxFloors} kat";

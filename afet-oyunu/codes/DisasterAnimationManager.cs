@@ -16,7 +16,7 @@ public partial class DisasterAnimationManager : Node
         var texture = GD.Load<Texture2D>(path);
         var frames = new SpriteFrames();
         frames.SetAnimationSpeed("default", speed);
-        frames.SetAnimationLoop("default", loop);
+        frames.SetAnimationLoopMode("default", loop ? SpriteFrames.LoopMode.Linear : SpriteFrames.LoopMode.None);
         int width = texture.GetWidth() / count;
         for (int i = 0; i < count; i++)
             frames.AddFrame("default", new AtlasTexture

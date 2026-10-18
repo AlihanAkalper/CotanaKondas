@@ -8,7 +8,8 @@ public class RegionInfo
 	public string Name { get; set; }
 	public int BasePlotPrice { get; set; }
 	public string MostExpensiveMaterial { get; set; }
-	public int MinRentIncome => (int)Math.Round(BasePlotPrice * 0.015m);
+	// Taban gelir, düşük arsa fiyatlı bölgelerde pahalı yapı malzemesini erişilebilir tutar.
+	public int MinRentIncome => 2500 + (int)Math.Round(BasePlotPrice * 0.012m);
 	public RegionInfo(string name, int basePlotPrice, string mostExpensiveMaterial)
     {
         Name = name;

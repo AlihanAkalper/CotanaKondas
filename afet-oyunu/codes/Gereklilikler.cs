@@ -49,6 +49,7 @@ public class HouseSaveData
 [Serializable]
 public class GameSaveData
 {
+    public DaySummaryData PendingDaySummary { get; set; }
     public int LostTenants { get; set; }
     public bool IsFinished { get; set; }
     public string EndReason { get; set; } = "";
@@ -56,7 +57,7 @@ public class GameSaveData
     public List<TenantDialogueAnswer> DialogueAnswers { get; set; } = new();
     public List<DisasterEvent> PendingDisasters { get; set; } = new();
     public int CurrentDay { get; set; } = 1;
-    public int Money { get; set; } = 1000000;
+    public int Money { get; set; } = 450000;
     public float CumulativeDisasterChance { get; set; } = 15f;
 
     public List<HouseSaveData> Houses { get; set; } = new();

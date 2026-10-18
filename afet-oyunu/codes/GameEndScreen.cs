@@ -34,14 +34,15 @@ public partial class GameEndScreen : Control
         Line("OYUN TAMAMLANDI", 30);
         Line(save.EndReason);
         Line($"TOPLAM PUAN: {score.Total:N0}", 28);
-        Line($"Tamamlanan gün: {score.CompletedDays} × 10 = +{score.DayPoints:N0}\n" +
-            $"Kullanılabilir ve kiracılı kat: {score.OccupiedUsableFloors} × 100 = +{score.FloorPoints:N0}\n" +
-            $"Hazırlık: {score.Preparations} × 50 = +{score.PreparationPoints:N0}\n" +
-            $"Pozitif cevap: {score.PositiveAnswers} × 20 = +{score.PositivePoints:N0}\n" +
+        Line($"Tamamlanan gün: {score.CompletedDays} (ilk {ScoreRules.DayPointLimit} gün × {ScoreRules.PointsPerDay}) = +{score.DayPoints:N0}\n" +
+            $"Kullanılabilir ve kiracılı kat: {score.OccupiedUsableFloors} × {ScoreRules.PointsPerFloor} = +{score.FloorPoints:N0}\n" +
+            $"Hazırlık: {score.Preparations} × {ScoreRules.PointsPerPreparation} = +{score.PreparationPoints:N0}\n" +
+            $"Benzersiz pozitif cevap: {score.PositiveAnswers} × {ScoreRules.PointsPerAnswer} = +{score.PositivePoints:N0}\n" +
             $"Nötr cevap: {score.NeutralAnswers} × 0 = 0\n" +
-            $"Negatif cevap: {score.NegativeAnswers} × (−20) = {score.NegativePoints:N0}\n" +
-            $"Yıkılan kat: {score.DestroyedFloors} × (−100) = {score.FloorPenalty:N0}\n" +
-            $"Yıkılan bina: {score.DestroyedBuildings} × (−200) = {score.BuildingPenalty:N0}");
+            $"Negatif cevap: {score.NegativeAnswers} × (−{ScoreRules.PointsPerAnswer}) = {score.NegativePoints:N0}\n" +
+            $"Yıkılan kat: {score.DestroyedFloors} × (−{ScoreRules.PenaltyPerFloor}) = {score.FloorPenalty:N0}\n" +
+            $"Yıkılan bina: {score.DestroyedBuildings} × (−{ScoreRules.PenaltyPerBuilding}) = {score.BuildingPenalty:N0}\n" +
+            $"Kaybedilen kiracı: {score.LostTenants} × (−{ScoreRules.PenaltyPerTenant}) = {score.TenantPenalty:N0}");
         if (score.RawTotal < 0) Line("Toplam puan sıfırın altına düşmez.");
         Line($"Ulaşılan gün: {save.CurrentDay}\nBakiye: {save.Money:N0} TL");
         Line($"Kiracı kaybı: {save.LostTenants} / {GameEndRules.TenantLossLimit}\nYıkılan kat: {GameEndRules.DestroyedFloors(save)}\nYıkılan bina: {GameEndRules.DestroyedBuildings(save)}");

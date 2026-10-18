@@ -41,7 +41,8 @@ public partial class Bina : Area2D
             } : (house != null && i == standingFloors && i < ConstructionRules.MaxFloors ? 1 : 0);
             _floors[i].sakin?.BindTenant(house, built ? house.Floors[i] : null, i);
             _floors[i].SetState(material, built ? house.Floors[i].Health : 0,
-                built && standingFloors == ConstructionRules.MaxFloors && i == ConstructionRules.MaxFloors - 1);
+                built && standingFloors == ConstructionRules.MaxFloors && i == ConstructionRules.MaxFloors - 1,
+                house?.material ?? Materyal.Alınmadı);
         }
     }
 }

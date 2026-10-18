@@ -53,11 +53,5 @@ public partial class TenantDialoguePanel : CanvasLayer
         var close = new Button { Text = "Şimdi değil" };
         column.AddChild(close);
         close.Pressed += QueueFree;
-        var menu = new Button { Text = "Kaydet ve ana menüye dön" };
-        column.AddChild(menu);
-        menu.Pressed += () => {
-            game.SaveGame();
-            GetTree().ChangeSceneToFile("res://scenes/GirişEkranı.tscn");
-        };
     }
 }

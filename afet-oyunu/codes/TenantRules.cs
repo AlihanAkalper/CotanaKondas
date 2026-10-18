@@ -4,7 +4,7 @@ using System.Linq;
 public static class TenantRules
 {
     public const int QuestionThreshold = 50;
-    public const int DailyAwarenessLoss = 2;
+    public const int DailyAwarenessLoss = 1;
     public const int PerkAwarenessBonus = 10;
     public const double DailyMoveInChance = 0.20;
     public static int AnswerEffect(DialogueTone tone) => tone switch
@@ -58,11 +58,12 @@ public static class TenantRules
                 }
                 ChangeAwareness(floor, -DailyAwarenessLoss);
             }
-        if (random.NextDouble() >= TenantDialogues.DailyChance) return;
         var candidates = save.Houses.Where(h => h.IsBuilt)
             .SelectMany(h => h.Floors).Where(f => f.HasTenant && f.Health > 0 &&
                 f.Awareness < QuestionThreshold && f.PendingQuestionId < 0).ToArray();
-        if (candidates.Length > 0) PrepareQuestion(candidates[random.Next(candidates.Length)], random);
+        // Her uygun kiracının şansı bağımsızdır; büyüyen portföyde konuşma fırsatı tükenmez.
+        foreach (var floor in candidates)
+            if (random.NextDouble() < TenantDialogues.DailyChance) PrepareQuestion(floor, random);
     }
 
     public static void ApplyPerk(HouseSaveData house)
