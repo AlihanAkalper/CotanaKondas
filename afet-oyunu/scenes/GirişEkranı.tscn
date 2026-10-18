@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://cpg5nsa626q8c"]
+
+[ext_resource type="Script" uid="uid://daa7gvsevw0s5" path="res://codes/MainMenu.cs" id="1_bqk3r"]
+[ext_resource type="Texture2D" uid="uid://br83h3hr3f865" path="res://assets/ege.png" id="2_paxsm"]
+
+[node name="GirişEkranı" type="Control" unique_id=502136015 node_paths=PackedStringArray("_continueButton", "_newGameButton", "_settingsButton", "_exitButton", "_settingsPanel", "_volumeSlider", "_closeSettingsButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bqk3r")
+_continueButton = NodePath("MenuContainer/ContinueButton")
+_newGameButton = NodePath("MenuContainer/NewGameButton")
+_settingsButton = NodePath("MenuContainer/SettingButton")
+_exitButton = NodePath("MenuContainer/ExitButton")
+_settingsPanel = NodePath("SettingPanel")
+_volumeSlider = NodePath("SettingPanel/VBoxContainer/HBoxContainer/VolumeSlider")
+_closeSettingsButton = NodePath("SettingPanel/VBoxContainer/CloseSettingButton")
+
+[node name="BackGround" type="TextureRect" parent="." unique_id=53259740]
+layout_mode = 0
+offset_right = 1158.0
+offset_bottom = 727.0
+texture = ExtResource("2_paxsm")
+
+[node name="MenuContainer" type="VBoxContainer" parent="." unique_id=1684627205]
+layout_mode = 0
+offset_left = 12.0
+offset_top = -70.0
+offset_right = 297.0
+offset_bottom = 216.0
+scale = Vector2(2, 2)
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="MenuContainer" unique_id=816573563]
+layout_mode = 2
+text = "AFET YÖNETİMİ / "
+
+[node name="ContinueButton" type="Button" parent="MenuContainer" unique_id=1007552625]
+layout_mode = 2
+text = "Devam Ediniz"
+
+[node name="NewGameButton" type="Button" parent="MenuContainer" unique_id=60945794]
+layout_mode = 2
+text = "Yeni Oyuna Başlayın"
+
+[node name="SettingButton" type="Button" parent="MenuContainer" unique_id=1237374204]
+layout_mode = 2
+text = "Ayarlar"
+
+[node name="ExitButton" type="Button" parent="MenuContainer" unique_id=1821126514]
+layout_mode = 2
+text = "Çıkış"
+
+[node name="SettingPanel" type="PanelContainer" parent="." unique_id=818376639]
+visible = false
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 0
+offset_left = 688.0
+offset_top = 166.0
+offset_right = 988.0
+offset_bottom = 316.0
+scale = Vector2(1.5, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingPanel" unique_id=1251833879]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingPanel/VBoxContainer" unique_id=2128157605]
+layout_mode = 2
+text = "Ses Ayarları"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingPanel/VBoxContainer" unique_id=1997703399]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingPanel/VBoxContainer/HBoxContainer" unique_id=1934973621]
+layout_mode = 2
+text = "Genel Ses"
+
+[node name="VolumeSlider" type="HSlider" parent="SettingPanel/VBoxContainer/HBoxContainer" unique_id=1969479494]
+layout_mode = 2
+
+[node name="CloseSettingButton" type="Button" parent="SettingPanel/VBoxContainer" unique_id=97943871]
+layout_mode = 2
+text = "Kapat"

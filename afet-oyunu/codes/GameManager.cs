@@ -55,7 +55,7 @@ public partial class GameManager : Node
 
     public AfetTürü ActiveDisaster { get; set; } = AfetTürü.Yok;
 
-    public GameSaveData SaveData { get; private set; } = new();
+    public GameSaveData SaveData { get; set; } = new();
     private string _savePath;
 
     public override void _Ready()

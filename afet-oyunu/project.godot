@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Afet Oyunu"
-run/main_scene="uid://uspwk66q5w2w"
+run/main_scene="uid://cpg5nsa626q8c"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="uid://jpxmnl73o60i"
 
