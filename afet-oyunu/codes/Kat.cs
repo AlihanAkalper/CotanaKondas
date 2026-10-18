@@ -170,7 +170,7 @@ public partial class Kat : Sprite2D
             ShowPerk(PerkType.DepremÇantası, "res://assets/depremCanta.png",
                 new Vector2(width / 2f - wallWidth - 9, bottom), new Vector2(36, 28), true);
             ShowPerk(PerkType.DumanDedektörü, "res://assets/OdaDedektor.png",
-                new Vector2(0, top + (SonKat ? 2 : 7)), new Vector2(38, 20), false);
+                new Vector2(0, bottom - 43), new Vector2(38, 20), true);
             if (SonKat)
                 ShowPerk(PerkType.SelUyarıSistemi, "res://assets/SelUyariCati.png",
                     new Vector2(width / 2f - 20, Çatı.Position.Y), new Vector2(48, 44), true);
