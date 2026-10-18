@@ -67,7 +67,7 @@ public partial class Kiraci : AnimatedSprite2D
 	private int direction = 1;
 	[Export] public float WalkSpeed = 10;
 	[Export] public int MinX = -27;
-	[Export] public int MaxX = 50;
+	[Export] public int MaxX = 40;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
