@@ -9,8 +9,11 @@ public partial class GameManager : Node
 
     public void AdvanceToNextDay()
     {
+        GameEndRules.Evaluate(SaveData);
+        if (SaveData.IsFinished) { SaveGame(); OpenCurrentGame(); return; }
         if (HasPendingDisasters) { OpenCurrentGame(); return; }
         SaveData.CurrentDay++;
+        TenantRules.AdvanceDay(SaveData, Random.Shared);
         int totalDailyIncome = 0;
 
         foreach (var house in SaveData.Houses)
@@ -23,9 +26,13 @@ public partial class GameManager : Node
         var occurredDisasters = DisasterManager.Instance.ProcessDailyDisasters();
 
         SaveData.PendingDisasters.AddRange(occurredDisasters);
+        GameEndRules.Evaluate(SaveData);
         SaveGame();
-        if (HasPendingDisasters) OpenCurrentGame();
-        else HUD.Instance?.UpdateHUD();
+        if (HasPendingDisasters || SaveData.IsFinished) OpenCurrentGame();
+        else
+        {
+            HUD.Instance?.UpdateHUD();
+        }
     }
     public static GameManager Instance { get; private set; }
     public bool HasPendingDisasters => SaveData.PendingDisasters.Count > 0;
@@ -38,6 +45,7 @@ public partial class GameManager : Node
             SelectedRegion = CurrentDisaster.Region;
             GetTree().ChangeSceneToFile("res://scenes/şehir.tscn");
         }
+        else if (SaveData.IsFinished) GetTree().ChangeSceneToFile("res://scenes/GameEnd.tscn");
         else GetTree().ChangeSceneToFile("res://scenes/türkiye_haritası.tscn");
     }
 

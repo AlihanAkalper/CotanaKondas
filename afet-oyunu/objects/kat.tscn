@@ -94,14 +94,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath(".:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-7.4264493, -30.044182)]
+"values": [-30.044182]
 }
 
 [sub_resource type="Animation" id="Animation_ak55u"]
@@ -111,14 +111,14 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath(".:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.97),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-7.4264493, -30.044182), Vector2(-7.426, -35.044)]
+"values": [-30.044182, -35.044]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m3r6m"]
@@ -181,11 +181,11 @@ frame_progress = 0.30796957
 script = ExtResource("7_okegr")
 
 [node name="Baloncuk" type="AnimatedSprite2D" parent="Kiraci" unique_id=1427294327]
+visible = false
 position = Vector2(-7.4264493, -30.044182)
-scale = Vector2(0.05, 0.05)
+scale = Vector2(0.65, 0.65)
 sprite_frames = SubResource("SpriteFrames_ci55w")
 animation = &"SagaYurume"
-autoplay = "Yok"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Kiraci/Baloncuk" unique_id=606208892]
 libraries/ = SubResource("AnimationLibrary_m3r6m")

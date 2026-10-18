@@ -9,6 +9,6 @@
 position = Vector2(583, 556)
 script = ExtResource("1_0e48y")
 Kat_Template = ExtResource("2_v281k")
-MaxKat = 5
+MaxKat = 3
 KatHeight = 120
 

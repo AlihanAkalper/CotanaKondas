@@ -30,6 +30,7 @@ public partial class PlotConfirmDialog : Control
 
     private void OnYesPressed()
     {
+        if (GameManager.Instance.SaveData.IsFinished) return;
         // 1. Para kontrolü
         if (GameManager.Instance.SaveData.Money < _price)
         {

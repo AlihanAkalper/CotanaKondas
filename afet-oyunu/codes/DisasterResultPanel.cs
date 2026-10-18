@@ -1,19 +1,14 @@
 using Godot;
-using System;
 
 public partial class DisasterResultPanel : CanvasLayer
 {
     private Control _root;
     private PanelContainer _panel;
     private Label _title;
-    private DisasterEvent _report;
-    private int _remaining;
 
     public void Begin(DisasterEvent report, int remaining)
     {
         Layer = 20;
-        _report = report;
-        _remaining = remaining;
         _root = new Control { MouseFilter = Control.MouseFilterEnum.Stop };
         AddChild(_root);
         _root.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect);
@@ -48,20 +43,21 @@ public partial class DisasterResultPanel : CanvasLayer
         scroll.AddChild(rows);
         void Line(string text) => rows.AddChild(new Label
         { Text = text, AutowrapMode = TextServer.AutowrapMode.WordSmart });
-        Line($"Bina: {report.BeforeHealth:0.#} → {report.RemainingHealth:0.#}/300 can   (−{report.DamageTaken:0.#})");
-        if (report.RemainingHealth <= 0) Line("Bina kullanılamaz. Onarılana kadar tüm katların geliri durdu.");
         foreach (var floor in report.Floors)
         {
-            string status = report.RemainingHealth <= 0 ? "Bina onarımı gerekiyor" :
-                floor.RemainingHealth <= 0 ? "Kullanılamaz — kat onarımı gerekiyor" : "Kullanılabilir";
+            string status =
+                floor.RemainingHealth <= 0 ? "Yıkıldı — yeniden inşa gerekiyor" : "Kullanılabilir";
             Line($"{floor.FloorNumber}. kat: {floor.BeforeHealth:0.#} → {floor.RemainingHealth:0.#}/100   (−{floor.DamageTaken:0.#})\n{status}");
         }
         Line($"Malzeme dayanıklılığı: ×{report.DurabilityMultiplier:0.00}");
-        Line($"Hazırlık koruması: %{report.ProtectionPercent:0.#}\nÖnlenen bina can kaybı: {report.PreventedBuildingDamage:0.#}");
+        Line($"Hazırlık koruması: %{report.ProtectionPercent:0.#}");
         Line(report.AppliedPerks.Count > 0 ? "Etkili hazırlıklar: " + string.Join(", ", report.AppliedPerks) : "Bu afete karşı satın alınmış hazırlık yok.");
         Line($"Günlük gelir: {report.IncomeBefore:N0} → {report.IncomeAfter:N0} TL");
+        if (report.DepartedTenants > 0)
+            Line($"Farkındalığı sıfıra ulaşmış {report.DepartedTenants} kiracı ayrıldı. Boş katlardan kira alınmıyor.");
         Line("Onarım için şehirdeki Bina / Malzeme menüsünü kullanabilirsiniz.");
-        var next = new Button { Text = remaining > 1 ? "Sonraki afeti göster" : "Tamam — Haritaya dön" };
+        var next = new Button { Text = remaining > 1 ? "Sonraki afeti göster" :
+            GameManager.Instance.SaveData.IsFinished ? "Sonuçları göster" : "Tamam — Haritaya dön" };
         next.Pressed += () => { next.Disabled = true; GameManager.Instance.AcknowledgeDisaster(); };
         column.AddChild(next);
         var menu = new Button { Text = "Kaydet ve ana menüye dön" };

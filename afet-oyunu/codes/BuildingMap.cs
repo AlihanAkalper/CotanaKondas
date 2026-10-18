@@ -11,7 +11,7 @@ public partial class BuildingMap : Node2D
     [Export] private Texture2D _steelHouseTexture;
     [Export] private TextureButton _perkButton;
     [Export] private PerkMenu _perkMenu;
-    [Export] private Button _constructionButton;
+    [Export] private BaseButton _constructionButton;
 
     [Export] private PlotConfirmDialog _confirmDialog; // Yeni onay paneli
     [Export] private BuildMenu _buildMenu;             // Malzeme menüsü

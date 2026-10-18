@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,14 +14,11 @@ public class DisasterEvent
     public int Day { get; set; }
     public Ev_numaraları Region { get; set; }
     public AfetTürü DisasterType { get; set; }
-    public float BeforeHealth { get; set; }
-    public float DamageTaken { get; set; }
-    public float RemainingHealth { get; set; }
     public float ProtectionPercent { get; set; }
-    public float PreventedBuildingDamage { get; set; }
     public float DurabilityMultiplier { get; set; }
     public int IncomeBefore { get; set; }
     public int IncomeAfter { get; set; }
+    public int DepartedTenants { get; set; }
     public List<FloorDisasterResult> Floors { get; set; } = new();
     public List<string> AppliedPerks { get; set; } = new();
 }
@@ -33,17 +29,15 @@ public static class DisasterResolution
     public static DisasterEvent Resolve(GameSaveData save, HouseSaveData house, AfetTürü type)
     {
         var beforeFloors = house.Floors.Select(f => f.Health).ToArray();
-        float before = house.Health;
+
         int incomeBefore = ConstructionRules.DailyIncome(house);
-        float unprotected = ConstructionRules.CalculateDamage(house, type, Array.Empty<PerkType>());
-        float protectedDamage = ConstructionRules.CalculateDamage(house, type, save.PurchasedPerks);
-        float actual = ConstructionRules.ApplyDamage(house, type, save.PurchasedPerks);
+        ConstructionRules.ApplyDamage(house, type, save.PurchasedPerks);
+        int departed = type == AfetTürü.Yok ? 0 : TenantRules.DepartAfterDisaster(house);
         var report = new DisasterEvent
         {
             Day = save.CurrentDay, Region = house.Type, DisasterType = type,
-            BeforeHealth = before, DamageTaken = actual, RemainingHealth = house.Health,
+            DepartedTenants = departed,
             ProtectionPercent = (1f - PerkDatabase.GetDamageMultiplier(type, save.PurchasedPerks)) * 100f,
-            PreventedBuildingDamage = Math.Max(0, Math.Min(before, unprotected) - Math.Min(before, protectedDamage)),
             DurabilityMultiplier = ConstructionRules.Durability(house),
             IncomeBefore = incomeBefore, IncomeAfter = ConstructionRules.DailyIncome(house)
         };

@@ -8,10 +8,10 @@
 [ext_resource type="Script" uid="uid://bbr2idbxx5wv" path="res://codes/DisasterAnimationManager.cs" id="5_oe26e"]
 [ext_resource type="Script" uid="uid://pkhjltfk2g48" path="res://codes/HUD.cs" id="6_385tt"]
 [ext_resource type="Texture2D" uid="uid://c7lfnf3qoustn" path="res://assets/money.png" id="8_y76np"]
+[ext_resource type="Texture2D" uid="uid://c4yam8ejf1nnm" path="res://assets/upgrade.png" id="9_0g7mh"]
 [ext_resource type="Texture2D" uid="uid://cm2liwsbt58f0" path="res://assets/cekic.png" id="9_3tbon"]
 [ext_resource type="Script" uid="uid://dolq8h85dwvqk" path="res://codes/PerkMenu.cs" id="10_tkc3r"]
-
-[ext_resource type="Script" path="res://codes/BuildMenu.cs" id="11_construction"]
+[ext_resource type="Script" uid="uid://be2v7jrw17gl7" path="res://codes/BuildMenu.cs" id="11_construction"]
 
 [node name="Şehir" type="Node2D" unique_id=576134575 node_paths=PackedStringArray("_disasterAnimManager", "_perkButton", "_perkMenu", "_constructionButton", "_buildMenu")]
 script = ExtResource("1_jgs2t")
@@ -50,8 +50,8 @@ position = Vector2(576, 333)
 [node name="Cityhud" type="CanvasLayer" parent="." unique_id=1432209959 node_paths=PackedStringArray("_moneyLabel", "_dateLabel", "_mainMenuButton")]
 script = ExtResource("6_385tt")
 _moneyLabel = NodePath("HBoxContainer/MoneyLabel")
-_mainMenuButton = NodePath("MainMenuButton")
 _dateLabel = NodePath("Day Label")
+_mainMenuButton = NodePath("MainMenuButton")
 
 [node name="Day Label" type="Label" parent="Cityhud" unique_id=1971786900]
 offset_left = 518.0
@@ -77,7 +77,7 @@ offset_left = -3.0
 offset_top = 187.0
 offset_right = 107.0
 offset_bottom = 292.0
-texture_normal = ExtResource("9_3tbon")
+texture_normal = ExtResource("9_0g7mh")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -123,19 +123,22 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ConstructionButton" type="Button" parent="Cityhud"]
-offset_left = 4.0
-offset_top = 104.0
-offset_right = 108.0
-offset_bottom = 176.0
-text = "Bina /
-Malzeme"
+[node name="ConstructionButton" type="TextureButton" parent="Cityhud" unique_id=176947700]
+offset_left = -3.0
+offset_top = 72.0
+offset_right = 107.0
+offset_bottom = 177.0
+texture_normal = ExtResource("9_3tbon")
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="BuildMenu" type="Control" parent="Cityhud"]
+[node name="BuildMenu" type="Control" parent="Cityhud" unique_id=633663996]
 visible = false
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("11_construction")
 
-[node name="MainMenuButton" type="Button" parent="Cityhud"]
+[node name="MainMenuButton" type="Button" parent="Cityhud" unique_id=415815449]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -144,10 +147,10 @@ offset_top = 12.0
 offset_right = -130.0
 offset_bottom = 52.0
 grow_horizontal = 0
-text = "Ana Menü"
 tooltip_text = "İlerlemeyi kaydet ve ana menüye dön."
+text = "Ana Menü"
 
-[node name="FireParticles" type="CPUParticles2D" parent="."]
+[node name="FireParticles" type="CPUParticles2D" parent="." unique_id=1571384113]
 visible = false
 z_index = 5
 position = Vector2(583, 480)
@@ -164,7 +167,7 @@ initial_velocity_max = 90.0
 scale_amount_min = 4.0
 scale_amount_max = 10.0
 
-[node name="FloodWater" type="ColorRect" parent="."]
+[node name="FloodWater" type="ColorRect" parent="." unique_id=1313930558]
 visible = false
 z_index = 6
 offset_left = -100.0
@@ -174,7 +177,8 @@ offset_bottom = 1400.0
 mouse_filter = 2
 color = Color(0.08, 0.4, 0.75, 0.65)
 
-[node name="Surface" type="ColorRect" parent="FloodWater"]
+[node name="Surface" type="ColorRect" parent="FloodWater" unique_id=1365596050]
+layout_mode = 0
 offset_right = 1400.0
 offset_bottom = 8.0
 mouse_filter = 2

@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class DisasterManager : Node
 {
@@ -17,7 +18,7 @@ public partial class DisasterManager : Node
         {
             foreach (var house in data.Houses)
             {
-                if (!house.IsBuilt || house.Health <= 0 || house.Floors.Count == 0) continue;
+                if (!house.IsBuilt || !house.Floors.Any(f => f.Health > 0)) continue;
                 if (!RegionDisasterDatabase.RegionConfigs.TryGetValue(house.Type, out var config)) continue;
                 // Her afet için bağımsız zar; birden fazlası tutarsa bölgeye tek birini rastgele seç.
                 var candidates = new List<AfetTürü>();

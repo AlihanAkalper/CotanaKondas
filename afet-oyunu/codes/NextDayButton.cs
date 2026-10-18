@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class NextDayButton : TextureButton
 {
@@ -13,8 +12,4 @@ public partial class NextDayButton : TextureButton
         // Gün döngüsünü başlatır, kiraları toplar ve afet kontrolünü çalıştırır
         GameManager.Instance.AdvanceToNextDay();
     }
-    
-    public override void _Process(double delta)
-	{
-	}
 }

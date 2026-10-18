@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Linq;
 
 public partial class StatPanel : Control
@@ -29,7 +28,7 @@ public partial class StatPanel : Control
         _lblMinKira.Text = $"Min. Kira Getirisi: {info.MinRentIncome:N0} TL/Gün";
 
         if (houseData != null && houseData.IsBuilt)
-            _lblİnşaEdildi.Text = $"Durum: {houseData.material} • {houseData.Floors.Count}/5 kat • {houseData.Health:0}/300 can";
+            _lblİnşaEdildi.Text = $"Durum: {houseData.material} • {houseData.Floors.Count}/{ConstructionRules.MaxFloors} kat";
         else
             _lblİnşaEdildi.Text = "Durum: Satılık Boş Arsa";
 
@@ -39,9 +38,6 @@ public partial class StatPanel : Control
     public void HideStats()
     {
         Visible = false;
-    }
-    public override void _Process(double delta)
-    {
     }
 }
 
