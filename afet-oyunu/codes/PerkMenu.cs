@@ -69,10 +69,18 @@ public partial class PerkMenu : Control
         }
 
         var save = GameManager.Instance.SaveData;
+        var house = save.Houses.Find(h => h.Type == GameManager.Instance.SelectedRegion);
+        GetNode<Label>("MainBox/HBoxContainer/titleLabel").Text =
+            RegionDatabase.Regions[GameManager.Instance.SelectedRegion].Name + " — Afet Hazırlığı";
+        if (house == null || !house.IsBuilt)
+        {
+            _perkListContainer.AddChild(new Label { Text = "Önce bu bölgedeki arsayı satın alın." });
+            return;
+        }
 
         foreach (var (perkType, info) in PerkDatabase.Perks)
         {
-            bool isPurchased = save.PurchasedPerks != null && save.PurchasedPerks.Contains(perkType);
+            bool isPurchased = house.PurchasedPerks.Contains(perkType);
 
             // 1. Dış Çerçeve Kartı
             var cardPanel = new PanelContainer();
@@ -160,9 +168,8 @@ public partial class PerkMenu : Control
     {
         var save = GameManager.Instance.SaveData;
         if (save.IsFinished) return;
-
-        save.PurchasedPerks ??= new();
-        if (save.PurchasedPerks.Contains(info.Type)) return;
+        var house = save.Houses.Find(h => h.Type == GameManager.Instance.SelectedRegion);
+        if (house == null || !house.IsBuilt || house.PurchasedPerks.Contains(info.Type)) return;
 
         if (save.Money < info.Price)
         {
@@ -172,8 +179,8 @@ public partial class PerkMenu : Control
 
         save.Money -= info.Price;
 
-        save.PurchasedPerks.Add(info.Type);
-        TenantRules.ApplyPerk(save);
+        house.PurchasedPerks.Add(info.Type);
+        TenantRules.ApplyPerk(house);
 
         GameManager.Instance.SaveGame();
         HUD.Instance?.UpdateHUD();

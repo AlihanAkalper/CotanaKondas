@@ -31,14 +31,14 @@ public static class DisasterResolution
         var beforeFloors = house.Floors.Select(f => f.Health).ToArray();
 
         int incomeBefore = ConstructionRules.DailyIncome(house);
-        ConstructionRules.ApplyDamage(house, type, save.PurchasedPerks);
+        ConstructionRules.ApplyDamage(house, type, house.PurchasedPerks);
         int departed = type == AfetTürü.Yok ? 0 : TenantRules.DepartAfterDisaster(house);
         save.LostTenants += departed;
         var report = new DisasterEvent
         {
             Day = save.CurrentDay, Region = house.Type, DisasterType = type,
             DepartedTenants = departed,
-            ProtectionPercent = (1f - PerkDatabase.GetDamageMultiplier(type, save.PurchasedPerks)) * 100f,
+            ProtectionPercent = (1f - PerkDatabase.GetDamageMultiplier(type, house.PurchasedPerks)) * 100f,
             DurabilityMultiplier = ConstructionRules.Durability(house),
             IncomeBefore = incomeBefore, IncomeAfter = ConstructionRules.DailyIncome(house)
         };
@@ -49,7 +49,7 @@ public static class DisasterResolution
                 RemainingHealth = house.Floors[i].Health,
                 DamageTaken = beforeFloors[i] - house.Floors[i].Health
             });
-        foreach (var perk in (save.PurchasedPerks ?? new()).Distinct())
+        foreach (var perk in (house.PurchasedPerks ?? new()).Distinct())
             if (PerkDatabase.Perks.TryGetValue(perk, out var info) &&
                 (info.AffectedDisaster == AfetTürü.Yok || info.AffectedDisaster == type))
                 report.AppliedPerks.Add(info.Name);

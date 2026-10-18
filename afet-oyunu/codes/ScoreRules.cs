@@ -23,7 +23,7 @@ public static class ScoreRules
         Math.Max(0, save.CurrentDay - 1),
         save.Houses.Where(h => h.IsBuilt)
             .Sum(h => h.Floors.Count(f => f.Health > 0 && f.HasTenant)),
-        save.PurchasedPerks.Distinct().Count(),
+        save.Houses.Sum(h => h.PurchasedPerks.Distinct().Count()),
         save.DialogueAnswers.Count(a => a.Tone == DialogueTone.Positive),
         save.DialogueAnswers.Count(a => a.Tone == DialogueTone.Neutral),
         save.DialogueAnswers.Count(a => a.Tone == DialogueTone.Negative),

@@ -34,6 +34,7 @@ public class HouseSaveData
     public Materyal material { get; set; } = Materyal.Alınmadı;
     public int Price { get; set; }
     public int BackgroundIndex { get; set; } = -1;
+    public List<PerkType> PurchasedPerks { get; set; } = new();
 
     // Yalnızca kat sistemi öncesindeki kayıtları dönüştürmek için okunur.
     [JsonPropertyName("Health")]
@@ -59,7 +60,9 @@ public class GameSaveData
     public float CumulativeDisasterChance { get; set; } = 15f;
 
     public List<HouseSaveData> Houses { get; set; } = new();
-    public List<PerkType> PurchasedPerks { get; set; } = new();
+    [JsonPropertyName("PurchasedPerks")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<PerkType> LegacyPurchasedPerks { get; set; }
 
     public GameSaveData()
     {

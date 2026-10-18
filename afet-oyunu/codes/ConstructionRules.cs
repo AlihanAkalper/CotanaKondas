@@ -116,11 +116,18 @@ public static class ConstructionRules
     }
     public static void Migrate(GameSaveData save)
     {
-        save.PurchasedPerks ??= new();
+        // Eski ortak satın alımların bölgesi bilinmiyor; bedellerini bir kez iade et.
+        if (save.LegacyPurchasedPerks != null)
+        {
+            foreach (var perk in save.LegacyPurchasedPerks.Distinct())
+                if (PerkDatabase.Perks.TryGetValue(perk, out var info)) save.Money += info.Price;
+            save.LegacyPurchasedPerks = null;
+        }
         save.PendingDisasters ??= new();
         save.DialogueAnswers ??= new();
         foreach (var h in save.Houses)
         {
+            h.PurchasedPerks ??= new();
             if (RegionDatabase.Regions.TryGetValue(h.Type, out var region))
                 h.Price = region.BasePlotPrice;
             if (h.ConstructionVersion < 1)

@@ -47,7 +47,7 @@ public partial class GameEndScreen : Control
         Line($"Kiracı kaybı: {save.LostTenants} / {GameEndRules.TenantLossLimit}\nYıkılan kat: {GameEndRules.DestroyedFloors(save)}\nYıkılan bina: {GameEndRules.DestroyedBuildings(save)}");
         var tenants = save.Houses.SelectMany(h => h.Floors).Where(f => f.HasTenant).ToArray();
         double awareness = tenants.Length == 0 ? 0 : tenants.Average(f => f.Awareness);
-        Line($"Kalan kiracı: {tenants.Length}\nOrtalama kiracı farkındalığı: {awareness:0.#}/100\nAlınan hazırlık: {save.PurchasedPerks.Distinct().Count()}");
+        Line($"Kalan kiracı: {tenants.Length}\nOrtalama kiracı farkındalığı: {awareness:0.#}/100\nAlınan hazırlık: {save.Houses.Sum(h => h.PurchasedPerks.Distinct().Count())}");
         Line($"Diyaloglar — Pozitif: {save.DialogueAnswers.Count(a => a.Tone == DialogueTone.Positive)} | Nötr: {save.DialogueAnswers.Count(a => a.Tone == DialogueTone.Neutral)} | Negatif: {save.DialogueAnswers.Count(a => a.Tone == DialogueTone.Negative)}");
         var menu = new Button { Text = "Ana menüye dön", CustomMinimumSize = new Vector2(0, 44) };
         rows.AddChild(menu);

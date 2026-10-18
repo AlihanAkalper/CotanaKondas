@@ -65,10 +65,9 @@ public static class TenantRules
         if (candidates.Length > 0) PrepareQuestion(candidates[random.Next(candidates.Length)], random);
     }
 
-    public static void ApplyPerk(GameSaveData save)
+    public static void ApplyPerk(HouseSaveData house)
     {
-        foreach (var house in save.Houses)
-            foreach (var floor in house.Floors) ChangeAwareness(floor, PerkAwarenessBonus);
+        foreach (var floor in house.Floors) ChangeAwareness(floor, PerkAwarenessBonus);
     }
 
     public static int DepartAfterDisaster(HouseSaveData house)
