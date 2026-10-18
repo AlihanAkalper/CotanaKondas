@@ -42,12 +42,16 @@ public partial class Kat : Sprite2D
 
     private Materyal _scaffoldMaterial;
     private Sprite2D _scaffoldBase;
+    private readonly Dictionary<PerkType, Sprite2D> _perkSprites = new();
+    private ICollection<PerkType> _perks;
 
-    public void SetState(int material, float health, bool topFloor, Materyal scaffoldMaterial = Materyal.Alınmadı)
+    public void SetState(int material, float health, bool topFloor, Materyal scaffoldMaterial = Materyal.Alınmadı,
+        ICollection<PerkType> perks = null)
     {
         Saglamlık = (int)Math.Ceiling(health);
         SonKat = topFloor;
         _scaffoldMaterial = scaffoldMaterial;
+        _perks = perks;
 
         Malzeme = material;
     }
@@ -88,6 +92,7 @@ public partial class Kat : Sprite2D
 
     private void UpdateLook()
     {
+        foreach (var sprite in _perkSprites.Values) sprite.Hide();
         UpdateKiraciVisibility();
         Texture = null;
         if (_scaffoldBase != null) _scaffoldBase.Hide();
@@ -158,6 +163,44 @@ public partial class Kat : Sprite2D
         }
 
         sakin?.SetFloorSurface(bottom);
+        if (Saglamlık > 0)
+        {
+            ShowPerk(PerkType.YangınSöndürmeSistemi, "res://assets/yanginTupu.png",
+                new Vector2(left + wallWidth + 7, bottom), new Vector2(24, 38), true);
+            ShowPerk(PerkType.DepremÇantası, "res://assets/depremCanta.png",
+                new Vector2(width / 2f - wallWidth - 9, bottom), new Vector2(36, 28), true);
+            ShowPerk(PerkType.DumanDedektörü, "res://assets/OdaDedektor.png",
+                new Vector2(0, top + (SonKat ? 2 : 7)), new Vector2(38, 20), false);
+            if (SonKat)
+                ShowPerk(PerkType.SelUyarıSistemi, "res://assets/SelUyariCati.png",
+                    new Vector2(width / 2f - 20, Çatı.Position.Y), new Vector2(48, 44), true);
+        }
+    }
+
+    private void ShowPerk(PerkType perk, string path, Vector2 anchor, Vector2 maxSize, bool bottomAligned)
+    {
+        if (_perks == null || !_perks.Contains(perk)) return;
+        if (!_perkSprites.TryGetValue(perk, out var sprite))
+        {
+            var texture = GD.Load<Texture2D>(path);
+            using var image = texture.GetImage();
+            sprite = new Sprite2D
+            {
+                Texture = new AtlasTexture { Atlas = texture, Region = image.GetUsedRect(), FilterClip = true },
+                Centered = false,
+                TextureFilter = TextureFilterEnum.Nearest,
+                ZIndex = 1
+            };
+            AddChild(sprite);
+            _perkSprites.Add(perk, sprite);
+        }
+        // Katın farklı yatay/dikey ölçeğine rağmen eşyanın kendi oranını koru.
+        Vector2 textureSize = sprite.Texture.GetSize();
+        float factor = Math.Min(maxSize.X / textureSize.X, maxSize.Y / textureSize.Y);
+        sprite.Scale = new Vector2(factor / Scale.X, factor / Scale.Y);
+        Vector2 size = textureSize * sprite.Scale;
+        sprite.Position = anchor - new Vector2(size.X / 2, bottomAligned ? size.Y : 0);
+        sprite.Show();
     }
 private void UpdateKiraciVisibility()
 	{
