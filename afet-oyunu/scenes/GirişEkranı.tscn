@@ -11,8 +11,8 @@ content_margin_bottom = 20.0
 bg_color = Color(0.12, 0.16, 0.17, 0.97)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
-corner_radius_bottom_left = 8
 corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="GirişEkranı" type="Control" unique_id=502136015 node_paths=PackedStringArray("_continueButton", "_newGameButton", "_settingsButton", "_exitButton", "_settingsPanel", "_volumeSlider", "_closeSettingsButton")]
 layout_mode = 3
@@ -55,11 +55,11 @@ layout_mode = 2
 
 [node name="ContinueButton" type="Button" parent="MenuContainer" unique_id=1007552625]
 layout_mode = 2
-text = "Devam Ediniz"
+text = "Devam Et"
 
 [node name="NewGameButton" type="Button" parent="MenuContainer" unique_id=60945794]
 layout_mode = 2
-text = "Yeni Oyuna Başlayın"
+text = "Yeni Oyun"
 
 [node name="SettingButton" type="Button" parent="MenuContainer" unique_id=1237374204]
 layout_mode = 2
@@ -82,6 +82,7 @@ layout_mode = 2
 visible = false
 custom_minimum_size = Vector2(460, 200)
 layout_mode = 1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -484.0
