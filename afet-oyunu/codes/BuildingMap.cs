@@ -34,11 +34,11 @@ public partial class BuildingMap : Node2D
         }
         if (_perkButton != null)
         {
-            _perkButton.Pressed += () => { if (GameManager.Instance.HasPendingDisasters) return; _buildMenu?.Hide(); _perkMenu?.Open(); };
+            _perkButton.Pressed += () => { if (GameManager.Instance.HasPendingDisasters) return; _buildMenu?.Hide(); if(_perkMenu.Visible) _perkMenu.Hide(); else _perkMenu?.Open(); };
         }
 
         if (_constructionButton != null)
-            _constructionButton.Pressed += () => { _perkMenu?.Hide(); OpenBuildMenu(); };
+            _constructionButton.Pressed += () => { _perkMenu?.Hide(); if(_buildMenu.Visible) _buildMenu.Hide(); else OpenBuildMenu(); };
 
         RefreshScene();
 
