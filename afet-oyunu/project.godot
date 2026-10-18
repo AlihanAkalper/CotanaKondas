@@ -19,6 +19,8 @@ config/icon="uid://jpxmnl73o60i"
 
 GameManager="*uid://dxhrd8cnttihu"
 DisasterManager="*uid://cc7a6obqcmm5i"
+BackgroundMusic="*res://codes/BackgroundMusic.cs"
+ButtonSounds="*res://codes/ButtonSounds.cs"
 
 [display]
 

@@ -8,6 +8,9 @@ public partial class DisasterAnimationManager : Node
     private Tween _animation;
     private Vector2 _cameraOffset;
     private Node2D _spriteEffects;
+    private AudioStreamPlayer _earthquakeAudio;
+    private AudioStreamPlayer _fireAudio;
+    private AudioStreamPlayer _floodAudio;
 
     public override void _Ready() => _cameraOffset = _camera?.Offset ?? Vector2.Zero;
 
@@ -42,6 +45,9 @@ public partial class DisasterAnimationManager : Node
 
     private void ClearEffects()
     {
+        if (GodotObject.IsInstanceValid(_floodAudio)) _floodAudio.Stop();
+        if (GodotObject.IsInstanceValid(_earthquakeAudio)) _earthquakeAudio.Stop();
+        if (GodotObject.IsInstanceValid(_fireAudio)) _fireAudio.Stop();
         if (GodotObject.IsInstanceValid(_spriteEffects))
         {
             _spriteEffects.Hide();
@@ -61,6 +67,17 @@ public partial class DisasterAnimationManager : Node
         switch (disaster)
         {
             case AfetTürü.Deprem:
+                if (!GodotObject.IsInstanceValid(_earthquakeAudio))
+                {
+                    _earthquakeAudio = new AudioStreamPlayer
+                    {
+                        Name = "EarthquakeAudio",
+                        Stream = GD.Load<AudioStream>("res://assets/audio/deprem.mp3"),
+                        Bus = "Master"
+                    };
+                    AddChild(_earthquakeAudio);
+                }
+                _earthquakeAudio.Play();
                 for (int i = 0; i < 60; i++)
                 {
                     float strength = 18f * (1f - i / 60f);
@@ -70,6 +87,17 @@ public partial class DisasterAnimationManager : Node
                 if (_camera != null) _animation.TweenProperty(_camera, "offset", _cameraOffset, .1);
                 break;
             case AfetTürü.Yangın:
+                if (!GodotObject.IsInstanceValid(_fireAudio))
+                {
+                    _fireAudio = new AudioStreamPlayer
+                    {
+                        Name = "FireAudio",
+                        Stream = GD.Load<AudioStream>("res://assets/audio/yangin.mp3"),
+                        Bus = "Master"
+                    };
+                    AddChild(_fireAudio);
+                }
+                _fireAudio.Play();
                 var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == GameManager.Instance.SelectedRegion);
                 var fire = LoadFrames("res://assets/fire.png", 10, 12, true);
                 var building = GetParent().GetNodeOrNull<Bina>("Bina");
@@ -87,6 +115,17 @@ public partial class DisasterAnimationManager : Node
                 _animation.TweenProperty(_spriteEffects, "modulate:a", 0f, .5);
                 break;
             case AfetTürü.Sel:
+                if (!GodotObject.IsInstanceValid(_floodAudio))
+                {
+                    _floodAudio = new AudioStreamPlayer
+                    {
+                        Name = "FloodAudio",
+                        Stream = GD.Load<AudioStream>("res://assets/audio/sel.mp3"),
+                        Bus = "Master"
+                    };
+                    AddChild(_floodAudio);
+                }
+                _floodAudio.Play();
                 var flood = LoadFrames("res://assets/sel.png", 12, 4, false);
                 var background = GetParent().GetNodeOrNull<Sprite2D>("Sprite2D");
                 Vector2 size = background != null ? background.Texture.GetSize() * background.Scale : new Vector2(1158, 665);
@@ -106,6 +145,9 @@ public partial class DisasterAnimationManager : Node
     public override void _ExitTree()
     {
         _animation?.Kill();
+        if (GodotObject.IsInstanceValid(_floodAudio)) _floodAudio.Stop();
+        if (GodotObject.IsInstanceValid(_earthquakeAudio)) _earthquakeAudio.Stop();
+        if (GodotObject.IsInstanceValid(_fireAudio)) _fireAudio.Stop();
         if (GodotObject.IsInstanceValid(_camera)) _camera.Offset = _cameraOffset;
     }
 }
