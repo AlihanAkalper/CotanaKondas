@@ -152,8 +152,8 @@ Tugla = ExtResource("5_m3r6m")
 
 [node name="ArkaDuvar" type="Sprite2D" parent="." unique_id=474522903]
 z_index = -1
-position = Vector2(13, -0.5)
-scale = Vector2(4, 1.7)
+position = Vector2(11, -0.5)
+scale = Vector2(4.6, 1.7)
 region_rect = Rect2(25, 15, 31, 102)
 
 [node name="SolDuvar" type="Sprite2D" parent="." unique_id=369147684]

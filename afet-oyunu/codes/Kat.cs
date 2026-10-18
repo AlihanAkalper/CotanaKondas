@@ -119,7 +119,7 @@ public partial class Kat : Sprite2D
         float left = -width / 2f;
         // Son dilimdeki iç duvar karosunu esnetmeden yan yana ve üst üste döşe.
         Tile(ArkaDuv, Layer(source, wood ? 7 : 6),
-            new Vector2(left + wallWidth, top), new Vector2(width - 2 * wallWidth, height));
+            new Vector2(left + wallWidth*0.85f, top), new Vector2(width - 2 * wallWidth*0.85f, height));
         var wallTexture = Layer(source, wall);
         Fit(SolDuv, wallTexture, new Vector2(left, top), new Vector2(wallWidth, height));
         Fit(SagDuv, wallTexture, new Vector2(width / 2f - wallWidth, top), new Vector2(wallWidth, height));
