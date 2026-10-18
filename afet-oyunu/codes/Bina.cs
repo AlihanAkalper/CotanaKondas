@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.JavaScript;
 
@@ -32,7 +33,7 @@ public partial class Bina : Area2D
             EmptyKat.SonKat = false;
             EmptyKat.Malzeme = 0;
             EmptyKat.Saglamlık = 0;
-            EmptyKat.Kiraci = null;
+            EmptyKat.sakin = null;
             AddChild(EmptyKat);
             katlar[i] = (EmptyKat);
         }
@@ -71,18 +72,33 @@ public partial class Bina : Area2D
             DEV_Malzeme++;  
     }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	private double NewKatTime = 0.0;
-    public override void _Process(double delta)
+    [Serializable]
+    public class BinaSaveData
     {
-        if (katlar[MaxKat-1].Malzeme  < 2)
+        public int KuruluKatlar = 0;
+        public Kat.KatSaveData[] katlar;
+        public int malzeme; //Çeto'nun dediği gibi tüm binanın aynı malzemeden olacağını var sayarak koydum.
+        //Onun için başka yerlerin de değişmesi gerekecek ama saat 4 oldu :p
+        
+        public BinaSaveData(Bina bina)
         {
-        NewKatTime += delta;
-        if(NewKatTime > 1.5)
-        {
-            NewKatTime = 0.0;
-            KatEkle();
-        }   
+            for (int i = 0; i < bina.MaxKat; i++)
+            {
+                if(bina.katlar[i].Malzeme > 1)
+                {
+                    KuruluKatlar++;
+                }
+            }
+            katlar = new Kat.KatSaveData[KuruluKatlar];
+            for (int i = 0; i < KuruluKatlar; i++)
+            {
+                Kat.KatSaveData kat = new Kat.KatSaveData(bina.katlar[i]);
+                katlar[i] = kat;
+            }
+            if(KuruluKatlar > 0)
+            {
+                malzeme = bina.katlar[0].Malzeme;
+            }
         }
     }
 }

@@ -6,7 +6,7 @@ public partial class Kat : Sprite2D
 {
 	[Export] public Boolean SonKat;
 
-	[Export]public Kiraci Kiraci;
+	[Export]public Kiraci sakin;
 	public int Saglamlık;
 
 	[ExportGroup("Duvarlar")]
@@ -146,4 +146,21 @@ public partial class Kat : Sprite2D
 		}
 	}
 
+	[Serializable]
+	public class KatSaveData
+	{
+		public bool kiraciVar = false;
+		public int saglam = 0;
+		public int farki = 0;
+
+		public KatSaveData(Kat hedef)
+		{
+			kiraciVar = hedef.sakin != null;
+			saglam = hedef.Saglamlık;
+			if (kiraciVar)
+			{
+				farki = hedef.sakin.Farkindalik;
+			}
+		}
+	}
 }

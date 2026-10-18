@@ -64,6 +64,10 @@ public class GameSaveData
 
         for (int i = 0; i < 8; i++)
         {
+            //Biraz soyut olan HouseSaveData yerine her binaya çağırılabilecek olan BinaSaveData(Bina bina) şeklinde
+            //bir class hazırladım. Ona bir bakarız sorun görünmesse onu veya düzeltilmişini kullanırız.
+            //Bunu hatalı şekilde bırakacağım ki çeto'nun gece bulup bakması kolay olsun.
+            Bina.BinaSaveData
             Houses.Add(new HouseSaveData
             {
                 Type = (Ev_numaraları)i,
