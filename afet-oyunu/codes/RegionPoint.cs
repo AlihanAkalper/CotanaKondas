@@ -1,7 +1,7 @@
 using Godot;
 
 public partial class RegionPoint : TextureButton
-{
+{//
     [Export] public Ev_numaraları RegionType;
     [Export] private StatPanel _statPanel;
 
