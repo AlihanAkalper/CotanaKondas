@@ -6,11 +6,27 @@ public partial class HUD : CanvasLayer
 
     [Export] private Label _moneyLabel;
     [Export] private Label _dateLabel;
+    [Export] private Button _mainMenuButton;
 
     public override void _Ready()
     {
         Instance = this;
         UpdateHUD();
+        if (_mainMenuButton != null)
+            _mainMenuButton.Pressed += ReturnToMainMenu;
+    }
+
+    private void ReturnToMainMenu()
+    {
+        if (GameManager.Instance.HasPendingDisasters) return;
+        GameManager.Instance.SaveGame();
+
+        GetTree().ChangeSceneToFile("res://scenes/GirişEkranı.tscn");
+    }
+
+    public override void _ExitTree()
+    {
+        if (Instance == this) Instance = null;
     }
 
     public void UpdateHUD()
@@ -29,3 +45,4 @@ public partial class HUD : CanvasLayer
         }
     }
 }
+

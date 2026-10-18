@@ -124,9 +124,10 @@ _statPanel = NodePath("../../MainHud/StatPanel")
 _forSaleTexture = ExtResource("3_76wrw")
 _purchasedTexture = ExtResource("4_heq2v")
 
-[node name="MainHud" type="CanvasLayer" parent="." unique_id=693278071 node_paths=PackedStringArray("_moneyLabel", "_dateLabel")]
+[node name="MainHud" type="CanvasLayer" parent="." unique_id=693278071 node_paths=PackedStringArray("_moneyLabel", "_dateLabel", "_mainMenuButton")]
 script = ExtResource("4_wvl83")
 _moneyLabel = NodePath("HBoxContainer/MoneyLabel")
+_mainMenuButton = NodePath("MainMenuButton")
 _dateLabel = NodePath("DateLabel")
 
 [node name="StatPanel" type="PanelContainer" parent="MainHud" unique_id=1330962018 node_paths=PackedStringArray("_lblArsaAd", "_lblArsaÜcreti", "_lblPahalıMateryal", "_lblUcuzMateryal", "_lblMinKira", "_lblİnşaEdildi")]
@@ -180,20 +181,13 @@ ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("8_qehax")
 
-[node name="BuildMenu" type="Control" parent="MainHud" unique_id=754634902 node_paths=PackedStringArray("_titleLabel", "_materialDropdown", "_amountInput", "_materialCostLabel", "_statusMessageLabel", "_confirmButton", "_cancelButton")]
+[node name="BuildMenu" type="Control" parent="MainHud" unique_id=754634902]
 visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_6tlxa")
-_titleLabel = NodePath("PanelContainer/VBoxContainer/TitleLabel")
-_materialDropdown = NodePath("PanelContainer/VBoxContainer/MaterialDropdown")
-_amountInput = NodePath("PanelContainer/VBoxContainer/AmountInput")
-_materialCostLabel = NodePath("PanelContainer/VBoxContainer/MaterialCostLabel")
-_statusMessageLabel = NodePath("PanelContainer/VBoxContainer/StatusMessageLabel")
-_confirmButton = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Confirm Button")
-_cancelButton = NodePath("PanelContainer/VBoxContainer/HBoxContainer/CancelButton")
 
 [node name="PanelContainer" type="PanelContainer" parent="MainHud/BuildMenu" unique_id=196346424]
 layout_mode = 0
@@ -285,3 +279,16 @@ texture = ExtResource("11_0tmf1")
 
 [node name="MoneyLabel" type="Label" parent="MainHud/HBoxContainer" unique_id=2138528950]
 layout_mode = 2
+
+
+[node name="MainMenuButton" type="Button" parent="MainHud"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -260.0
+offset_top = 12.0
+offset_right = -130.0
+offset_bottom = 52.0
+grow_horizontal = 0
+text = "Ana Menü"
+tooltip_text = "İlerlemeyi kaydet ve ana menüye dön."

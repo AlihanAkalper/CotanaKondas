@@ -68,7 +68,7 @@ public partial class MainMenu : Control
         // Kayıtlı veriyi yükle ve Türkiye haritasına geç
         if (GameManager.Instance.LoadGame())
         {
-            GetTree().ChangeSceneToFile("res://scenes/türkiye_haritası.tscn");
+            GameManager.Instance.OpenCurrentGame();
         }
         else
         {
@@ -89,7 +89,7 @@ public partial class MainMenu : Control
         GameManager.Instance.SaveGame();
 
         // Türkiye haritasına başla
-        GetTree().ChangeSceneToFile("res://scenes/türkiye_haritası.tscn");
+        GameManager.Instance.OpenCurrentGame();
     }
 
     private void OnVolumeChanged(double value)

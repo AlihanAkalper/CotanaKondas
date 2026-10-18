@@ -1,73 +1,73 @@
-// Scripts/DisasterAnimationManager.cs
 using Godot;
 using System;
 
 public partial class DisasterAnimationManager : Node
 {
     [Export] private Camera2D _camera;
-    [Export] private CpuParticles2D _fireParticles; // Varsa alev efekti
-    [Export] private ColorRect _waterRect;         // Varsa su efekti
+    [Export] private CpuParticles2D _fireParticles;
+    [Export] private ColorRect _waterRect;
+    public event Action Completed;
+    private Tween _animation;
+    private Vector2 _cameraOffset;
 
-    public void PlayDisasterAnimation(AfetTürü afet)
+    public void PlayDisasterAnimation(AfetTürü disaster)
     {
-        GD.Print($"[ANİMASYON] {afet} görsel efekti oynatılıyor!");
-
-        switch (afet)
+        _animation?.Kill();
+        _cameraOffset = _camera?.Offset ?? Vector2.Zero;
+        _animation = CreateTween();
+        switch (disaster)
         {
             case AfetTürü.Deprem:
-                StartCameraShake(2.5f, 20.0f);
+                for (int i = 0; i < 60; i++)
+                {
+                    float strength = 18f * (1f - i / 60f);
+                    var offset = _cameraOffset + new Vector2((float)GD.RandRange(-strength, strength), (float)GD.RandRange(-strength, strength));
+                    if (_camera != null) _animation.TweenProperty(_camera, "offset", offset, .04);
+                }
+                if (_camera != null) _animation.TweenProperty(_camera, "offset", _cameraOffset, .1);
                 break;
-
             case AfetTürü.Yangın:
                 if (_fireParticles != null)
                 {
+                    var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == GameManager.Instance.SelectedRegion);
+                    float height = Math.Max(1, house?.Floors.Count ?? 1) * 120f;
+                    _fireParticles.Position = new Vector2(583, 540 - height / 2);
+                    _fireParticles.EmissionRectExtents = new Vector2(185, height / 2);
+                    _fireParticles.ColorRamp = new Gradient
+                    {
+                        Offsets = new float[] { 0, .25f, .65f, 1 },
+                        Colors = new Color[] { new(1, .85f, .15f, .9f), new(1, .35f, .04f, .85f), new(.35f, .12f, .06f, .6f), new(.15f, .15f, .15f, 0) }
+                    };
+                    _fireParticles.Show();
                     _fireParticles.Emitting = true;
-                    GetTree().CreateTimer(3.0f).Timeout += () => _fireParticles.Emitting = false;
+                    _fireParticles.Restart();
                 }
+                _animation.TweenInterval(3);
+                _animation.TweenCallback(Callable.From(() => { if (_fireParticles != null) _fireParticles.Emitting = false; }));
+                _animation.TweenInterval(1.3);
                 break;
-
             case AfetTürü.Sel:
                 if (_waterRect != null)
                 {
-                    StartFloodAnimation();
+                    _waterRect.Position = new Vector2(-100, 700);
+                    _waterRect.Show();
+                    _animation.TweenProperty(_waterRect, "position:y", 390f, 1.5).SetTrans(Tween.TransitionType.Sine);
+                    _animation.TweenInterval(1);
+                    _animation.TweenProperty(_waterRect, "position:y", 700f, 1.5).SetTrans(Tween.TransitionType.Sine);
                 }
                 break;
         }
+        _animation.TweenCallback(Callable.From(() =>
+        {
+            if (_fireParticles != null) { _fireParticles.Emitting = false; _fireParticles.Hide(); }
+            _waterRect?.Hide();
+            Completed?.Invoke();
+        }));
     }
 
-    private void StartCameraShake(float duration, float intensity)
+    public override void _ExitTree()
     {
-        if (_camera == null)
-        {
-            GD.PrintErr("HATA: DisasterAnimationManager içinde Camera2D atanmamış!");
-            return;
-        }
-
-        Vector2 originalOffset = _camera.Offset;
-        Tween tween = CreateTween();
-        int steps = (int)(duration * 25);
-        var rand = new Random();
-
-        for (int i = 0; i < steps; i++)
-        {
-            float x = ((float)rand.NextDouble() * 2f - 1f) * intensity;
-            float y = ((float)rand.NextDouble() * 2f - 1f) * intensity;
-            intensity = Mathf.Max(0f, intensity - (intensity / steps));
-
-            tween.TweenProperty(_camera, "offset", originalOffset + new Vector2(x, y), duration / steps);
-        }
-
-        tween.TweenProperty(_camera, "offset", originalOffset, 0.05f);
-    }
-
-    private void StartFloodAnimation()
-    {
-        Vector2 startPos = _waterRect.Position;
-        Vector2 floodedPos = new Vector2(startPos.X, startPos.Y - 250f);
-
-        Tween tween = CreateTween();
-        tween.TweenProperty(_waterRect, "position", floodedPos, 1.5f).SetTrans(Tween.TransitionType.Sine);
-        tween.TweenInterval(1.0f);
-        tween.TweenProperty(_waterRect, "position", startPos, 1.5f).SetTrans(Tween.TransitionType.Sine);
+        _animation?.Kill();
+        if (GodotObject.IsInstanceValid(_camera)) _camera.Offset = _cameraOffset;
     }
 }

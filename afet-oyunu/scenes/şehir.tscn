@@ -11,9 +11,15 @@
 [ext_resource type="Texture2D" uid="uid://cm2liwsbt58f0" path="res://assets/cekic.png" id="9_3tbon"]
 [ext_resource type="Script" uid="uid://dolq8h85dwvqk" path="res://codes/PerkMenu.cs" id="10_tkc3r"]
 
-[node name="Şehir" type="Node2D" unique_id=576134575 node_paths=PackedStringArray("_disasterAnimManager")]
+[ext_resource type="Script" path="res://codes/BuildMenu.cs" id="11_construction"]
+
+[node name="Şehir" type="Node2D" unique_id=576134575 node_paths=PackedStringArray("_disasterAnimManager", "_perkButton", "_perkMenu", "_constructionButton", "_buildMenu")]
 script = ExtResource("1_jgs2t")
 _disasterAnimManager = NodePath("DisasterEffect")
+_perkButton = NodePath("Cityhud/PerkButton")
+_perkMenu = NodePath("Cityhud/PerkMenu")
+_constructionButton = NodePath("Cityhud/ConstructionButton")
+_buildMenu = NodePath("Cityhud/BuildMenu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=292076233]
 z_index = -3
@@ -32,16 +38,19 @@ ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("4_hj688")
 
-[node name="DisasterEffect" type="Node" parent="." unique_id=1821234811 node_paths=PackedStringArray("_camera")]
+[node name="DisasterEffect" type="Node" parent="." unique_id=1821234811 node_paths=PackedStringArray("_camera", "_fireParticles", "_waterRect")]
 script = ExtResource("5_oe26e")
 _camera = NodePath("../Camera2D")
+_fireParticles = NodePath("../FireParticles")
+_waterRect = NodePath("../FloodWater")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=757772713]
 position = Vector2(576, 333)
 
-[node name="Cityhud" type="CanvasLayer" parent="." unique_id=1432209959 node_paths=PackedStringArray("_moneyLabel", "_dateLabel")]
+[node name="Cityhud" type="CanvasLayer" parent="." unique_id=1432209959 node_paths=PackedStringArray("_moneyLabel", "_dateLabel", "_mainMenuButton")]
 script = ExtResource("6_385tt")
 _moneyLabel = NodePath("HBoxContainer/MoneyLabel")
+_mainMenuButton = NodePath("MainMenuButton")
 _dateLabel = NodePath("Day Label")
 
 [node name="Day Label" type="Label" parent="Cityhud" unique_id=1971786900]
@@ -72,20 +81,23 @@ texture_normal = ExtResource("9_3tbon")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="PerkMenu" type="PanelContainer" parent="Cityhud" unique_id=1109723998]
-custom_minimum_size = Vector2(350, 500)
+[node name="PerkMenu" type="PanelContainer" parent="Cityhud" unique_id=1109723998 node_paths=PackedStringArray("_perkListContainer", "_closeButton")]
+visible = false
+custom_minimum_size = Vector2(640, 500)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -320.0
+offset_top = -250.0
+offset_right = 320.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("10_tkc3r")
+_perkListContainer = NodePath("MainBox/ScrollContainer/PerkListContainer")
+_closeButton = NodePath("MainBox/HBoxContainer/CloseButton")
 
 [node name="MainBox" type="VBoxContainer" parent="Cityhud/PerkMenu" unique_id=1620376210]
 layout_mode = 2
@@ -95,12 +107,75 @@ layout_mode = 2
 
 [node name="titleLabel" type="Label" parent="Cityhud/PerkMenu/MainBox/HBoxContainer" unique_id=2034363717]
 layout_mode = 2
+size_flags_horizontal = 3
+text = "Afet Hazırlığı"
 
 [node name="CloseButton" type="Button" parent="Cityhud/PerkMenu/MainBox/HBoxContainer" unique_id=622071664]
 layout_mode = 2
+text = "Kapat"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Cityhud/PerkMenu/MainBox" unique_id=1546173095]
 layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
 [node name="PerkListContainer" type="VBoxContainer" parent="Cityhud/PerkMenu/MainBox/ScrollContainer" unique_id=1133724814]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ConstructionButton" type="Button" parent="Cityhud"]
+offset_left = 4.0
+offset_top = 104.0
+offset_right = 108.0
+offset_bottom = 176.0
+text = "Bina /
+Malzeme"
+
+[node name="BuildMenu" type="Control" parent="Cityhud"]
+visible = false
+script = ExtResource("11_construction")
+
+[node name="MainMenuButton" type="Button" parent="Cityhud"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -260.0
+offset_top = 12.0
+offset_right = -130.0
+offset_bottom = 52.0
+grow_horizontal = 0
+text = "Ana Menü"
+tooltip_text = "İlerlemeyi kaydet ve ana menüye dön."
+
+[node name="FireParticles" type="CPUParticles2D" parent="."]
+visible = false
+z_index = 5
+position = Vector2(583, 480)
+emitting = false
+amount = 220
+lifetime = 1.2
+emission_shape = 3
+emission_rect_extents = Vector2(185, 60)
+direction = Vector2(0, -1)
+spread = 25.0
+gravity = Vector2(0, -50)
+initial_velocity_min = 30.0
+initial_velocity_max = 90.0
+scale_amount_min = 4.0
+scale_amount_max = 10.0
+
+[node name="FloodWater" type="ColorRect" parent="."]
+visible = false
+z_index = 6
+offset_left = -100.0
+offset_top = 700.0
+offset_right = 1300.0
+offset_bottom = 1400.0
+mouse_filter = 2
+color = Color(0.08, 0.4, 0.75, 0.65)
+
+[node name="Surface" type="ColorRect" parent="FloodWater"]
+offset_right = 1400.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.55, 0.85, 1, 0.85)

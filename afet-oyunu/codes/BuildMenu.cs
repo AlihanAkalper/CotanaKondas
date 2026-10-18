@@ -3,110 +3,107 @@ using System;
 
 public partial class BuildMenu : Control
 {
-    [Export] private Label _titleLabel;
-    [Export] private OptionButton _materialDropdown;
-    [Export] private SpinBox _amountInput;
-    [Export] private Label _materialCostLabel;
-    [Export] private Label _statusMessageLabel;
-    [Export] private Button _confirmButton;
-    [Export] private Button _cancelButton;
-
-    private Ev_numaraları _currentRegion;
-
+    private VBoxContainer _rows;
+    private Ev_numaraları _region;
+    private string _message = "";
     public override void _Ready()
     {
-        // Inspector bağlantıları henüz yapılmadıysa hata vermesini engelle
-        if (_materialDropdown == null || _confirmButton == null || _cancelButton == null)
-            return;
-
-        _materialDropdown.Clear();
-        _materialDropdown.AddItem("Odun (100 TL)", (int)Materyal.Odun);
-        _materialDropdown.AddItem("Tuğla (250 TL)", (int)Materyal.Tuğla);
-        _materialDropdown.AddItem("Çelik (600 TL)", (int)Materyal.Çelik);
-
-        _materialDropdown.ItemSelected += _ => UpdateCostDisplay();
-        _amountInput.ValueChanged += _ => UpdateCostDisplay();
-
-        _confirmButton.Pressed += OnConfirmPressed;
-        _cancelButton.Pressed += () => Visible = false;
+        foreach (Node child in GetChildren()) { RemoveChild(child); child.QueueFree(); }
+        SetAnchorsAndOffsetsPreset(LayoutPreset.TopLeft);
+        Size = GetViewportRect().Size;
+        GetViewport().SizeChanged += ResizeToViewport;
+        MouseFilter = MouseFilterEnum.Ignore;
+        var panel = new PanelContainer();
+        AddChild(panel);
+        panel.SetAnchorsAndOffsetsPreset(LayoutPreset.Center);
+        panel.OffsetLeft = -350;
+        panel.OffsetTop = -285;
+        panel.OffsetRight = 350;
+        panel.OffsetBottom = 285;
+        var margin = new MarginContainer();
+        foreach (var side in new[] { "left", "right", "top", "bottom" })
+            margin.AddThemeConstantOverride("margin_" + side, 12);
+        panel.AddChild(margin);
+        var scroll = new ScrollContainer { HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled };
+        margin.AddChild(scroll);
+        _rows = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
+        _rows.AddThemeConstantOverride("separation", 8);
+        scroll.AddChild(_rows);
+        Hide();
     }
-
-    public void Open(Ev_numaraları region)
+    private void ResizeToViewport() => Size = GetViewportRect().Size;
+    public override void _ExitTree() => GetViewport().SizeChanged -= ResizeToViewport;
+    public void Open(Ev_numaraları region) { _region = region; _message = ""; Refresh(); Show(); }
+    private void Label(string text) => _rows.AddChild(new Label { Text = text, AutowrapMode = TextServer.AutowrapMode.WordSmart });
+    private void Button(string text, Action action, bool disabled = false)
     {
-        _currentRegion = region;
-        var info = RegionDatabase.Regions[region];
-        var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == region);
-
-        if (_titleLabel != null)
-            _titleLabel.Text = $"{info.Name} - İnşaat Paneli";
-
-        if (_statusMessageLabel != null)
-            _statusMessageLabel.Text = "";
-
-        if (_amountInput != null)
+        var button = new Button { Text = text, Disabled = disabled };
+        button.Pressed += action;
+        _rows.AddChild(button);
+    }
+    private void Buy(string action, Materyal material = Materyal.Alınmadı, int floor = -1)
+    {
+        var game = GameManager.Instance;
+        var h = game.SaveData.Houses.Find(x => x.Type == _region);
+        bool ok = ConstructionRules.Purchase(game.SaveData, h, action, material, floor);
+        _message = ok ? "İşlem tamamlandı." : "İşlem yapılamadı. Bakiye ve bina durumunu kontrol edin.";
+        if (ok)
         {
-            _amountInput.MinValue = 1;
-            _amountInput.MaxValue = 500;
-            _amountInput.Value = 10;
+            game.SaveGame();
+            HUD.Instance?.UpdateHUD();
+            (GetTree().CurrentScene as BuildingMap)?.RefreshScene();
         }
-
-        UpdateCostDisplay();
-        Visible = true;
+        Refresh();
     }
-
-    private void UpdateCostDisplay()
+    private void Refresh()
     {
-        if (_materialDropdown == null || _amountInput == null || _materialCostLabel == null)
-            return;
-
-        Materyal selectedMat = (Materyal)_materialDropdown.GetSelectedId();
-        int amount = (int)_amountInput.Value;
-
-        if (!MaterialPrices.UnitPrices.ContainsKey(selectedMat)) return;
-
-        int unitPrice = MaterialPrices.UnitPrices[selectedMat];
-        int totalCost = unitPrice * amount;
-
-        _materialCostLabel.Text = $"Ödenecek Tutar: {totalCost:N0} TL ({amount} adet)";
-    }
-
-    private void OnConfirmPressed()
-    {
-        Materyal selectedMat = (Materyal)_materialDropdown.GetSelectedId();
-        int amount = (int)_amountInput.Value;
-
-        int unitPrice = MaterialPrices.UnitPrices[selectedMat];
-        int totalCost = unitPrice * amount;
-
-        // Bakiye kontrolü
-        if (GameManager.Instance.SaveData.Money < totalCost)
+        foreach (Node child in _rows.GetChildren()) { _rows.RemoveChild(child); child.QueueFree(); }
+        var game = GameManager.Instance;
+        var h = game.SaveData.Houses.Find(x => x.Type == _region);
+        Label(RegionDatabase.Regions[_region].Name + " — Bina ve Malzeme");
+        Button("Kapat", Hide);
+        if (h == null || !h.IsBuilt) { Label("Önce bu arsayı satın alın."); return; }
+        Label($"Bakiye: {game.SaveData.Money:N0} TL");
+        if (h.material == Materyal.Alınmadı)
         {
-            if (_statusMessageLabel != null)
-                _statusMessageLabel.Text = "Yetersiz bakiye!";
-            return;
+            Label("Bu arsa için tek malzeme seçin. Seçim sonradan değiştirilemez.");
+            foreach (var material in new[] { Materyal.Odun, Materyal.Tuğla, Materyal.Çelik })
+            {
+                int price = ConstructionRules.MaterialPrice(_region, material);
+                Button($"{material} seç — {price:N0} TL", () => Buy("select", material), game.SaveData.Money < price);
+            }
         }
-
-        var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == _currentRegion);
-        if (house == null) return;
-
-        // Parayı düş ve eve malzemeyi ata
-        GameManager.Instance.SaveData.Money -= totalCost;
-        house.material = selectedMat;
-        house.MaterialAmount += amount;
-        house.Health = 100f; // Ev tamamlandı/yenilendi
-
-        GameManager.Instance.SaveGame();
-        HUD.Instance?.UpdateHUD();
-
-        if (_statusMessageLabel != null)
-            _statusMessageLabel.Text = "İnşaat tamamlandı!";
-
-        // Şehir sahnesini yenile (boş arsa yerine evin görseli gelsin)
-        GetTree().CreateTimer(0.8f).Timeout += () =>
+        else
         {
-            Visible = false;
-            var cityScene = GetTree().CurrentScene as BuildingMap;
-            cityScene?.RefreshScene();
-        };
+            Label($"{h.material} • Seviye {h.MaterialLevel}/5 • Satın alma sayısı: {h.MaterialLevel}");
+            Label($"Dayanıklılık: ×{ConstructionRules.Durability(h):0.00} • Gelir: ×{ConstructionRules.IncomeBonus(h):0.00}\nGünlük gelir: {ConstructionRules.DailyIncome(h):N0} TL");
+            Label($"Bina: {h.Health:0.#}/300 can" + (h.Health <= 0 ? " — Kullanılamaz, onarım gerekiyor" : ""));
+            if (h.MaterialLevel < ConstructionRules.MaxFloors)
+            {
+                int price = ConstructionRules.UpgradePrice(h);
+                Button($"Seviye {h.MaterialLevel + 1} — {price:N0} TL", () => Buy("upgrade"), h.Health <= 0 || game.SaveData.Money < price);
+            }
+            else Label("En yüksek malzeme seviyesine ulaşıldı.");
+            Label($"Katlar: {h.Floors.Count}/5 • Açılan kat hakkı: {h.MaterialLevel}");
+            if (h.Floors.Count < ConstructionRules.MaxFloors)
+            {
+                int price = ConstructionRules.FloorPrice(h);
+                Button($"{h.Floors.Count + 1}. katı inşa et — {price:N0} TL", () => Buy("floor"),
+                    h.Health <= 0 || h.Floors.Count >= h.MaterialLevel || game.SaveData.Money < price);
+            }
+            int repair = ConstructionRules.RepairPrice(h);
+            Button($"Binayı onar — {repair:N0} TL", () => Buy("repair"), repair <= 0 || game.SaveData.Money < repair);
+            for (int i = 0; i < h.Floors.Count; i++)
+            {
+                int floor = i;
+                int price = ConstructionRules.RepairPrice(h, i);
+                string status = h.Health <= 0 || h.Floors[i].Health <= 0 ? "Kullanılamaz" : "Kullanılabilir";
+                Button($"{i + 1}. kat: {h.Floors[i].Health:0.#}/100 • {status} • Onar: {price:N0} TL",
+                    () => Buy("repair", floor: floor), price <= 0 || game.SaveData.Money < price);
+            }
+        }
+        if (_message.Length > 0) Label(_message);
     }
 }
+
+

@@ -35,12 +35,7 @@ public partial class Kat : Sprite2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		if(GetParent().ToString() == "<Window#26860324303>")
-		{
-			GD.PrintErr("In DEV mode, material set to 2");
-			SonKat = true;
-			Malzeme = 2;
-		}
+		UpdateKiraciVisibility();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,102 +43,89 @@ public partial class Kat : Sprite2D
 	{
 	}
 
-	private void UpdateLook()
+	private bool _buildingUsable = true;
+
+    public void SetState(int material, float health, bool topFloor, bool buildingUsable)
+    {
+        Saglamlık = (int)Math.Ceiling(health);
+        SonKat = topFloor;
+        _buildingUsable = buildingUsable;
+        Malzeme = material;
+    }
+
+    // Atlas dilimlerinin şeffaf kenarlarını kaldırıp tüm parçaları aynı kat ölçüsüne oturt.
+    private Texture2D Layer(CompressedTextureLayered source, int index)
+    {
+        var image = source.GetLayerData(index);
+        return new AtlasTexture
+        {
+            Atlas = ImageTexture.CreateFromImage(image),
+            Region = image.GetUsedRect()
+        };
+    }
+
+    private void Fit(Sprite2D sprite, Texture2D texture, Vector2 position, Vector2 size)
+    {
+        sprite.Texture = texture;
+        sprite.Centered = false;
+        sprite.Offset = Vector2.Zero;
+        sprite.RegionEnabled = false;
+        sprite.Position = position;
+        sprite.Scale = size / texture.GetSize();
+    }
+
+    private void UpdateLook()
+    {
+        UpdateKiraciVisibility();
+        Texture = null;
+        ArkaDuv.Texture = SolDuv.Texture = SagDuv.Texture = Çatı.Texture = null;
+        if (_malzeme == 0) return;
+        if (_malzeme == 1)
+        {
+            var scaffoldImage = iskele.GetImage();
+            Texture = new AtlasTexture { Atlas = iskele, Region = scaffoldImage.GetUsedRect() };
+            Centered = true;
+            RegionEnabled = false;
+            // İskele ayaklarını boş arsada zemine, sonraki katlarda çatıya oturt.
+            float baseOffset = Position.Y < 0 ? 13.5f : 4.5f;
+            Offset = new Vector2(0, -Texture.GetHeight() / 2f - baseOffset);
+            return;
+        }
+
+        var source = _malzeme == 2 ? Odun : _malzeme == 3 ? Metal : Tugla;
+        bool wood = _malzeme == 2;
+        int wall = wood
+            ? (Saglamlık > 75 ? 2 : Saglamlık > 50 ? 0 : Saglamlık > 25 ? 1 : 3)
+            : (Saglamlık > 66 ? 0 : Saglamlık > 33 ? 1 : 2);
+        Texture = Layer(source, wood ? 4 : 3);
+        Centered = true;
+        Offset = Vector2.Zero;
+        RegionEnabled = false;
+
+        float width = Texture.GetWidth();
+        float height = (GetParent() is Bina bina ? bina.KatHeight : 120) / Scale.Y;
+        float bottom = -Texture.GetHeight() / 2f;
+        float top = bottom - height;
+        const float wallWidth = 9f;
+        float left = -width / 2f;
+        Fit(ArkaDuv, Layer(source, wood ? 5 : 4),
+            new Vector2(left + wallWidth, top), new Vector2(width - 2 * wallWidth, height));
+        var wallTexture = Layer(source, wall);
+        Fit(SolDuv, wallTexture, new Vector2(left, top), new Vector2(wallWidth, height));
+        Fit(SagDuv, wallTexture, new Vector2(width / 2f - wallWidth, top), new Vector2(wallWidth, height));
+        if (SonKat)
+            Fit(Çatı, Layer(source, wood ? 6 : 5),
+                new Vector2(left - 2, top - 9), new Vector2(width + 4, 9));
+
+        if (sakin != null)
+            sakin.Position = new Vector2(sakin.Position.X, bottom - 16);
+    }
+private void UpdateKiraciVisibility()
 	{
-		GD.Print("CHANGE MY MALZEME TO " + _malzeme);
-		switch (_malzeme)
-		{
-			case 0: //Boşluk
-				this.Texture = null;
-				ArkaDuv.Texture = null;
-				SolDuv.Texture = null;
-				SagDuv.Texture = null;
-				Çatı.Texture = null;
-				break;
-			case 1: //İskele
-				this.Texture = iskele;
-				ArkaDuv.Texture = null;
-				SolDuv.Texture = null;
-				SagDuv.Texture = null;
-				Çatı.Texture = null;
-				break;
-			case 2: //Odun
-				if (Saglamlık > 100)
-				{
-					SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(2));
-					SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(2));
-				}else if (Saglamlık > 50)
-				{
-					SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
-					SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(0));
-				}
-				else if(Saglamlık > 25)
-				{
-					SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(1));
-					SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(1));
-				}
-				else
-				{
-					SolDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(3));
-					SagDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(3));
-				}
-				this.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(4));
-				ArkaDuv.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(7));
-				if (SonKat)
-				{
-					Çatı.Texture = ImageTexture.CreateFromImage(Odun.GetLayerData(8));
-				}
-				break;
-			case 3: //Çelik
-				this.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(3));
-				ArkaDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(6));
-				if (Saglamlık > 200)
-				{
-					SolDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(0));
-					SagDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(0));
-				}
-				else if(Saglamlık > 100)
-				{
-					SolDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(1));
-					SagDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(1));
-				}
-				else
-				{
-					SolDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(2));
-					SagDuv.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(2));
-				}
-				if (SonKat)
-				{
-					Çatı.Texture = ImageTexture.CreateFromImage(Metal.GetLayerData(5));
-				}
-				break;
-			case 4: //Tuğla
-				this.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(3));
-				ArkaDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(6));
-				if (Saglamlık > 200)
-				{
-					SolDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(0));
-					SagDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(0));
-				}
-				else if(Saglamlık > 100)
-				{
-					SolDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(1));
-					SagDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(1));
-				}
-				else
-				{
-					SolDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(2));
-					SagDuv.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(2));
-				}
-				if (SonKat)
-				{
-					Çatı.Texture = ImageTexture.CreateFromImage(Tugla.GetLayerData(5));
-				}
-				break;
-			default:
-				GD.PrintErr("Unknown malzeme");
-				break;
-		}
+		if (sakin == null) return;
+		bool katInsaaEdildi = _malzeme >= 2 && _malzeme <= 4 && Saglamlık > 0 && _buildingUsable;
+		sakin.Visible = katInsaaEdildi;
+		sakin.ProcessMode = katInsaaEdildi ? ProcessModeEnum.Inherit : ProcessModeEnum.Disabled;
 	}
 
 	[Serializable]
@@ -164,3 +146,7 @@ public partial class Kat : Sprite2D
 		}
 	}
 }
+
+
+
+

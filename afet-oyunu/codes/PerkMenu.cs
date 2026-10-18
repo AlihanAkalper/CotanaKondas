@@ -29,6 +29,7 @@ public partial class PerkMenu : Control
         // Eski satırları temizle
         foreach (Node child in _perkListContainer.GetChildren())
         {
+            _perkListContainer.RemoveChild(child);
             child.QueueFree();
         }
 
@@ -119,6 +120,9 @@ public partial class PerkMenu : Control
     private void OnBuyPerkClicked(PerkInfo info)
     {
         var save = GameManager.Instance.SaveData;
+
+        save.PurchasedPerks ??= new();
+        if (save.PurchasedPerks.Contains(info.Type)) return;
 
         if (save.Money < info.Price)
         {

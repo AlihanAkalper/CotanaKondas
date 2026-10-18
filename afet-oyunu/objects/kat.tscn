@@ -135,12 +135,12 @@ _data = {
 &"Sag&Sol": SubResource("Animation_bn7wg")
 }
 
-[node name="Kat" type="Sprite2D" unique_id=170612053 node_paths=PackedStringArray("Kiraci", "ArkaDuv", "SolDuv", "SagDuv", "Çatı")]
+[node name="Kat" type="Sprite2D" unique_id=170612053 node_paths=PackedStringArray("sakin", "ArkaDuv", "SolDuv", "SagDuv", "Çatı")]
 z_index = 1
 scale = Vector2(3.501, 2.425)
 region_rect = Rect2(516, 94, 117, 9)
 script = ExtResource("1_lgjv1")
-Kiraci = NodePath("Kiraci")
+sakin = NodePath("Kiraci")
 ArkaDuv = NodePath("ArkaDuvar")
 SolDuv = NodePath("SolDuvar")
 SagDuv = NodePath("SagDuvar")

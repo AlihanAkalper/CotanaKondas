@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class StatPanel : Control
 {
@@ -22,12 +23,13 @@ public partial class StatPanel : Control
 
         _lblArsaAd.Text = info.Name;
         _lblArsaÜcreti.Text = $"Arsa Fiyatı: {info.BasePlotPrice:N0} TL";
-        _lblPahalıMateryal.Text = $"Pahalı Malzeme: {info.MostExpensiveMaterial}";
-        _lblUcuzMateryal.Text = $"Ucuz Malzeme: {info.MostExpensiveMaterial}";
+        var materials = ConstructionRules.BasePrices.Keys.OrderBy(m => ConstructionRules.MaterialPrice(region, m)).ToArray();
+        _lblPahalıMateryal.Text = $"Pahalı Malzeme: {materials[^1]}";
+        _lblUcuzMateryal.Text = $"Ucuz Malzeme: {materials[0]}";
         _lblMinKira.Text = $"Min. Kira Getirisi: {info.MinRentIncome:N0} TL/Gün";
 
         if (houseData != null && houseData.IsBuilt)
-            _lblİnşaEdildi.Text = $"Durum: İnşa Edildi ({houseData.material})";
+            _lblİnşaEdildi.Text = $"Durum: {houseData.material} • {houseData.Floors.Count}/5 kat • {houseData.Health:0}/300 can";
         else
             _lblİnşaEdildi.Text = "Durum: Satılık Boş Arsa";
 
@@ -42,3 +44,4 @@ public partial class StatPanel : Control
     {
     }
 }
+

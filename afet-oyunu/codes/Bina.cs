@@ -1,104 +1,38 @@
 using Godot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.JavaScript;
 
 public partial class Bina : Area2D
 {
-    private int DEV_Malzeme = 1;
-
-	[Export] public Ev_numaraları type;
-
+    [Export] public Ev_numaraları type;
     [Export] private PackedScene Kat_Template;
-    
-    [Export] public int MaxKat;
-    [Export] public int KatHeight;
-    [Export] private Kat[] katlar;
-
-    [ExportGroup("Durum Görselleri")]
-    [Export] private Texture2D _forSaleTexture;   // Satılık tabela/boş arazi görseli
-    [Export] private Texture2D _builtHouseTexture_odun; // odun
-    [Export] private Texture2D _builtHouseTexture_tuğla; // tuğla
-    [Export] private Texture2D _builtHouseTexture_celik; // çelik
-    [Export] private Sprite2D _sprite;
-
+    [Export] public int MaxKat = 5;
+    [Export] public int KatHeight = 120;
+    private Kat[] _floors;
     public override void _Ready()
     {
-        katlar = new Kat[MaxKat];
-        for (int i = 0; i < MaxKat; i++)
+        _floors = new Kat[ConstructionRules.MaxFloors];
+        for (int i = 0; i < _floors.Length; i++)
         {
-            var EmptyKat = (Kat)Kat_Template.Instantiate();
-            EmptyKat.Position += new Vector2(0,-1*KatHeight*i);
-            EmptyKat.SonKat = false;
-            EmptyKat.Malzeme = 0;
-            EmptyKat.Saglamlık = 0;
-            EmptyKat.sakin = null;
-            AddChild(EmptyKat);
-            katlar[i] = (EmptyKat);
+            var floor = Kat_Template.Instantiate<Kat>();
+            floor.Position += new Vector2(0, -KatHeight * i);
+            AddChild(floor);
+            _floors[i] = floor;
         }
-        katlar[0].Malzeme = 1;
-        katlar[MaxKat-1].SonKat = true;
-        GD.Print(katlar);
+        Refresh();
     }
-
-    public void KatEkle()
+    public void Refresh()
     {
-        for (int i = 0; i < MaxKat; i++)
-            {
-                if(DEV_Malzeme > 4)
-                {
-                    DEV_Malzeme = 1;
-                }
-                if(katlar[i].Malzeme == 1)
-                {
-                    GD.Print("YENİ KAT ÇIKILIYOR!");
-                    katlar[i].Malzeme = DEV_Malzeme; //GEÇİCİ OLARAK KOYDUM, MALZEME NO'su olacak
-                    if (i+1 == MaxKat)
-                    {
-                        katlar[i].SonKat = true;
-                        katlar[i].Malzeme = DEV_Malzeme;
-                        GD.Print("ÇATI KATI ÇIKILDI");
-                        // katlar[i].       EN ÜST KATI ÇATI YAPACAK    
-                    }
-                    else
-                    {
-                        katlar[i+1].Malzeme = 1;
-                    }
-                    GD.Print(katlar);
-                    break;
-                }
-            }
-            DEV_Malzeme++;  
-    }
-
-    [Serializable]
-    public class BinaSaveData
-    {
-        public int KuruluKatlar = 0;
-        public Kat.KatSaveData[] katlar;
-        public int malzeme; //Çeto'nun dediği gibi tüm binanın aynı malzemeden olacağını var sayarak koydum.
-        //Onun için başka yerlerin de değişmesi gerekecek ama saat 4 oldu :p
-        
-        public BinaSaveData(Bina bina)
+        if (_floors == null || GameManager.Instance == null) return;
+        var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == GameManager.Instance.SelectedRegion);
+        for (int i = 0; i < _floors.Length; i++)
         {
-            for (int i = 0; i < bina.MaxKat; i++)
+            bool built = house != null && i < house.Floors.Count;
+            int material = built ? house.material switch
             {
-                if(bina.katlar[i].Malzeme > 1)
-                {
-                    KuruluKatlar++;
-                }
-            }
-            katlar = new Kat.KatSaveData[KuruluKatlar];
-            for (int i = 0; i < KuruluKatlar; i++)
-            {
-                Kat.KatSaveData kat = new Kat.KatSaveData(bina.katlar[i]);
-                katlar[i] = kat;
-            }
-            if(KuruluKatlar > 0)
-            {
-                malzeme = bina.katlar[0].Malzeme;
-            }
+                Materyal.Odun => 2, Materyal.Çelik => 3, Materyal.Tuğla => 4, _ => 0
+            } : (house != null && i == house.Floors.Count ? 1 : 0);
+            _floors[i].SetState(material, built ? house.Floors[i].Health : 0,
+                built && i == house.Floors.Count - 1, house != null && house.Health > 0);
         }
     }
 }
+

@@ -42,13 +42,17 @@ public class HouseSaveData // laod save yapıldığında neler kaydedilecekse
     public int Price { get; set; }
     public int MaterialAmount { get; set; } = 0;
 
-    public float Health { get; set; } = 100f;
+    public float Health { get; set; } = ConstructionRules.BuildingHealth;
+    public int ConstructionVersion { get; set; }
+    public int MaterialLevel { get; set; }
+    public List<FloorSaveData> Floors { get; set; } = new();
 
 }
 
 [Serializable]
 public class GameSaveData
 {
+    public List<DisasterEvent> PendingDisasters { get; set; } = new();
     public int CurrentDay { get; set; } = 1;
     public int Money { get; set; } = 200000;
     public float CumulativeDisasterChance { get; set; } = 15f;
@@ -69,9 +73,16 @@ public class GameSaveData
             {
                 Type = (Ev_numaraları)i,
                 IsBuilt = false,
+                ConstructionVersion = 1,
                 material = Materyal.Alınmadı,
                 Price = housePrices[i],
             });
         }
     }
 }
+
+public class FloorSaveData
+{
+    public float Health { get; set; } = ConstructionRules.FloorHealth;
+}
+

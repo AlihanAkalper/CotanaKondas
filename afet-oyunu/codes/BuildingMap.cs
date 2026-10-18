@@ -11,6 +11,7 @@ public partial class BuildingMap : Node2D
     [Export] private Texture2D _steelHouseTexture;
     [Export] private TextureButton _perkButton;
     [Export] private PerkMenu _perkMenu;
+    [Export] private Button _constructionButton;
 
     [Export] private PlotConfirmDialog _confirmDialog; // Yeni onay paneli
     [Export] private BuildMenu _buildMenu;             // Malzeme menüsü
@@ -33,29 +34,28 @@ public partial class BuildingMap : Node2D
         }
         if (_perkButton != null)
         {
-            _perkButton.Pressed += () => _perkMenu?.Open();
+            _perkButton.Pressed += () => { if (GameManager.Instance.HasPendingDisasters) return; _buildMenu?.Hide(); _perkMenu?.Open(); };
         }
+
+        if (_constructionButton != null)
+            _constructionButton.Pressed += () => { _perkMenu?.Hide(); OpenBuildMenu(); };
 
         RefreshScene();
 
-        // Afet kontrolü
-        if (GameManager.Instance.ActiveDisaster != AfetTürü.Yok)
+        if (GameManager.Instance.HasPendingDisasters)
         {
-            AfetTürü currentDisaster = GameManager.Instance.ActiveDisaster;
-
-            GD.Print($"Şehir Sahnesi: {currentDisaster} tespit edildi. 0.3 saniye sonra animasyon başlayacak.");
-
-            // Sahnenin oturması için 0.3 saniye bekleyip animasyonu başlat
-            GetTree().CreateTimer(0.3f).Timeout += () =>
+            var report = GameManager.Instance.CurrentDisaster;
+            var results = new DisasterResultPanel();
+            AddChild(results);
+            results.Begin(report, GameManager.Instance.SaveData.PendingDisasters.Count);
+            if (_disasterAnimManager != null)
             {
-                _disasterAnimManager?.PlayDisasterAnimation(currentDisaster);
-            };
-
-            // Afeti tüket (tekrar tekrar oynamasın)
-            GameManager.Instance.ActiveDisaster = AfetTürü.Yok;
+                _disasterAnimManager.Completed += results.ShowResults;
+                _disasterAnimManager.PlayDisasterAnimation(report.DisasterType);
+            }
+            else results.ShowResults();
         }
     }
-
     private void OnPlotClicked()
     {
         var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == _currentRegion);
@@ -73,11 +73,13 @@ public partial class BuildingMap : Node2D
 
     public void OpenBuildMenu()
     {
+        if (GameManager.Instance.HasPendingDisasters) return;
         _buildMenu?.Open(_currentRegion);
     }
 
     public void RefreshScene()
     {
+        GetNodeOrNull<Bina>("Bina")?.Refresh();
         var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == _currentRegion);
         if (house == null || _plotButton == null) return;
 
@@ -101,6 +103,9 @@ public partial class BuildingMap : Node2D
 
     public void OnBackToMapButtonPressed()
     {
+        if (GameManager.Instance.HasPendingDisasters) return;
         GetTree().ChangeSceneToFile("res://scenes/türkiye_haritası.tscn");
     }
 }
+
+
