@@ -76,7 +76,7 @@ public static class TenantRules
         int departed = 0;
         foreach (var floor in house.Floors)
         {
-            if (!floor.HasTenant || (!floor.LeavesOnNextDisaster && floor.Awareness > 0)) continue;
+            if (!floor.HasTenant || (floor.Health > 0 && !floor.LeavesOnNextDisaster && floor.Awareness > 0)) continue;
             floor.Tenant = null;
             departed++;
         }

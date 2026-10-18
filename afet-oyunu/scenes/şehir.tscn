@@ -38,11 +38,9 @@ ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("4_hj688")
 
-[node name="DisasterEffect" type="Node" parent="." unique_id=1821234811 node_paths=PackedStringArray("_camera", "_fireParticles", "_waterRect")]
+[node name="DisasterEffect" type="Node" parent="." unique_id=1821234811 node_paths=PackedStringArray("_camera")]
 script = ExtResource("5_oe26e")
 _camera = NodePath("../Camera2D")
-_fireParticles = NodePath("../FireParticles")
-_waterRect = NodePath("../FloodWater")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=757772713]
 position = Vector2(576, 333)
@@ -150,36 +148,3 @@ grow_horizontal = 0
 tooltip_text = "İlerlemeyi kaydet ve ana menüye dön."
 text = "Ana Menü"
 
-[node name="FireParticles" type="CPUParticles2D" parent="." unique_id=1571384113]
-visible = false
-z_index = 5
-position = Vector2(583, 480)
-emitting = false
-amount = 220
-lifetime = 1.2
-emission_shape = 3
-emission_rect_extents = Vector2(185, 60)
-direction = Vector2(0, -1)
-spread = 25.0
-gravity = Vector2(0, -50)
-initial_velocity_min = 30.0
-initial_velocity_max = 90.0
-scale_amount_min = 4.0
-scale_amount_max = 10.0
-
-[node name="FloodWater" type="ColorRect" parent="." unique_id=1313930558]
-visible = false
-z_index = 6
-offset_left = -100.0
-offset_top = 700.0
-offset_right = 1300.0
-offset_bottom = 1400.0
-mouse_filter = 2
-color = Color(0.08, 0.4, 0.75, 0.65)
-
-[node name="Surface" type="ColorRect" parent="FloodWater" unique_id=1365596050]
-layout_mode = 0
-offset_right = 1400.0
-offset_bottom = 8.0
-mouse_filter = 2
-color = Color(0.55, 0.85, 1, 0.85)

@@ -48,6 +48,7 @@ public class HouseSaveData
 [Serializable]
 public class GameSaveData
 {
+    public int LostTenants { get; set; }
     public bool IsFinished { get; set; }
     public string EndReason { get; set; } = "";
     public int LastDialogueRollDay { get; set; }

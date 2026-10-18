@@ -33,6 +33,7 @@ public static class DisasterResolution
         int incomeBefore = ConstructionRules.DailyIncome(house);
         ConstructionRules.ApplyDamage(house, type, save.PurchasedPerks);
         int departed = type == AfetTürü.Yok ? 0 : TenantRules.DepartAfterDisaster(house);
+        save.LostTenants += departed;
         var report = new DisasterEvent
         {
             Day = save.CurrentDay, Region = house.Type, DisasterType = type,

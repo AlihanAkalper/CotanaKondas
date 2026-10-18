@@ -4,16 +4,59 @@ using System;
 public partial class DisasterAnimationManager : Node
 {
     [Export] private Camera2D _camera;
-    [Export] private CpuParticles2D _fireParticles;
-    [Export] private ColorRect _waterRect;
     public event Action Completed;
     private Tween _animation;
     private Vector2 _cameraOffset;
+    private Node2D _spriteEffects;
+
+    public override void _Ready() => _cameraOffset = _camera?.Offset ?? Vector2.Zero;
+
+    private static SpriteFrames LoadFrames(string path, int count, double speed, bool loop)
+    {
+        var texture = GD.Load<Texture2D>(path);
+        var frames = new SpriteFrames();
+        frames.SetAnimationSpeed("default", speed);
+        frames.SetAnimationLoop("default", loop);
+        int width = texture.GetWidth() / count;
+        for (int i = 0; i < count; i++)
+            frames.AddFrame("default", new AtlasTexture
+            {
+                Atlas = texture,
+                Region = new Rect2(i * width, 0, width, texture.GetHeight()),
+                FilterClip = true
+            });
+        return frames;
+    }
+
+    private AnimatedSprite2D AddEffect(SpriteFrames frames, Vector2 position, Vector2 scale)
+    {
+        var sprite = new AnimatedSprite2D
+        {
+            SpriteFrames = frames, Position = position, Scale = scale,
+            Centered = false, TextureFilter = CanvasItem.TextureFilterEnum.Nearest
+        };
+        _spriteEffects.AddChild(sprite);
+        sprite.Play();
+        return sprite;
+    }
+
+    private void ClearEffects()
+    {
+        if (GodotObject.IsInstanceValid(_spriteEffects))
+        {
+            _spriteEffects.Hide();
+            _spriteEffects.QueueFree();
+            _spriteEffects = null;
+        }
+        if (GodotObject.IsInstanceValid(_camera)) _camera.Offset = _cameraOffset;
+    }
 
     public void PlayDisasterAnimation(AfetTürü disaster)
     {
         _animation?.Kill();
-        _cameraOffset = _camera?.Offset ?? Vector2.Zero;
+        ClearEffects();
+        _spriteEffects = new Node2D { ZIndex = 6 };
+        AddChild(_spriteEffects);
         _animation = CreateTween();
         switch (disaster)
         {
@@ -27,40 +70,35 @@ public partial class DisasterAnimationManager : Node
                 if (_camera != null) _animation.TweenProperty(_camera, "offset", _cameraOffset, .1);
                 break;
             case AfetTürü.Yangın:
-                if (_fireParticles != null)
-                {
-                    var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == GameManager.Instance.SelectedRegion);
-                    float height = Math.Max(1, house?.Floors.Count ?? 1) * 120f;
-                    _fireParticles.Position = new Vector2(583, 540 - height / 2);
-                    _fireParticles.EmissionRectExtents = new Vector2(185, height / 2);
-                    _fireParticles.ColorRamp = new Gradient
+                var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == GameManager.Instance.SelectedRegion);
+                var fire = LoadFrames("res://assets/fire.png", 10, 12, true);
+                var building = GetParent().GetNodeOrNull<Bina>("Bina");
+                Vector2 origin = building?.Position ?? new Vector2(583, 556);
+                float floorHeight = building?.KatHeight ?? 120;
+                for (int floor = 0; floor < Math.Max(1, house?.Floors.Count ?? 1); floor++)
+                    for (int column = 0; column < 5; column++)
                     {
-                        Offsets = new float[] { 0, .25f, .65f, 1 },
-                        Colors = new Color[] { new(1, .85f, .15f, .9f), new(1, .35f, .04f, .85f), new(.35f, .12f, .06f, .6f), new(.15f, .15f, .15f, 0) }
-                    };
-                    _fireParticles.Show();
-                    _fireParticles.Emitting = true;
-                    _fireParticles.Restart();
-                }
+                        var flame = AddEffect(fire,
+                            origin + new Vector2(-210 + column * 80, -floorHeight * floor - 110),
+                            new Vector2(1.5f, 1.5f));
+                        flame.Frame = (floor * 3 + column * 2) % 10;
+                    }
                 _animation.TweenInterval(3);
-                _animation.TweenCallback(Callable.From(() => { if (_fireParticles != null) _fireParticles.Emitting = false; }));
-                _animation.TweenInterval(1.3);
+                _animation.TweenProperty(_spriteEffects, "modulate:a", 0f, .5);
                 break;
             case AfetTürü.Sel:
-                if (_waterRect != null)
-                {
-                    _waterRect.Position = new Vector2(-100, 700);
-                    _waterRect.Show();
-                    _animation.TweenProperty(_waterRect, "position:y", 390f, 1.5).SetTrans(Tween.TransitionType.Sine);
-                    _animation.TweenInterval(1);
-                    _animation.TweenProperty(_waterRect, "position:y", 700f, 1.5).SetTrans(Tween.TransitionType.Sine);
-                }
+                var flood = LoadFrames("res://assets/sel.png", 12, 4, false);
+                var background = GetParent().GetNodeOrNull<Sprite2D>("Sprite2D");
+                Vector2 size = background != null ? background.Texture.GetSize() * background.Scale : new Vector2(1158, 665);
+                Vector2 topLeft = background != null ? background.Position - size / 2 : Vector2.Zero;
+                AddEffect(flood, topLeft, size / new Vector2(640, 360));
+                _animation.TweenInterval(3);
+                _animation.TweenProperty(_spriteEffects, "modulate:a", 0f, .4);
                 break;
         }
         _animation.TweenCallback(Callable.From(() =>
         {
-            if (_fireParticles != null) { _fireParticles.Emitting = false; _fireParticles.Hide(); }
-            _waterRect?.Hide();
+            ClearEffects();
             Completed?.Invoke();
         }));
     }

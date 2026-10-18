@@ -44,7 +44,7 @@ public partial class GameEndScreen : Control
             $"Yıkılan bina: {score.DestroyedBuildings} × (−200) = {score.BuildingPenalty:N0}");
         if (score.RawTotal < 0) Line("Toplam puan sıfırın altına düşmez.");
         Line($"Ulaşılan gün: {save.CurrentDay}\nBakiye: {save.Money:N0} TL");
-        Line($"Yıkılan kat: {GameEndRules.DestroyedFloors(save)} / {GameEndRules.FloorLimit}\nYıkılan bina: {GameEndRules.DestroyedBuildings(save)} / {GameEndRules.BuildingLimit}");
+        Line($"Kiracı kaybı: {save.LostTenants} / {GameEndRules.TenantLossLimit}\nYıkılan kat: {GameEndRules.DestroyedFloors(save)}\nYıkılan bina: {GameEndRules.DestroyedBuildings(save)}");
         var tenants = save.Houses.SelectMany(h => h.Floors).Where(f => f.HasTenant).ToArray();
         double awareness = tenants.Length == 0 ? 0 : tenants.Average(f => f.Awareness);
         Line($"Kalan kiracı: {tenants.Length}\nOrtalama kiracı farkındalığı: {awareness:0.#}/100\nAlınan hazırlık: {save.PurchasedPerks.Distinct().Count()}");

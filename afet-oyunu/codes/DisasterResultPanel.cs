@@ -54,7 +54,7 @@ public partial class DisasterResultPanel : CanvasLayer
         Line(report.AppliedPerks.Count > 0 ? "Etkili hazırlıklar: " + string.Join(", ", report.AppliedPerks) : "Bu afete karşı satın alınmış hazırlık yok.");
         Line($"Günlük gelir: {report.IncomeBefore:N0} → {report.IncomeAfter:N0} TL");
         if (report.DepartedTenants > 0)
-            Line($"Farkındalığı sıfıra ulaşmış {report.DepartedTenants} kiracı ayrıldı. Boş katlardan kira alınmıyor.");
+            Line($"Kat yıkımı veya farkındalık kaybı nedeniyle {report.DepartedTenants} kiracı ayrıldı. Boş katlardan kira alınmıyor.");
         Line("Onarım için şehirdeki Bina / Malzeme menüsünü kullanabilirsiniz.");
         var next = new Button { Text = remaining > 1 ? "Sonraki afeti göster" :
             GameManager.Instance.SaveData.IsFinished ? "Sonuçları göster" : "Tamam — Haritaya dön" };

@@ -39,20 +39,13 @@ public partial class HUD : CanvasLayer
         help.OffsetLeft = 12; help.OffsetRight = 160;
         help.OffsetTop = -50; help.OffsetBottom = -12;
         var instructions = new AcceptDialog {
-            Title = "Oyun kuralları", Exclusive = true,
+            Title = "Nasıl oynanır?", Exclusive = true,
             DialogText =
-                "Arsa al, malzeme seç ve kat inşa et. Çekiç inşaat menüsünü açar.\n" +
-                "Dolu ve sağlam her kat, günlük arsa bedelinin %1,5'i kadar kira getirir.\n" +
-                "Malzeme seviyesi yükseldikçe dayanıklılık ve kira artar.\n\n" +
-                "Her kiracı 50–100 arası farkındalıkla gelir; farkındalık her gün 2 azalır.\n" +
-                "50'nin altındaki uygun kiracılardan birine günlük %10 şansla soru atanır.\n" +
-                "Konuşmak için soru işaretine tıkla. Pozitif +15, nötr +5, negatif −10 etkiler.\n" +
-                "Upgrade menüsündeki her yeni hazırlık mevcut kiracılara +10 farkındalık verir.\n" +
-                "Farkındalık sıfıra ulaşırsa kiracı kendi binasını etkileyen sonraki afette ayrılır.\n" +
-                "Sonradan farkındalık artsa da ayrılma kararı değişmez.\n" +
-                "Boş ve sağlam daireye her yeni gün %20 şansla kiracı gelir.\n\n" +
-                "6 farklı kat veya 3 farklı bina yıkılırsa oyun biter. Gün sınırı yoktur.\n" +
-                "Onarım geçmiş yıkım sayısını azaltmaz; aynı yapı tekrar sayılmaz."
+                "• Arsa al, çekiç menüsünden malzeme seç ve kat yap.\n" +
+                "• Günleri ilerlet, kiracılardan kira kazan.\n" +
+                "• Ek özelliklerle afetlere hazırlan, hasarlı katları onar.\n" +
+                "• Soru işaretine tıklayıp kiracıların farkındalığını artır.\n\n" +
+                "Toplam 10 kiracı kaybedersen oyun biter."
         };
         AddChild(instructions);
         help.Pressed += () => instructions.PopupCentered();
@@ -94,7 +87,7 @@ public partial class HUD : CanvasLayer
         if (GameManager.Instance?.SaveData == null) return;
         var save = GameManager.Instance.SaveData;
         if (_lossLabel != null)
-            _lossLabel.Text = $"Yıkım: {GameEndRules.DestroyedFloors(save)}/{GameEndRules.FloorLimit} kat • {GameEndRules.DestroyedBuildings(save)}/{GameEndRules.BuildingLimit} bina";
+            _lossLabel.Text = $"Kiracı kaybı: {save.LostTenants}/{GameEndRules.TenantLossLimit}";
 
         // "Para: " kelimesi kaldırıldı, sadece tutar yazılıyor:
         if (_moneyLabel != null)

@@ -121,7 +121,7 @@ public partial class BuildMenu : Control
         var game = GameManager.Instance;
         var h = game.SaveData.Houses.Find(x => x.Type == _region);
         bool ok = ConstructionRules.Purchase(game.SaveData, h, action, material, floor);
-        _message = ok ? "İşlem tamamlandı." : "İşlem yapılamadı. Bakiye ve bina durumunu kontrol edin.";
+        _message = ok ? "" : "İşlem yapılamadı. Bakiye ve bina durumunu kontrol edin.";
         if (ok)
         {
             game.SaveGame();
