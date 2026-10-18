@@ -1,16 +1,14 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using static PerkData;
-
 
 public static class MaterialPrices
 {
     public static readonly Dictionary<Materyal, int> UnitPrices = new()
     {
-        { Materyal.Odun,  100 },  // 1 adet Odun = 100 TL
-        { Materyal.Tuğla, 250 },  // 1 adet Tuğla = 250 TL
-        { Materyal.Çelik, 600 }   // 1 adet Çelik = 600 TL
+        { Materyal.Odun,  100 },
+        { Materyal.Tuğla, 250 },
+        { Materyal.Çelik, 600 }
     };
 }
 public enum Ev_numaraları

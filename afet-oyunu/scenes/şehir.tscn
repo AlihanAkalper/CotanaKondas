@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://pkhjltfk2g48" path="res://codes/HUD.cs" id="6_385tt"]
 [ext_resource type="Texture2D" uid="uid://c7lfnf3qoustn" path="res://assets/money.png" id="8_y76np"]
 [ext_resource type="Texture2D" uid="uid://cm2liwsbt58f0" path="res://assets/cekic.png" id="9_3tbon"]
+[ext_resource type="Script" uid="uid://dolq8h85dwvqk" path="res://codes/PerkMenu.cs" id="10_tkc3r"]
 
 [node name="Şehir" type="Node2D" unique_id=576134575 node_paths=PackedStringArray("_disasterAnimManager")]
 script = ExtResource("1_jgs2t")
@@ -70,3 +71,36 @@ offset_bottom = 292.0
 texture_normal = ExtResource("9_3tbon")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="PerkMenu" type="PanelContainer" parent="Cityhud" unique_id=1109723998]
+custom_minimum_size = Vector2(350, 500)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_tkc3r")
+
+[node name="MainBox" type="VBoxContainer" parent="Cityhud/PerkMenu" unique_id=1620376210]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Cityhud/PerkMenu/MainBox" unique_id=1210942290]
+layout_mode = 2
+
+[node name="titleLabel" type="Label" parent="Cityhud/PerkMenu/MainBox/HBoxContainer" unique_id=2034363717]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="Cityhud/PerkMenu/MainBox/HBoxContainer" unique_id=622071664]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Cityhud/PerkMenu/MainBox" unique_id=1546173095]
+layout_mode = 2
+
+[node name="PerkListContainer" type="VBoxContainer" parent="Cityhud/PerkMenu/MainBox/ScrollContainer" unique_id=1133724814]
+layout_mode = 2
