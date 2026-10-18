@@ -33,6 +33,7 @@ public class HouseSaveData
     public bool IsBuilt { get; set; } = false;
     public Materyal material { get; set; } = Materyal.Alınmadı;
     public int Price { get; set; }
+    public int BackgroundIndex { get; set; } = -1;
 
     // Yalnızca kat sistemi öncesindeki kayıtları dönüştürmek için okunur.
     [JsonPropertyName("Health")]

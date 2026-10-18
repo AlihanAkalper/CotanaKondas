@@ -18,10 +18,17 @@ public partial class BuildingMap : Node2D
     [Export] private TextureButton _backButton;
 
     private Ev_numaraları _currentRegion;
+    private static readonly string[] BackgroundPaths =
+    {
+        "res://assets/akdeniz.png",
+        "res://assets/ege.png",
+        "res://assets/ucuncuBolge.png"
+    };
 
     public override void _Ready()
     {
         _currentRegion = GameManager.Instance.SelectedRegion;
+        ApplyRegionBackground();
 
         if (_backButton != null)
         {
@@ -56,6 +63,25 @@ public partial class BuildingMap : Node2D
             else results.ShowResults();
         }
     }
+    private void ApplyRegionBackground()
+    {
+        var game = GameManager.Instance;
+        var house = game.SaveData.Houses.Find(h => h.Type == _currentRegion);
+        var background = GetNodeOrNull<Sprite2D>("Sprite2D");
+        if (house == null || background == null) return;
+
+        if (house.BackgroundIndex < 0 || house.BackgroundIndex >= BackgroundPaths.Length)
+        {
+            house.BackgroundIndex = Random.Shared.Next(BackgroundPaths.Length);
+            game.SaveGame();
+        }
+
+        // Görseller farklı boyutta olsa da mevcut arka plan alanını kaplasın.
+        Vector2 displaySize = background.Texture.GetSize() * background.Scale;
+        background.Texture = GD.Load<Texture2D>(BackgroundPaths[house.BackgroundIndex]);
+        background.Scale = displaySize / background.Texture.GetSize();
+    }
+
     private void OnPlotClicked()
     {
         var house = GameManager.Instance.SaveData.Houses.Find(h => h.Type == _currentRegion);

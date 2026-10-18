@@ -19,6 +19,7 @@ public partial class MainMenu : Control
 
     public override void _Ready()
     {
+        ApplyButtonTextures();
         // Kayıt dosyasının yolu
         _savePath = ProjectSettings.GlobalizePath("user://").PathJoin("savegame.json");
 
@@ -60,6 +61,38 @@ public partial class MainMenu : Control
             _volumeSlider.Value = Mathf.DbToLinear(currentDb);
 
             _volumeSlider.ValueChanged += OnVolumeChanged;
+        }
+    }
+
+    private void ApplyButtonTextures()
+    {
+        var normal = GD.Load<Texture2D>("res://assets/buton1.png");
+        var pressed = GD.Load<Texture2D>("res://assets/buton2.png");
+        using var normalImage = normal.GetImage();
+        using var pressedImage = pressed.GetImage();
+        // İki durumun ortak sınırını kullan; basılırken düğmenin hizası değişmesin.
+        Rect2 region = normalImage.GetUsedRect().Merge(pressedImage.GetUsedRect());
+        StyleBoxTexture Style(Texture2D texture, float brightness = 1f) => new()
+        {
+            Texture = new AtlasTexture { Atlas = texture, Region = region, FilterClip = true },
+            ContentMarginLeft = 16,
+            ContentMarginRight = 16,
+            ContentMarginTop = 10,
+            ContentMarginBottom = 10,
+            ModulateColor = new Color(brightness, brightness, brightness)
+        };
+        foreach (var button in new[] { _continueButton, _newGameButton, _settingsButton, _exitButton })
+        {
+            if (button == null) continue;
+            button.TextureFilter = TextureFilterEnum.Nearest;
+            button.CustomMinimumSize = new Vector2(0, 44);
+            button.AddThemeStyleboxOverride("normal", Style(normal));
+            button.AddThemeStyleboxOverride("hover", Style(normal));
+            button.AddThemeStyleboxOverride("pressed", Style(pressed));
+            button.AddThemeStyleboxOverride("disabled", Style(normal, .6f));
+            foreach (string state in new[] { "font_color", "font_hover_color", "font_pressed_color", "font_focus_color" })
+                button.AddThemeColorOverride(state, new Color("fff1d5"));
+            button.AddThemeColorOverride("font_disabled_color", new Color("a89986"));
         }
     }
 
