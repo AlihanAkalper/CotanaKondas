@@ -11,7 +11,6 @@ public partial class PerkData : Node
         AfetPlanKitapçığı = 0,
         DepremÇantası = 1,
         AfetSigortası = 2,
-        AfetSigortası = 2,
         DumanDedektörü = 3,
         YangınSöndürmeSistemi = 4,
         ElektrikTesisaıKontrolü = 5,

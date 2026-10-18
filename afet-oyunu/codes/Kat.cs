@@ -6,8 +6,7 @@ public partial class Kat : Sprite2D
 {
 	[Export] public Boolean SonKat;
 
-	public Node Kiraci;
-
+	[Export]public Kiraci Kiraci;
 	public int Saglamlık;
 
 	[ExportGroup("Duvarlar")]
