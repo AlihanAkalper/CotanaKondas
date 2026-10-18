@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://brihs7gnur1pr" path="res://scenes/BackButton.cs" id="4_hj688"]
 [ext_resource type="Script" uid="uid://bbr2idbxx5wv" path="res://codes/DisasterAnimationManager.cs" id="5_oe26e"]
 [ext_resource type="Script" uid="uid://pkhjltfk2g48" path="res://codes/HUD.cs" id="6_385tt"]
+[ext_resource type="Texture2D" uid="uid://c7lfnf3qoustn" path="res://assets/money.png" id="8_y76np"]
+[ext_resource type="Texture2D" uid="uid://cm2liwsbt58f0" path="res://assets/cekic.png" id="9_3tbon"]
 
 [node name="Şehir" type="Node2D" unique_id=576134575 node_paths=PackedStringArray("_disasterAnimManager")]
 script = ExtResource("1_jgs2t")
@@ -38,15 +40,33 @@ position = Vector2(576, 333)
 
 [node name="Cityhud" type="CanvasLayer" parent="." unique_id=1432209959 node_paths=PackedStringArray("_moneyLabel", "_dateLabel")]
 script = ExtResource("6_385tt")
-_moneyLabel = NodePath("Money Label")
+_moneyLabel = NodePath("HBoxContainer/MoneyLabel")
 _dateLabel = NodePath("Day Label")
-
-[node name="Money Label" type="Label" parent="Cityhud" unique_id=913878039]
-offset_right = 180.0
-offset_bottom = 51.0
 
 [node name="Day Label" type="Label" parent="Cityhud" unique_id=1971786900]
 offset_left = 518.0
 offset_top = 1.0
 offset_right = 790.0
 offset_bottom = 53.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Cityhud" unique_id=2098024908]
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 71.0
+offset_bottom = 67.0
+
+[node name="TextureRect" type="TextureRect" parent="Cityhud/HBoxContainer" unique_id=1566680644]
+layout_mode = 2
+texture = ExtResource("8_y76np")
+
+[node name="MoneyLabel" type="Label" parent="Cityhud/HBoxContainer" unique_id=1539321225]
+layout_mode = 2
+
+[node name="PerkButton" type="TextureButton" parent="Cityhud" unique_id=1030496858]
+offset_left = -3.0
+offset_top = 187.0
+offset_right = 107.0
+offset_bottom = 292.0
+texture_normal = ExtResource("9_3tbon")
+ignore_texture_size = true
+stretch_mode = 5

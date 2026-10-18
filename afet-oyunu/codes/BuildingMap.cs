@@ -9,6 +9,8 @@ public partial class BuildingMap : Node2D
     [Export] private Texture2D _woodHouseTexture;
     [Export] private Texture2D _brickHouseTexture;
     [Export] private Texture2D _steelHouseTexture;
+    [Export] private TextureButton _perkButton;
+    [Export] private PerkMenu _perkMenu;
 
     [Export] private PlotConfirmDialog _confirmDialog; // Yeni onay paneli
     [Export] private BuildMenu _buildMenu;             // Malzeme menüsü
@@ -28,6 +30,10 @@ public partial class BuildingMap : Node2D
         if (_plotButton != null)
         {
             _plotButton.Pressed += OnPlotClicked;
+        }
+        if (_perkButton != null)
+        {
+            _perkButton.Pressed += () => _perkMenu?.Open();
         }
 
         RefreshScene();

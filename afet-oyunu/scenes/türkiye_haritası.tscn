@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cgjvurrhersn8" path="res://codes/NextDayButton.cs" id="8_qehax"]
 [ext_resource type="Script" uid="uid://be2v7jrw17gl7" path="res://codes/BuildMenu.cs" id="9_6tlxa"]
 [ext_resource type="Script" uid="uid://denc77tkxos68" path="res://codes/PlotConfirmDialog.cs" id="10_0tmf1"]
+[ext_resource type="Texture2D" uid="uid://c7lfnf3qoustn" path="res://assets/money.png" id="11_0tmf1"]
 
 [node name="Türkiye haritası" type="Node2D" unique_id=232434904]
 
@@ -125,7 +126,7 @@ _purchasedTexture = ExtResource("4_heq2v")
 
 [node name="MainHud" type="CanvasLayer" parent="." unique_id=693278071 node_paths=PackedStringArray("_moneyLabel", "_dateLabel")]
 script = ExtResource("4_wvl83")
-_moneyLabel = NodePath("MoneyLabel")
+_moneyLabel = NodePath("HBoxContainer/MoneyLabel")
 _dateLabel = NodePath("DateLabel")
 
 [node name="StatPanel" type="PanelContainer" parent="MainHud" unique_id=1330962018 node_paths=PackedStringArray("_lblArsaAd", "_lblArsaÜcreti", "_lblPahalıMateryal", "_lblUcuzMateryal", "_lblMinKira", "_lblİnşaEdildi")]
@@ -161,10 +162,6 @@ layout_mode = 2
 
 [node name="StatusLabel" type="Label" parent="MainHud/StatPanel/VBoxContainer" unique_id=831618574]
 layout_mode = 2
-
-[node name="MoneyLabel" type="Label" parent="MainHud" unique_id=2138528950]
-offset_right = 180.0
-offset_bottom = 51.0
 
 [node name="DateLabel" type="Label" parent="MainHud" unique_id=1256239754]
 offset_left = 518.0
@@ -275,3 +272,16 @@ text = "Evet"
 [node name="deny" type="Button" parent="MainHud/ConfirmDialog/VBoxContainer/HBoxContainer" unique_id=1086061540]
 layout_mode = 2
 text = "hayır"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainHud" unique_id=1855396388]
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 71.0
+offset_bottom = 67.0
+
+[node name="TextureRect" type="TextureRect" parent="MainHud/HBoxContainer" unique_id=1528008981]
+layout_mode = 2
+texture = ExtResource("11_0tmf1")
+
+[node name="MoneyLabel" type="Label" parent="MainHud/HBoxContainer" unique_id=2138528950]
+layout_mode = 2

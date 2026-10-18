@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using static PerkData;
 
 
 public static class MaterialPrices
@@ -52,26 +53,24 @@ public class GameSaveData
 {
     public int CurrentDay { get; set; } = 1;
     public int Money { get; set; } = 200000;
-
     public float CumulativeDisasterChance { get; set; } = 15f;
 
     public List<HouseSaveData> Houses { get; set; } = new();
+    public List<PerkType> PurchasedPerks { get; set; } = new();
 
     public GameSaveData()
     {
-
-        int[] housePrices = new int[8] { 150000, 300000, 600000, 1000000, 1800000, 3000000, 5000000, 8500000 };//deişebilir
+        int[] housePrices = new int[8] { 150000, 300000, 600000, 1000000, 1800000, 3000000, 5000000, 8500000 };
 
         for (int i = 0; i < 8; i++)
         {
-            //Biraz soyut olan HouseSaveData yerine her binaya çağırılabilecek olan BinaSaveData(Bina bina) şeklinde
-            //bir class hazırladım. Ona bir bakarız sorun görünmesse onu veya düzeltilmişini kullanırız.
-            //Bunu hatalı şekilde bırakacağım ki çeto'nun gece bulup bakması kolay olsun.
-            Bina.BinaSaveData
+            // İleride BinaSaveData'ya geçilecekse buraya entegre edilebilir:
+            // var binaKayit = new Bina.BinaSaveData();
+
             Houses.Add(new HouseSaveData
             {
                 Type = (Ev_numaraları)i,
-                IsBuilt = false, 
+                IsBuilt = false,
                 material = Materyal.Alınmadı,
                 Price = housePrices[i],
             });
